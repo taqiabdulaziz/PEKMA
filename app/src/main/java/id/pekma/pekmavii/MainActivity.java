@@ -1,117 +1,85 @@
 package id.pekma.pekmavii;
 
-
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Toast;
-import com.onesignal.OneSignal;
+
+import id.pekma.pekmavii.NavDrawContent.HomeFragment;
+import id.pekma.pekmavii.NavDrawContent.FixturesFragment;
+import id.pekma.pekmavii.NavDrawContent.NewsFragment;
+import id.pekma.pekmavii.NavDrawContent.OtherFragment;
+import id.pekma.pekmavii.NavDrawContent.ResultFragment;
 
 public class MainActivity extends AppCompatActivity {
-    private WebView webView;
-    private boolean isRedirected;
-    String url = "https://pekma.id";
 
-    @SuppressLint("SetJavaScriptEnabled")
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(true)
-                .init();
-
         setContentView(R.layout.activity_main);
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
+        setTitle("PEKMA");
+        changeFragment(0);
 
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
-        webView = findViewById(R.id.webView1);
-
-        webView.setWebViewClient(new WebViewClient() {
-            ProgressDialog progressDialog;
-
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                isRedirected = true;
-                return false;
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon);
-                isRedirected = false;
-            }
-
-            @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                webView.loadUrl("about:blank");
-                Intent i = new Intent(getApplicationContext(), NoInternet.class);
-                startActivity(i);
-                Toast.makeText(MainActivity.this, "Check your internet connection", Toast.LENGTH_SHORT).show();
-            }
-
-            public void onLoadResource(WebView view, String url) {
-                if (!isRedirected) {
-                    if (progressDialog == null) {
-                        progressDialog = new ProgressDialog(MainActivity.this);
-                        progressDialog.setMessage("Loading...");
-                        progressDialog.show();
-                    }
-                }
-            }
-
-            public void onPageFinished(WebView view, String url) {
-
-                try {
-                    isRedirected = true;
-
-                    if (progressDialog.isShowing()) {
-                        progressDialog.dismiss();
-                        progressDialog = null;
-                    }
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-            }
-        });
-
-        webView.loadUrl(url);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-        webView.getSettings().setAppCacheEnabled(true);
-        webView.getSettings().setDomStorageEnabled(true);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // handle arrow click here
-        if (item.getItemId() == android.R.id.home) {
-            finish(); // close this activity and return to preview activity (if there is any)
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
-    @Override
-    public void onBackPressed() {
-        if (webView.canGoBack()){
-            webView.goBack();
+    public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.Home:
+                    changeFragment(1);
+                    break;
+                case R.id.Fixtures:
+                    changeFragment(2);
+                    break;
+                case R.id.Result:
+                    changeFragment(3);
+                    break;
+                case R.id.News:
+                    changeFragment(4);
+                    break;
+                case R.id.Other:
+                    changeFragment(5);
+                    break;
+            }
+            return true;
+        }
+
+    };
+
+    private void changeFragment(int position) {
+        Fragment fragment = null;
+        if (position == 1){
+            fragment = new HomeFragment();
+
+        } else if  (position == 2) {
+            fragment = new FixturesFragment();
+        } else if (position == 3){
+            fragment = new ResultFragment();
+        } else if (position == 4) {
+            fragment = new NewsFragment();
         } else {
-            super.onBackPressed();
+            fragment = new OtherFragment();
         }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flFragment, fragment);
+        fragmentTransaction.commit();
     }
+
+
+
 }

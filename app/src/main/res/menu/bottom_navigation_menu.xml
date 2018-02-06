@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/Home"
+        android:enabled="true"
+        android:icon="@drawable/bnv_home"
+        android:title="Home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/Fixtures"
+        android:enabled="true"
+        android:icon="@drawable/bnv_fixtures"
+        android:title="Fixtures"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/Result"
+        android:enabled="true"
+        android:icon="@drawable/bnv_result"
+        android:title="Result"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/News"
+        android:enabled="true"
+        android:icon="@drawable/bnv_news"
+        android:title="News"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/Other"
+        android:enabled="true"
+        android:icon="@drawable/bnv_other"
+        android:title="Other"
+        app:showAsAction="ifRoom" />
+</menu>
