@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import id.pekma.pekmavii.NavDrawContent.HomeFragment;
 import id.pekma.pekmavii.NavDrawContent.FixturesFragment;
-import id.pekma.pekmavii.NavDrawContent.NewsFragment;
+import id.pekma.pekmavii.NewsFragment.NewsFragment;
 import id.pekma.pekmavii.NavDrawContent.OtherFragment;
 import id.pekma.pekmavii.NavDrawContent.ResultFragment;
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void changeFragment(int position) {
-        Fragment fragment = null;
+        Fragment fragment;
         if (position == 1){
             fragment = new HomeFragment();
 
