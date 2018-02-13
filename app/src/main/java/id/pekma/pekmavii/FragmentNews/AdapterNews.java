@@ -1,4 +1,4 @@
-package id.pekma.pekmavii.NewsFragment;
+package id.pekma.pekmavii.FragmentNews;
 
 /**
  * Created by Muhammad Taqi on 2/7/2018.
@@ -12,13 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
-import org.jsoup.Jsoup;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,8 +37,8 @@ public class AdapterNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     // Inflate the layout when viewholder created
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.news_item, parent,false);
-        MyHolder holder=new MyHolder(view);
+        View view=inflater.inflate(R.layout.item_news, parent,false);
+        MyHolderNews holder=new MyHolderNews(view);
         return holder;
     }
 
@@ -52,12 +47,17 @@ public class AdapterNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         // Get current position of item in recyclerview to bind data and assign values from list
-        MyHolder myHolder= (MyHolder) holder;
+        MyHolderNews myHolderNews = (MyHolderNews) holder;
         NewsData current=data.get(position);
-        myHolder.newsTitle.setText(current.title);
-        myHolder.newsDesc.setText(current.desc);
-//        Glide.with (context).load("https://api.myjson.com/bins/1b5huh").into(myHolder.newsIv);
-        Picasso.with(context).load(current.newsImage).into(myHolder.newsIv);
+//        myHolderNews.newsTitle.setText(current.title);
+        myHolderNews.newsDesc.setText(current.desc);
+//        Glide.with (context).load("https://api.myjson.com/bins/1b5huh").into(myHolderNews.newsIv);
+        Picasso.with(context)
+                .load(current.getNewsImage())
+                .fit()
+                .centerCrop()
+                .transform(new GradientTransformation())
+                .into(myHolderNews.newsIv);
 
 
     }
@@ -71,7 +71,7 @@ public class AdapterNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
 
-    class MyHolder extends RecyclerView.ViewHolder{
+    class MyHolderNews extends RecyclerView.ViewHolder{
 
         NewsData newsData;
         TextView newsTitle;
@@ -81,15 +81,10 @@ public class AdapterNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView textPrice;
 
         // create constructor to get widget reference
-        public MyHolder(View itemView) {
+        public MyHolderNews(View itemView) {
             super(itemView);
-            newsTitle= (TextView) itemView.findViewById(R.id.newsTitleTxt);
             newsDesc= (TextView) itemView.findViewById(R.id.newsDescTxt);
             newsIv= (ImageView) itemView.findViewById(R.id.ivNews);
-
-
         }
-
     }
-
 }

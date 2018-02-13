@@ -9,9 +9,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import id.pekma.pekmavii.NavDrawContent.HomeFragment;
+import id.pekma.pekmavii.FragmentHome.HomeFragment;
 import id.pekma.pekmavii.NavDrawContent.FixturesFragment;
-import id.pekma.pekmavii.NewsFragment.NewsFragment;
+import id.pekma.pekmavii.FragmentNews.NewsFragment;
 import id.pekma.pekmavii.NavDrawContent.OtherFragment;
 import id.pekma.pekmavii.NavDrawContent.ResultFragment;
 
@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
         setTitle("PEKMA");
         changeFragment(0);
-
     }
 
 
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment;
         if (position == 1){
             fragment = new HomeFragment();
-
         } else if  (position == 2) {
             fragment = new FixturesFragment();
         } else if (position == 3){

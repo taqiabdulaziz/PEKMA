@@ -1,4 +1,4 @@
-package id.pekma.pekmavii.NewsFragment;
+package id.pekma.pekmavii.FragmentHome;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -26,35 +27,31 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.pekma.pekmavii.FragmentNews.AdapterNews;
+import id.pekma.pekmavii.FragmentNews.NewsData;
 import id.pekma.pekmavii.R;
 
 /**
- * Created by Muhammad Taqi on 2/2/2018.
+ * Created by Muhammad Taqi on 2/13/2018.
  */
 
-public class NewsFragment extends Fragment {
-
+public class HomeFragment extends Fragment{
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
-    private RecyclerView recyclerView;
-    private AdapterNews mAdapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return  inflater.inflate(R.layout.fragment_news, null);
-
-
+        return  inflater.inflate(R.layout.fragment_home, null);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new AsyncFetch().execute();
+        new AsyncFetch3().execute();
     }
 
-
-    public class AsyncFetch extends AsyncTask<String,String,String>{
+    public class AsyncFetch3 extends AsyncTask<String,String,String> {
         ProgressDialog pdLoading = new ProgressDialog(getActivity());
         HttpURLConnection conn;
         URL url = null;
@@ -72,7 +69,7 @@ public class NewsFragment extends Fragment {
                 // Enter URL address where your json file resides
                 // Even you can make call to php file which returns json data
 
-                url = new URL("https://taqiabdulaziz.com/news.json");
+                url = new URL("https://taqiabdulaziz.com/news.php");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -136,27 +133,39 @@ public class NewsFragment extends Fragment {
             //this method will be running on UI thread
 
             pdLoading.dismiss();
-            List<NewsData> data=new ArrayList<>();
+            List<HomeData> data=new ArrayList<>();
 
             pdLoading.dismiss();
 
             try {
 
-                JSONArray jArray = new JSONArray(result);
+                JSONArray jsonArray = new JSONArray(result);
 
-                // Extract data from json and store into ArrayList as class objects
-                for(int i=0;i<jArray.length();i++){
-                    JSONObject json_data = jArray.getJSONObject(i);
-                    NewsData newsData = new NewsData();
-                    newsData.title= json_data.getString("title");
-                    newsData.desc= json_data.getString("content");
-                    newsData.newsImage= json_data.getString("thumbnail");
-                    data.add(newsData);
+                for (int i=0;i<jsonArray.length();i++){
+                JSONObject json_data = jsonArray.getJSONObject(i);
+                HomeData homeData = new HomeData();
+                homeData.playerA = json_data.getString("playera");
+                    homeData.playerB = json_data.getString("playerb");
+
+
+
+
+                    data.add(homeData);
                 }
 
+                // Extract data from json and store into ArrayList as class objects
+//                for(int i=0;i<jArray.length();i++){
+//                    JSONObject json_data = jArray.getJSONObject(i);
+//                    NewsData newsData = new NewsData();
+//                    newsData.title= json_data.getString("title");
+//                    newsData.desc= json_data.optString("link");
+//                    newsData.newsImage= json_data.optString("-src");
+//                    data.add(newsData);
+//                }
+
                 // Setup and Handover data to recyclerview
-                recyclerView = getView().findViewById(R.id.rvHome);
-                mAdapter = new AdapterNews(getActivity(), data);
+                RecyclerView recyclerView = getView().findViewById(R.id.rvHome);
+                AdapterHome mAdapter = new AdapterHome(getActivity(), data);
                 recyclerView.setAdapter(mAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

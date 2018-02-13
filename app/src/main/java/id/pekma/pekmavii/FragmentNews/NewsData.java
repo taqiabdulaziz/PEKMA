@@ -1,8 +1,8 @@
-package id.pekma.pekmavii.NewsFragment;
+package id.pekma.pekmavii.FragmentNews;
 
 public class NewsData {
 
-    public String newsImage;
+    public String newsImage = "https://api.androidhive.info/json/movies/1.jpg";
     public String fishName;
     public String desc;
     public String title;

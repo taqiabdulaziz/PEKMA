@@ -9,7 +9,7 @@
         <!--<item name="android:selectableItemBackground">@drawaselectorctor</item>-->
     </style>
 
-    <style name="SplashScreenStyle" parent="Theme.AppCompat.NoActionBar">
+    <style name="SplashScreenStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/logo</item>
         <item name="android:activatedBackgroundIndicator">@drawable/selector</item>
     </style>
