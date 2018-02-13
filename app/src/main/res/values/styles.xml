@@ -6,12 +6,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <!--<item name="android:selectableItemBackground">@drawaselectorctor</item>-->
+        <item name="android:textColorSecondary">#eeeeee</item>
+        <!--<item name="android:selectableItemBa
+        <item name="android:textColorSecondary">#eeeeee</item>ckground">@drawaselectorctor</item>-->
     </style>
 
     <style name="SplashScreenStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/logo</item>
         <item name="android:activatedBackgroundIndicator">@drawable/selector</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

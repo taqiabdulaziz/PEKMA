@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "211194476908",
+    "firebase_url": "https://pekma-vii-6eb86.firebaseio.com",
+    "project_id": "pekma-vii-6eb86",
+    "storage_bucket": "pekma-vii-6eb86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211194476908:android:97b802b51e2ce725",
+        "android_client_info": {
+          "package_name": "id.pekma.pekmavii"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211194476908-racp8ce2d42n1779q587amrf5j4j1fnh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyDyeFEs1oRvw6fl_rD2mXi7acHzJgT0A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

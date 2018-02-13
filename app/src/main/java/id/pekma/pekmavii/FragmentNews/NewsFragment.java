@@ -50,7 +50,7 @@ public class NewsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.flFragment);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.flfragment);
     }
 
     @Override
