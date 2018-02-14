@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ProgressDialog mProgressDialog;
 
     public SignInButton btnSignIn;
-    public Button btnRevokeAccess;
     public LinearLayout llProfileLayout;
     public ImageView imgProfilePic;
     public TextView txtName, txtEmail;
@@ -99,16 +99,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         btnSignIn = findViewById(R.id.footer_item_2);
-        btnRevokeAccess = findViewById(R.id.btn_revoke_access);
-        llProfileLayout = findViewById(R.id.llProfile);
-        imgProfilePic = findViewById(R.id.w);
 //        txtName = findViewById(R.id.txtName);
         NavigationView navigationView;
-        txtEmail = findViewById(R.id.txtEmail);
 
 
         btnSignIn.setOnClickListener(this);
-        btnRevokeAccess.setOnClickListener(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -137,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         setTitle("PEKMA");
-        changeFragment(1);
+        changeFragment(4);
     }
 
     private void signIn() {
@@ -237,10 +232,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 changeFragment(5);
                 break;
             case R.id.footer_item_2:
-                signIn();
                 break;
             case R.id.Logout:
                 signOut();
+                finish();
+                startActivity(getIntent());
                 break;
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -268,14 +264,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onClick(View v) {
         int id = v.getId();
-
         switch (id) {
             case R.id.footer_item_2:
                 signIn();
-                break;
-
-            case R.id.btn_revoke_access:
-                revokeAccess();
                 break;
         }
     }
@@ -344,14 +335,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void updateUI(boolean isSignedIn) {
         if (isSignedIn) {
             btnSignIn.setVisibility(View.GONE);
-            btnRevokeAccess.setVisibility(View.VISIBLE);
-            llProfileLayout.setVisibility(View.VISIBLE);
             showItem();
         } else {
             btnSignIn.setVisibility(View.VISIBLE);
             hideItem();
-            btnRevokeAccess.setVisibility(View.GONE);
-            llProfileLayout.setVisibility(View.GONE);
         }
     }
 

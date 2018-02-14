@@ -8,13 +8,6 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-
-
-    <TextView
-        android:text="222222"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <include
         layout="@layout/app_bar_main2"
         android:layout_width="match_parent"
@@ -31,6 +24,7 @@
         android:background="@color/colorPrimary"
         app:headerLayout="@layout/nav_header_main2"
         app:menu="@menu/activity_main2_drawer">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

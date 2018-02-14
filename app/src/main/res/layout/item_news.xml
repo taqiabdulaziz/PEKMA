@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:gravity="bottom"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="16dp">
 
             <!--<TextView-->
             <!--android:id="@+id/newsTitleTxt"-->
@@ -48,13 +48,14 @@
                 android:id="@+id/newsDescTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="fill_horizontal"
                 android:layout_below="@+id/newsTitleTxt"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="4dp"
                 android:layout_toLeftOf="@+id/ivNews"
-                android:maxLines="1"
-                android:text="Judul mancay mancay mancay mancay"
+                android:maxLines="3"
+                android:text="Judul mancay mancay mancay mancay mancay mancay mancay mancay mancay"
                 android:textColor="#ffffff"
                 android:textSize="18sp"
                 android:typeface="normal" />
@@ -69,7 +70,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_toLeftOf="@+id/ivNews"
                 android:text="PEKMA NEWS"
-                android:textColor="#653ad1"
+                android:textColor="#855af1"
                 android:textSize="14dp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>

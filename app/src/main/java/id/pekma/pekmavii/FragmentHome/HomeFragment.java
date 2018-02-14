@@ -167,7 +167,7 @@ public class HomeFragment extends Fragment{
                 RecyclerView recyclerView = getView().findViewById(R.id.rvHome);
                 AdapterHome mAdapter = new AdapterHome(getActivity(), data);
                 recyclerView.setAdapter(mAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
 
             } catch (JSONException e) {
                 Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
