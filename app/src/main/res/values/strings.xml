@@ -22,6 +22,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="transition_string">hello</string>
     <string name="cabang_olahraga">"Cabang lomba"</string>
 
     <string name="btn_logout_from_google">Logout from Google</string>

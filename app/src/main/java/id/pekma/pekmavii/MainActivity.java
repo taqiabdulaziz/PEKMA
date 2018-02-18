@@ -13,23 +13,16 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -41,15 +34,23 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Picasso;
 
+import java.util.Collections;
+import java.util.List;
+
+import id.pekma.pekmavii.FragmentHome.HomeData;
 import id.pekma.pekmavii.FragmentHome.HomeFragment;
+import id.pekma.pekmavii.FragmentNews.NewsData;
 import id.pekma.pekmavii.FragmentNews.NewsFragment;
 import id.pekma.pekmavii.NavDrawContent.FixturesFragment;
 import id.pekma.pekmavii.NavDrawContent.OtherFragment;
 import id.pekma.pekmavii.NavDrawContent.ResultFragment;
 
-import static com.google.android.gms.common.SignInButton.COLOR_DARK;
-
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener,
+        GoogleApiClient.OnConnectionFailedListener,
+        View.OnClickListener,
+        NewsFragment.SendMessage,
+        NewsFragment.SendMessageiv{
 
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -59,9 +60,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ProgressDialog mProgressDialog;
 
     public SignInButton btnSignIn;
-    public LinearLayout llProfileLayout;
+    String myString,myIvString;
     public ImageView imgProfilePic;
-    public TextView txtName, txtEmail;
+    public TextView txtName, txtEmail,mnews;
     NavigationView navigationView;
 
 
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         btnSignIn.setOnClickListener(this);
+        mnews = findViewById(R.id.homenewsdesctxt);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
+
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this)
@@ -133,6 +136,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setTitle("PEKMA");
         changeFragment(4);
+    }
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 
     private void signIn() {
@@ -205,10 +211,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             fragment = new OtherFragment();
         }
+//        public List<NewsData> data= Collections.emptyList();
+//        NewsData current=data.get(position);
+
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.flfragment, fragment);
+        fragmentTransaction.add(R.id.flfragment, fragment);
         fragmentTransaction.commit();
+        fragmentTransaction.addToBackStack(null);
     }
 
 
@@ -368,6 +379,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu = navigationView.getMenu();
         menu.findItem(R.id.Logout).setVisible(false);
+    }
+
+    @Override
+    public void sendNewsData(String message) {
+       Log.d("LOG","hello" + message);
+       myString = message;
+    }
+
+    @Override
+    public void sendNewsIvData(String ivMessage) {
+        Log.d("LOG","hello" + ivMessage);
+        myIvString = ivMessage;
+    }
+
+    public String getMyData() {
+
+        return myString;
+    }
+
+    public String getMyIvData(){
+        return myIvString;
     }
 
 }

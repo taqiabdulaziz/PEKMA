@@ -68,8 +68,8 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public MyHolderHome(View itemView) {
             super(itemView);
 //            newsTitle= (TextView) itemView.findViewById(R.id.newsTitleTxt);
-            tvplayerA= itemView.findViewById(R.id.TxtPlayerA);
-            tvplayerB= itemView.findViewById(R.id.TxtPlayerB);
+            tvplayerA= itemView.findViewById(R.id.txtPlayerA);
+            tvplayerB= itemView.findViewById(R.id.txtPlayerB);
         }
     }
 }

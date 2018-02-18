@@ -7,6 +7,7 @@ repositories {
     mavenCentral()
     google()
     maven { url 'https://maven.google.com' }
+    jcenter()
 }
 apply plugin: 'com.android.application'
 
@@ -45,13 +46,13 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support:design:26.1.0'
     compile 'org.jsoup:jsoup:1.11.2'
-    compile 'com.github.bumptech.glide:glide:4.5.0'
-    compile(name: 'line-sdk-4.0.7', ext: 'aar')
     compile 'com.google.firebase:firebase-core:11.8.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.google.code.gson:gson:2.2.4'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
+    compile 'jp.wasabeef:recyclerview-animators:2.3.0'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support:customtabs:26.1.0'
     compile 'com.google.android.gms:play-services-auth:11.8.0'
