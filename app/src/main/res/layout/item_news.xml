@@ -9,6 +9,7 @@
     android:foreground="@drawable/ripple"
     android:background="@drawable/ripple"
     android:layout_marginLeft="7dp"
+    android:onClick="framelayoutclick"
     android:layout_marginRight="7dp"
     android:layout_marginTop="7dp">
 

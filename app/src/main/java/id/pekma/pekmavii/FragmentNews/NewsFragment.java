@@ -23,6 +23,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,7 +76,6 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         rootview = inflater.inflate(R.layout.fragment_news, null);
-
         return rootview;
     }
 

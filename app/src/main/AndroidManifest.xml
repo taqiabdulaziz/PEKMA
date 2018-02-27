@@ -50,6 +50,14 @@
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FragmentNews.DetailActivityNews"
+            android:theme="@style/DetailNewsTheme">
+        </activity>
+        <activity android:name=".FragmentHome.DetailActivityHomeMatch"
+            android:theme="@style/DetailHomeTheme">
+
+        </activity>
     </application>
 
 </manifest>

@@ -13,8 +13,26 @@ public class HomeData {
     public String mftime;
     public String resultpa;
     public String resultpb;
+    public String jurA;
+    public String jurB;
     public String idevent;
     public String done;
+
+    public String getJurA() {
+        return jurA;
+    }
+
+    public void setJurA(String jurA) {
+        this.jurA = jurA;
+    }
+
+    public String getJurB() {
+        return jurB;
+    }
+
+    public void setJurB(String jurB) {
+        this.jurB = jurB;
+    }
 
     public String getPlayerA() {
         return playerA;

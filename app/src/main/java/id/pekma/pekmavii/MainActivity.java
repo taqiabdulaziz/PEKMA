@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener,
         NewsFragment.SendMessage,
-        NewsFragment.SendMessageiv{
-
+        NewsFragment.SendMessageiv
+{
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int RC_SIGN_IN = 007;
@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements
     public ImageView imgProfilePic;
     public TextView txtName, txtEmail,mnews;
     NavigationView navigationView;
-
 
     public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -103,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements
 //        txtName = findViewById(R.id.txtName);
         NavigationView navigationView;
 
-
         btnSignIn.setOnClickListener(this);
         mnews = findViewById(R.id.homenewsdesctxt);
 
@@ -113,7 +111,6 @@ public class MainActivity extends AppCompatActivity implements
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this)
@@ -125,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements
         btnSignIn.setColorScheme(0);
 
         btnSignIn.setScopes(gso.getScopeArray());
-
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -197,7 +193,6 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-
     private void changeFragment(int position) {
         Fragment fragment;
         if (position == 1) {
@@ -211,9 +206,6 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             fragment = new OtherFragment();
         }
-//        public List<NewsData> data= Collections.emptyList();
-//        NewsData current=data.get(position);
-
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -221,7 +213,6 @@ public class MainActivity extends AppCompatActivity implements
         fragmentTransaction.commit();
         fragmentTransaction.addToBackStack(null);
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -401,5 +392,4 @@ public class MainActivity extends AppCompatActivity implements
     public String getMyIvData(){
         return myIvString;
     }
-
 }

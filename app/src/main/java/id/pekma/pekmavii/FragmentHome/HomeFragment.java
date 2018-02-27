@@ -60,23 +60,6 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootview =inflater.inflate(R.layout.fragment_home, container,false);
 
-        View bottomSheet = rootview.findViewById(R.id.bottom_sheet1);
-        mBottomSheetBehavior1 = BottomSheetBehavior.from(bottomSheet);
-        final LinearLayout linearLayout1 = rootview.findViewById(R.id.line1);
-        linearLayout1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mBottomSheetBehavior1.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                    mBottomSheetBehavior1.setState(BottomSheetBehavior.STATE_EXPANDED);
-
-                }
-                else {
-                    mBottomSheetBehavior1.setState(BottomSheetBehavior.STATE_COLLAPSED);
-
-                }
-            }
-        });
-
 
         MainActivity mainActivity = (MainActivity)getActivity();
         String myDataFromActivity = mainActivity.getMyData();
@@ -215,6 +198,10 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                 HomeData homeData = new HomeData();
                 homeData.playerA = json_data.getString("playera");
                 homeData.playerB = json_data.getString("playerb");
+                homeData.msDate = json_data.getString("msdate");
+                homeData.mstime = json_data.getString("mstime");
+                homeData.jurA = json_data.getString("jurA");
+                homeData.jurB = json_data.getString("jurB");
 
                 data.add(homeData);
 
