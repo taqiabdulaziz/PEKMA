@@ -57,39 +57,36 @@ public class AdapterNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         runEnterAnimation(holder.itemView);
         final String description = data.get(position).getDesc();
         final String image = data.get(position).getNewsImage();
+        final String title = data.get(position).getTitle();
 
 
         // Get current position of item in recyclerview to bind data and assign values from list
         MyHolderNews myHolderNews = (MyHolderNews) holder;
         NewsData current=data.get(position);
-        myHolderNews.newsDesc.setText(current.desc);
+        myHolderNews.title.setText(current.title);
         Picasso.with(context)
                 .load(current.getNewsImage())
                 .fit()
                 .centerCrop()
                 .transform(new GradientTransformation())
                 .into(myHolderNews.newsIv);
+        Picasso.with(context)
+                .load(R.drawable.logopekma6)
+                .fit()
+                .into(myHolderNews.iconpekmasmallnews);
 
         ((MyHolderNews) holder).setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                openDetailNewsActivity(description,image);
+                openDetailNewsActivity(title,description,image);
             }
         });
-
-//        myHolderNews.newsDesc.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-
-
     }
 
-    private void openDetailNewsActivity(String description, String image) {
+    private void openDetailNewsActivity(String title, String description, String image) {
         Intent i = new Intent(context,DetailActivityNews.class);
         //PACK DATA TO SEND
+        i.putExtra("TITLE_KEY",title);
         i.putExtra("NAME_KEY",description);
         i.putExtra("IMAGE_KEY",image);
 
@@ -119,16 +116,16 @@ public class AdapterNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         ImageView homeNewsIv;
         TextView homeNewsDesc;
-        ImageView newsIv;
+        ImageView newsIv,iconpekmasmallnews;
         TextView newsDesc;
+        TextView title;
         ItemClickListener itemClickListener;
         // create constructor to get widget reference
         MyHolderNews(View itemView) {
             super(itemView);
-
-            newsDesc= itemView.findViewById(R.id.newsDescTxt);
+            iconpekmasmallnews = itemView.findViewById(R.id.iconpekmasmallnews);
+            title= itemView.findViewById(R.id.newsTitleTxt);
             newsIv= itemView.findViewById(R.id.ivNews);
-            homeNewsDesc = itemView.findViewById(R.id.homenewsdesctxt);
             homeNewsIv = itemView.findViewById(R.id.ivHomeNews);
 
             itemView.setOnClickListener(this);

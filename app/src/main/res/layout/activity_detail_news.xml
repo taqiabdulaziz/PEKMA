@@ -1,21 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="id.pekma.pekmavii.FragmentNews.DetailActivityNews"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/homeNewsDetailTxt"
-        android:text="desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-    <ImageView
-        android:id="@+id/homeNewsDetailIv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="230dp"
+        android:fitsSystemWindows="true">
 
-</LinearLayout>
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginStart="48dp"
+        app:expandedTitleMarginEnd="64dp"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/homeNewsDetailIv"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_internet"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar1"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_collapseMode="pin" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="Yesterday - 7:42 PM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/homeTitleNewsDetailTxt"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="13dp"
+                android:layout_height="wrap_content"
+                android:text="Adrian Clarke believes Sam Allardyce must focus on his defence to improve the Toffees' away record"
+                android:textSize="20sp"
+                android:textColor="#323c46"
+                android:layout_marginBottom="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:textColor="#323c46"
+                android:id="@+id/homeNewsDetailTxt"
+                android:text="Everton?s away form is a cause for concern as they make the short trip to Burnley this weekend.
+
+The Toffees collected one win and two draws from their first three road trips under Sam Allardyce, but since then they have lost four consecutive away days.
+
+Over the course of the season, only Stoke City and West Bromwich Albion have amassed fewer away points than Everton?s eight.
+
+Formation tinkering
+
+Since appointing Allardyce as manager at the end of November, Everton?s starting line-up has constantly changed.
+
+Going from a back four to a three, or five, the Toffees have altered formations for all seven of their away matches under Allardyce.
+
+He has retained the same defence just once, in a draw at Liverpool which was followed by a victory at Newcastle United, so there has yet to be a settled feel.
+
+By introducing greater continuity in the weeks to come, stronger relationships can develop between central defenders and their full-backs.
+
+This could help greatly when the team is under pressure in hostile environments.Everton need to be more compact, another issue that could be resolved by greater continuity.
+
+When the structure and pattern of play changes on a match-by-match basis, the responsibilities of individual players can also change.
+
+This is not an excuse for players switching off or not marking properly, but some of Everton?s off-the-ball work and positioning has suffered from the changes.
+
+They need to be less open between the lines and in wide areas, to reduce the shots that have been raining in on their goal."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

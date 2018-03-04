@@ -38,7 +38,7 @@
                 android:layout_centerVertical="true"
                 android:text="Akuntansi"
                 android:textAllCaps="true"
-                android:textColor="#323c46"
+                android:textColor="@color/dark"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -73,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="14dp"
-            android:background="#A9B0B3"
+            android:background="@color/dark"
             android:layout_marginBottom="14dp">
 
             <TextView
@@ -81,9 +81,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textAlignment="center"
                 android:text="21:20"
-                android:textColor="#FFFF" />
+                android:textAlignment="center"
+                android:textColor="#FFFF"
+                android:textStyle="bold" />
     </LinearLayout>
 
     </LinearLayout>
@@ -129,7 +130,7 @@
                 android:layout_gravity="center"
                 android:text="Akunansi"
                 android:textAllCaps="true"
-                android:textColor="#323c46"
+                android:textColor="@color/dark"
                 android:textStyle="bold" />
 
             <ImageView

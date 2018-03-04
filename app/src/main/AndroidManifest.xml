@@ -52,12 +52,11 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".FragmentNews.DetailActivityNews"
-            android:theme="@style/DetailNewsTheme">
-        </activity>
-        <activity android:name=".FragmentHome.DetailActivityHomeMatch"
-            android:theme="@style/DetailHomeTheme">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".FragmentHome.DetailActivityHomeMatch"
+            android:theme="@style/DetailHomeTheme"></activity>
+        <activity android:name=".FragmentResult.FragmentOlahraga"></activity>
     </application>
 
 </manifest>

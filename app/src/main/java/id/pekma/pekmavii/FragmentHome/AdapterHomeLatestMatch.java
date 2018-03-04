@@ -1,5 +1,6 @@
 package id.pekma.pekmavii.FragmentHome;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -7,22 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.pekma.pekmavii.FragmentNews.ItemClickListener;
@@ -32,7 +26,7 @@ import id.pekma.pekmavii.R;
  * Created by Muhammad Taqi on 2/13/2018.
  */
 
-public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private LayoutInflater inflater;
@@ -41,7 +35,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     int currentPos=0;
     AdapterView.OnItemClickListener itemClickListener;
 
-    public AdapterHome(Context context, List<HomeData> data){
+    public AdapterHomeLatestMatch(Context context, List<HomeData> data){
         this.context=context;
         inflater= LayoutInflater.from(context);
         this.data=data;
@@ -69,55 +63,65 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         MyHolderHome myHolderHome = (MyHolderHome) holderhome;
         HomeData currenthome = data.get(position);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date strDate = sdf.parse(msdate);
-            if (System.currentTimeMillis() < strDate.getTime()) {
+            if (System.currentTimeMillis() > strDate.getTime()) {
                 myHolderHome.tvplayerA.setText(currenthome.playerA);
                 myHolderHome.tvplayerB.setText(currenthome.playerB);
 
-                if ((jurA.equals("D4 Akuntansi"))
-                        || (jurA.equals("D3 Akuntansi"))
-                        || (jurA.equals("D4 Akuntansi Tugas belajar"))
-                        || (jurA.equals("D3 Manajemen Aset"))
-                        || (jurA.equals("D3 Akuntansi Tugas Belajar"))) {
+                switch (jurA) {
+                    case "D4 Akuntansi":
+                    case "D3 Akuntansi":
+                    case "D4 Akuntansi Tugas belajar":
+                    case "D3 Manajemen Aset":
+                    case "D3 Akuntansi Tugas Belajar":
 
-                    Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurAciv);
-                } else if ((jurA.equals("D1 Pajak"))
-                        || ((jurA.equals("D3 Pajak")))
-                        || (jurA.equals("D3 Pajak Tugas Belajar"))
-                        || (jurA.equals("D3 Penilai"))){
+                        Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurAciv);
+                        break;
+                    case "D1 Pajak":
+                    case "D3 Pajak":
+                    case "D3 Pajak Tugas Belajar":
+                    case "D3 Penilai":
 
-                    Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurAciv);
-                } else if ((jurA.equals("D1 BC"))
-                        || (jurA.equals("D3 BC"))) {
+                        Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurAciv);
+                        break;
+                    case "D1 BC":
+                    case "D3 BC":
 
-                    Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurAciv);
-                } else {
+                        Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurAciv);
+                        break;
+                    default:
 
-                    Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurAciv);
+                        Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurAciv);
+                        break;
                 }
 
-                if ((jurB.equals("D4 Akuntansi"))
-                        || (jurB.equals("D3 Akuntansi"))
-                        || (jurB.equals("D4 Akuntansi Tugas belajar"))
-                        || (jurB.equals("D3 Manajemen Aset"))
-                        || (jurB.equals("D3 Akuntansi Tugas Belajar"))) {
+                switch (jurB) {
+                    case "D4 Akuntansi":
+                    case "D3 Akuntansi":
+                    case "D4 Akuntansi Tugas belajar":
+                    case "D3 Manajemen Aset":
+                    case "D3 Akuntansi Tugas Belajar":
 
-                    Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurBciv);
-                } else if ((jurB.equals("D1 Pajak"))
-                        || ((jurB.equals("D3 Pajak")))
-                        || (jurB.equals("D3 Pajak Tugas Belajar"))
-                        || (jurB.equals("D3 Penilai"))){
+                        Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurBciv);
+                        break;
+                    case "D1 Pajak":
+                    case "D3 Pajak":
+                    case "D3 Pajak Tugas Belajar":
+                    case "D3 Penilai":
 
-                    Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurBciv);
-                } else if ((jurB.equals("D1 BC"))
-                        || (jurB.equals("D3 BC"))) {
+                        Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurBciv);
+                        break;
+                    case "D1 BC":
+                    case "D3 BC":
 
-                    Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurBciv);
-                } else {
+                        Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurBciv);
+                        break;
+                    default:
 
-                    Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurBciv);
+                        Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurBciv);
+                        break;
                 }
 
                 ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
@@ -156,16 +160,13 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     class MyHolderHome extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        HomeData homeData;
         TextView tvplayerA,tvplayerB;
         ItemClickListener itemClickListener;
         CircleImageView jurAciv,jurBciv;
 
-
         // create constructor to get widget reference
-        public MyHolderHome(View itemView) {
+        MyHolderHome(View itemView) {
             super(itemView);
-
             tvplayerA= itemView.findViewById(R.id.txtPlayerA);
             tvplayerB= itemView.findViewById(R.id.txtPlayerB);
             jurAciv = itemView.findViewById(R.id.jurAciv);
@@ -173,12 +174,11 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             itemView.setOnClickListener(this);
         }
-
         @Override
         public void onClick(View v) {
             this.itemClickListener.onItemClick(this.getLayoutPosition());
         }
-        public void setItemClickListener(ItemClickListener itemClickListener)
+        void setItemClickListener(ItemClickListener itemClickListener)
         {
             this.itemClickListener=itemClickListener;
         }

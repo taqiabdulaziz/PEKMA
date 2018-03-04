@@ -23,9 +23,12 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,20 +64,19 @@ public class NewsFragment extends Fragment {
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
     public String homenewstxt;
+    public String homenewstitleTxt;
     public String homenewsiv;
-    Context ctx;
+    SendMessageTitle SMT;
     SendMessage SM;
     SendMessageiv SMI;
     SwipeRefreshLayout mSwipeRefreshLayout;
     View rootview;
-    View rootviewnews;
     private RecyclerView recyclerView;
     private AdapterNews mAdapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         rootview = inflater.inflate(R.layout.fragment_news, null);
         return rootview;
     }
@@ -95,6 +97,7 @@ public class NewsFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
+            SMT = (SendMessageTitle) getActivity();
             SM = (SendMessage) getActivity();
             SMI = (SendMessageiv)getActivity();
         } catch (ClassCastException e) {
@@ -109,6 +112,10 @@ public class NewsFragment extends Fragment {
 
     public interface SendMessageiv {
         void sendNewsIvData(String ivMessage);
+    }
+
+    public interface SendMessageTitle {
+        void sendNewsTitleData(String titleMessage);
     }
 
     public class AsyncFetch extends AsyncTask<String,String,String>{
@@ -126,7 +133,7 @@ public class NewsFragment extends Fragment {
                 // Enter URL address where your json file resides
                 // Even you can make call to php file which returns json data
 
-                url = new URL("https://taqiabdulaziz.com/news1.json");
+                url = new URL("https://taqiabdulaziz.com/berita.php");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -191,32 +198,26 @@ public class NewsFragment extends Fragment {
 
             try {
 
-                JSONObject jsonObject = new JSONObject(result);
-                JSONObject rssObject = jsonObject.getJSONObject("rss");
-                JSONObject channelObject = rssObject.getJSONObject("channel");
-                JSONArray jsonArray = channelObject.getJSONArray("item");
+                JSONArray jsonArray = new JSONArray(result);
+
                 for (int i=0;i<jsonArray.length();i++){
                     JSONObject json_data = jsonArray.getJSONObject(i);
                     JSONObject json_data_home = jsonArray.getJSONObject(0);
 
                     NewsData newsData = new NewsData();
-                    NewsDataHome newsDatahome = new NewsDataHome();
-                    newsData.title=json_data.getString("title");
-                    newsData.title=json_data_home.getString("title");
 
-                    JSONObject descObject = json_data.getJSONObject("description");
-                    JSONObject descObjectHome = json_data_home.getJSONObject("description");
-                    JSONObject imgObject = descObject.getJSONObject("img");
-                    JSONObject imgObjectHome = descObjectHome.getJSONObject("img");
-
-                    newsData.desc=descObject.optString("#text");
-                    newsData.deschome=descObjectHome.optString("#text");
-                    newsData.newsImage=imgObject.optString("-src");
-                    newsData.newsImageHome=imgObjectHome.optString("-src");
+                    newsData.title = json_data.optString("title");
+                    newsData.title = json_data_home.optString("title");
+                    newsData.desc=json_data.optString("ndesc");
+                    newsData.deschome=json_data_home.optString("ndesc");
+                    newsData.newsImage=json_data.optString("nimg");
+                    newsData.newsImageHome=json_data_home.optString("nimg");
 
                     String mnews = newsData.getDeschome();
                     String mnewsiv = newsData.getNewsImageHome();
+                    String mnewstitle = newsData.getTitle();
 
+                    homenewstitleTxt = mnewstitle;
                     homenewstxt = mnews;
                     homenewsiv = mnewsiv;
 
@@ -247,6 +248,7 @@ public class NewsFragment extends Fragment {
                 controller = new LayoutAnimationController(set, 0.5f);
                 recyclerView.setLayoutAnimation(controller);
 
+                SMT.sendNewsTitleData(homenewstitleTxt);
                 SM.sendNewsData(homenewstxt);
                 SMI.sendNewsIvData(homenewsiv);
 

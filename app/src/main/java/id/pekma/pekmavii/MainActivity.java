@@ -19,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
@@ -34,23 +33,19 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Picasso;
 
-import java.util.Collections;
-import java.util.List;
-
-import id.pekma.pekmavii.FragmentHome.HomeData;
 import id.pekma.pekmavii.FragmentHome.HomeFragment;
-import id.pekma.pekmavii.FragmentNews.NewsData;
 import id.pekma.pekmavii.FragmentNews.NewsFragment;
 import id.pekma.pekmavii.NavDrawContent.FixturesFragment;
 import id.pekma.pekmavii.NavDrawContent.OtherFragment;
-import id.pekma.pekmavii.NavDrawContent.ResultFragment;
+import id.pekma.pekmavii.FragmentResult.ResultFragment;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener,
         NewsFragment.SendMessage,
-        NewsFragment.SendMessageiv
+        NewsFragment.SendMessageiv,
+        NewsFragment.SendMessageTitle
 {
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -60,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements
     private ProgressDialog mProgressDialog;
 
     public SignInButton btnSignIn;
-    String myString,myIvString;
+    String myString,myIvString,myTitleString;
     public ImageView imgProfilePic;
     public TextView txtName, txtEmail,mnews;
     NavigationView navigationView;
@@ -103,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements
         NavigationView navigationView;
 
         btnSignIn.setOnClickListener(this);
-        mnews = findViewById(R.id.homenewsdesctxt);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -195,22 +189,30 @@ public class MainActivity extends AppCompatActivity implements
 
     private void changeFragment(int position) {
         Fragment fragment;
+        String title = null;
         if (position == 1) {
             fragment = new HomeFragment();
+            title = "Home";
         } else if (position == 2) {
             fragment = new FixturesFragment();
+            title = "Fixtures";
         } else if (position == 3) {
             fragment = new ResultFragment();
+            Intent i = new Intent(getApplicationContext(),NoInternet.class);
+            startActivity(i);
+            title = "Result";
         } else if (position == 4) {
             fragment = new NewsFragment();
+            title = "Feed";
         } else {
             fragment = new OtherFragment();
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.flfragment, fragment);
+        fragmentTransaction.add(R.id.flfragment,fragment);
         fragmentTransaction.commit();
+        setTitle(title);
         fragmentTransaction.addToBackStack(null);
     }
 
@@ -384,8 +386,17 @@ public class MainActivity extends AppCompatActivity implements
         myIvString = ivMessage;
     }
 
-    public String getMyData() {
+    @Override
+    public void sendNewsTitleData(String titleMessage) {
+        Log.d("LOG","hello" + titleMessage);
+        myTitleString = titleMessage;
+    }
 
+    public String getMyTitleString() {
+        return myTitleString;
+    }
+
+    public String getMyData() {
         return myString;
     }
 

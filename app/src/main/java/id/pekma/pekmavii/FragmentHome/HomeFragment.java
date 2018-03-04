@@ -1,6 +1,7 @@
 package id.pekma.pekmavii.FragmentHome;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.sax.RootElement;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import id.pekma.pekmavii.FragmentNews.AdapterNews;
+import id.pekma.pekmavii.FragmentNews.DetailActivityNews;
 import id.pekma.pekmavii.FragmentNews.NewsData;
 import id.pekma.pekmavii.FragmentNews.NewsDataHome;
 import id.pekma.pekmavii.FragmentNews.NewsFragment;
@@ -52,37 +54,62 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
 
-    TextView mnewst;
+    TextView mnewst,mnewst1,mnewstitle,mnewstitle1;
+    String title,desc,imageview;
+    ImageView mnewsiv,iconpekmasmall;
+    Button buttonNewsHome;
+
     private BottomSheetBehavior mBottomSheetBehavior1;
-    ImageView mnewsiv;
+
     @Nullable
     @Override
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootview =inflater.inflate(R.layout.fragment_home, container,false);
+        View rootview = inflater.inflate(R.layout.fragment_home, container, false);
+        MainActivity mainActivity = (MainActivity) getActivity();
 
+        final String myDataFromActivity = mainActivity.getMyData();
+        final String myTitleDataFromActivity = mainActivity.getMyTitleString();
+        final String myIvDataFromActivity = mainActivity.getMyIvData();
 
-        MainActivity mainActivity = (MainActivity)getActivity();
-        String myDataFromActivity = mainActivity.getMyData();
-        String myIvDataFromActivity = mainActivity.getMyIvData();
-        mnewst = rootview.findViewById(R.id.homenewsdesctxt);
-        mnewst = rootview.findViewById(R.id.homenewsdesctxt);
+        this.title = myTitleDataFromActivity;
+        this.desc = myDataFromActivity;
+        this.imageview = myIvDataFromActivity;
+        buttonNewsHome = rootview.findViewById(R.id.openNews);
+        iconpekmasmall = rootview.findViewById(R.id.iconpekmasmall);
+        mnewstitle = rootview.findViewById(R.id.homenewstxt);
         mnewsiv = rootview.findViewById(R.id.ivHomeNews);
         Picasso.with(getContext())
                 .load(myIvDataFromActivity)
+                .fit()
                 .into(mnewsiv);
-        mnewst.setText(myDataFromActivity);
+        Picasso.with(getContext())
+                .load(R.drawable.logopekma6)
+                .fit()
+                .into(iconpekmasmall);
+//        buttonNewsHome.setOnClickListener(this);
+        mnewstitle.setText(myTitleDataFromActivity);
+
+        buttonNewsHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(),DetailActivityNews.class);
+                //PACK DATA TO SEND
+                i.putExtra("TITLE_KEY",title);
+                i.putExtra("NAME_KEY",desc);
+                i.putExtra("IMAGE_KEY",imageview);
+
+                startActivity(i);
+            }
+        });
         return rootview;
 
 
-    }
-    protected void displayReceivedData(String message) {
 
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-
 
 
         if (getArguments()!=null) {
@@ -93,15 +120,28 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
         super.onCreate(savedInstanceState);
         new AsyncFetch3().execute();
 
+
+//        buttonNewsHome.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(getContext(),DetailActivityNews.class);
+//                //PACK DATA TO SEND
+//                i.putExtra("TITLE_KEY",title);
+//                i.putExtra("NAME_KEY",desc);
+//                i.putExtra("IMAGE_KEY",imageview);
+//            }
+//        });
+
     }
 
+    protected void displayReceivedData(String message) {
+
+    }
 
     @Override
     public void sendNewsData(String message) {
         Log.e("hello",message);
-
     }
-
 
     public class AsyncFetch3 extends AsyncTask<String,String,String> {
         ProgressDialog pdLoading = new ProgressDialog(getActivity());
@@ -114,6 +154,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
             pdLoading.setCancelable(false);
             pdLoading.show();
         }
+
         @Override
         protected String doInBackground(String... strings) {
             try {
@@ -176,8 +217,6 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
             } finally {
                 conn.disconnect();
             }
-
-
         }
 
         @Override
@@ -202,22 +241,25 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                 homeData.mstime = json_data.getString("mstime");
                 homeData.jurA = json_data.getString("jurA");
                 homeData.jurB = json_data.getString("jurB");
+                homeData.idevent = json_data.getString("idevent");
 
                 data.add(homeData);
 
                 }
 
                 RecyclerView recyclerView = getView().findViewById(R.id.rvHome);
+                RecyclerView recyclerViewL = getView().findViewById(R.id.rvHomeLatest);
                 AdapterHome mAdapter = new AdapterHome(getActivity(), data);
+                AdapterHomeLatestMatch mAdapterL = new AdapterHomeLatestMatch(getActivity(), data);
+
                 recyclerView.setAdapter(mAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+                recyclerViewL.setAdapter(mAdapterL);
+                recyclerViewL.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
 
             } catch (JSONException e) {
                 Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
             }
-
         }
     }
-
-
 }
