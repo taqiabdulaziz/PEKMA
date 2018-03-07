@@ -27,4 +27,45 @@
 
     <string name="btn_logout_from_google">Logout from Google</string>
     <string name="btn_revoke_access">Revoke Access</string>
+
+    <string-array name="cabang_olahraga">
+        <item>Akademik</item>
+        <item>Olahraga</item>
+        <item>Seni</item>
+    </string-array>
+
+    <string-array name="akademik">
+        <item>Essay &amp; KTI</item>
+        <item>Akuntansi</item>
+        <item>Pajak</item>
+        <item>APBN</item>
+        <item>Pidato &amp; Speech</item>
+        <item>Cerdas Cermat</item>
+        <item>Debat</item>
+    </string-array>
+
+    <string-array name="olahraga">
+        <item>Atletik</item>
+        <item>Basket</item>
+        <item>Voli</item>
+        <item>Tenis Meja</item>
+        <item>Catur</item>
+        <item>Futsal</item>
+        <item>Mini Soccer</item>
+        <item>Badminton</item>
+        <item>Mini Games</item>
+    </string-array>
+
+    <string-array name="seni">
+        <item>Band</item>
+        <item>Stand Up Comedy</item>
+        <item>Vocal (Solo &amp; Group)</item>
+        <item>Sinematografi</item>
+        <item>Fotografi</item>
+        <item>Musikalisasi Puisi</item>
+        <item>Kabaret</item>
+        <item>Tari Tradisional</item>
+        <item>Tari Modern</item>
+        <item>PKN STAN Got Talent</item>
+    </string-array>
 </resources>

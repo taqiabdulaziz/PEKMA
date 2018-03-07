@@ -1,4 +1,5 @@
-package id.pekma.pekmavii.FragmentNews; /**
+package id.pekma.pekmavii.FragmentNews;
+/**
  * Created by Muhammad Taqi on 2/7/2018.
  */
 
@@ -31,8 +32,6 @@ public class AdapterNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private LayoutInflater inflater;
     public List<NewsData> data= Collections.emptyList();
-    private List<NewsDataHome> dataHome= Collections.emptyList();
-    ItemClickListener itemClickListener;
 
     // create constructor to innitilize context and data sent from MainActivity
     AdapterNews(Context context, List<NewsData> data){
@@ -71,7 +70,7 @@ public class AdapterNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 .transform(new GradientTransformation())
                 .into(myHolderNews.newsIv);
         Picasso.with(context)
-                .load(R.drawable.logopekma6)
+                .load(R.drawable.ic_w)
                 .fit()
                 .into(myHolderNews.iconpekmasmallnews);
 

@@ -1,4 +1,4 @@
-package id.pekma.pekmavii.FragmentResult;
+package id.pekma.pekmavii.FragmentResult.Olahraga;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +12,7 @@ import id.pekma.pekmavii.R;
 
 public class FragmentOlahraga extends Fragment {
     View rootview;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

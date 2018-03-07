@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                 .fit()
                 .into(mnewsiv);
         Picasso.with(getContext())
-                .load(R.drawable.logopekma6)
+                .load(R.drawable.ic_w)
                 .fit()
                 .into(iconpekmasmall);
 //        buttonNewsHome.setOnClickListener(this);
@@ -94,6 +94,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(),DetailActivityNews.class);
+
                 //PACK DATA TO SEND
                 i.putExtra("TITLE_KEY",title);
                 i.putExtra("NAME_KEY",desc);

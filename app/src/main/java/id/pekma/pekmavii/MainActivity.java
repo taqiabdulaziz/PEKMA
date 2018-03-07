@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements
             txtEmail = navigationView.getHeaderView(0).findViewById(R.id.email);
             txtEmail.setText(email);
             imgProfilePic = navigationView.getHeaderView(0).findViewById(R.id.img_profile_pic);
-            Picasso.with(getApplicationContext()).load(personPhotoUrl)
+            Picasso.with(getApplicationContext()).load(personPhotoUrl).fit()
                     .into(imgProfilePic);
 
             updateUI(true);
@@ -198,8 +198,6 @@ public class MainActivity extends AppCompatActivity implements
             title = "Fixtures";
         } else if (position == 3) {
             fragment = new ResultFragment();
-            Intent i = new Intent(getApplicationContext(),NoInternet.class);
-            startActivity(i);
             title = "Result";
         } else if (position == 4) {
             fragment = new NewsFragment();
@@ -210,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.flfragment,fragment);
+        fragmentTransaction.replace(R.id.flfragment,fragment);
         fragmentTransaction.commit();
         setTitle(title);
         fragmentTransaction.addToBackStack(null);
