@@ -17,6 +17,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import id.pekma.pekmavii.FragmentNews.NewsFragment;
 import id.pekma.pekmavii.FragmentResult.Olahraga.FragmentOlahraga;
 import id.pekma.pekmavii.R;
 
@@ -24,11 +27,12 @@ import id.pekma.pekmavii.R;
  * Created by Muhammad Taqi on 2/2/2018.
  */
 
-public class ResultFragment extends Fragment{
+public class ResultFragment extends Fragment implements NewsFragment.SendMessage{
+    public static final int CONNECTION_TIMEOUT = 10000;
+    public static final int READ_TIMEOUT = 15000;
     private Spinner spinnerCabor,spinnerCaborDetail;
-    Button btn1,btn2,btn3;
+    
     int pos = 0;
-
 
     @Nullable
     @Override
@@ -38,28 +42,10 @@ public class ResultFragment extends Fragment{
         spinnerCaborDetail = rootview.findViewById(R.id.spinnerDetailCabor);
         spinnerCabor = rootview.findViewById(R.id.spinnerCabor);
 
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.cabang_olahraga, android.R.layout.simple_spinner_item);
 
-        if (pos == 0) {
-            ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
-                    R.array.akademik, android.R.layout.simple_spinner_item);
-            adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerCaborDetail.setAdapter(adapter2);
-            adapter2.notifyDataSetChanged();
-        } else if ( pos == 1) {
-            ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
-                    R.array.olahraga, android.R.layout.simple_spinner_item);
-            adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerCaborDetail.setAdapter(adapter2);
-            adapter2.notifyDataSetChanged();
-        } else {
-            ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
-                    R.array.seni, android.R.layout.simple_spinner_item);
-            adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerCaborDetail.setAdapter(adapter2);
-            adapter2.notifyDataSetChanged();
-        }
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCabor.setPrompt("ww");
@@ -67,35 +53,6 @@ public class ResultFragment extends Fragment{
         spinnerCaborDetail.setPrompt("ww2");
 
         //SELECTED ITEM LISTENER......
-        spinnerCaborDetail.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-                if (position == 0) {
-                    Toast.makeText(getContext(), "Akademik", Toast.LENGTH_SHORT).show();
-                    spinnerCabor.setPrompt("Akademik");
-                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-
-                } else if (position == 1) {
-                    spinnerCabor.setPrompt("Olahraga");
-                    Toast.makeText(getContext(), "Olahraga", Toast.LENGTH_SHORT).show();
-                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-
-
-                } else {
-                    spinnerCabor.setPrompt("Seni");
-                    spinnerCabor.setSelection(2);
-                    Toast.makeText(getContext(), "Seni", Toast.LENGTH_SHORT).show();
-                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         spinnerCabor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -106,18 +63,40 @@ public class ResultFragment extends Fragment{
                     spinnerCabor.setPrompt("Akademik");
                     ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
 
+                    ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
+                            R.array.akademik, android.R.layout.simple_spinner_item);
+
+                    adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    adapter2.notifyDataSetChanged();
+                    spinnerCaborDetail.setAdapter(adapter2);
+
+
+
                 } else if (position == 1) {
                     pos = 1;
                     spinnerCabor.setPrompt("Olahraga");
                     Toast.makeText(getContext(), "Olahraga"+ pos, Toast.LENGTH_SHORT).show();
                     ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
 
+                    ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
+                            R.array.olahraga, android.R.layout.simple_spinner_item);
+
+                    adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    adapter2.notifyDataSetChanged();
+                    spinnerCaborDetail.setAdapter(adapter2);
+
                 } else {
                     pos = 2;
                     spinnerCabor.setPrompt("Seni");
-                    spinnerCabor.setSelection(2);
                     Toast.makeText(getContext(), "Seni"+ pos, Toast.LENGTH_SHORT).show();
                     ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+
+                    ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
+                            R.array.seni, android.R.layout.simple_spinner_item);
+
+                    adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    adapter2.notifyDataSetChanged();
+                    spinnerCaborDetail.setAdapter(adapter2);
 
                 }
             }
@@ -128,17 +107,20 @@ public class ResultFragment extends Fragment{
             }
         });
 
-//        btn1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Fragment fragment;
-//                fragment = new FragmentOlahraga();
-//                FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-//                ft.replace(R.id.flfragment2,fragment);
-//                ft.commit();
-//                ft.addToBackStack(null);
-//            }
-//        });
+        spinnerCaborDetail.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         return rootview;
     }
 
@@ -146,10 +128,4 @@ public class ResultFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-    private void click(){
-    }
-
-
-
 }
