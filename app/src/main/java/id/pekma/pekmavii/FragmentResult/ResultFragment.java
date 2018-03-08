@@ -1,11 +1,16 @@
 package id.pekma.pekmavii.FragmentResult;
 
+import android.app.ProgressDialog;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,21 +22,36 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import id.pekma.pekmavii.FragmentHome.AdapterHome;
+import id.pekma.pekmavii.FragmentHome.AdapterHomeLatestMatch;
+import id.pekma.pekmavii.FragmentHome.HomeData;
+import id.pekma.pekmavii.FragmentHome.HomeFragment;
 import id.pekma.pekmavii.FragmentNews.NewsFragment;
 import id.pekma.pekmavii.FragmentResult.Olahraga.FragmentOlahraga;
+import id.pekma.pekmavii.MainActivity;
 import id.pekma.pekmavii.R;
 
 /**
  * Created by Muhammad Taqi on 2/2/2018.
  */
 
-public class ResultFragment extends Fragment implements NewsFragment.SendMessage{
-    public static final int CONNECTION_TIMEOUT = 10000;
-    public static final int READ_TIMEOUT = 15000;
+public class ResultFragment extends Fragment{
     private Spinner spinnerCabor,spinnerCaborDetail;
-    
+
     int pos = 0;
 
     @Nullable
@@ -41,7 +61,6 @@ public class ResultFragment extends Fragment implements NewsFragment.SendMessage
         View rootview =  inflater.inflate(R.layout.fragment_result, null);
         spinnerCaborDetail = rootview.findViewById(R.id.spinnerDetailCabor);
         spinnerCabor = rootview.findViewById(R.id.spinnerCabor);
-
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.cabang_olahraga, android.R.layout.simple_spinner_item);
@@ -110,9 +129,14 @@ public class ResultFragment extends Fragment implements NewsFragment.SendMessage
         spinnerCaborDetail.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-
+                if (position == 1 && pos == 1){
+                    Fragment fragment = new FragmentOlahraga();
+                    FragmentManager fragmentManager = getChildFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.flfragment2,fragment);
+                    fragmentTransaction.commit();
+                }
             }
 
             @Override
@@ -128,4 +152,6 @@ public class ResultFragment extends Fragment implements NewsFragment.SendMessage
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+
 }

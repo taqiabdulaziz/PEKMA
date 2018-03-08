@@ -1,5 +1,6 @@
 package id.pekma.pekmavii.FragmentHome;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -87,7 +88,6 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                 .load(R.drawable.ic_w)
                 .fit()
                 .into(iconpekmasmall);
-//        buttonNewsHome.setOnClickListener(this);
         mnewstitle.setText(myTitleDataFromActivity);
 
         buttonNewsHome.setOnClickListener(new View.OnClickListener() {
@@ -116,10 +116,10 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
         if (getArguments()!=null) {
             Bundle bundle = getArguments();
             String mnews1 = bundle.getString("txtnews");
-            new AsyncFetch3().execute();
+            new AsyncFetch().execute();
         }
         super.onCreate(savedInstanceState);
-        new AsyncFetch3().execute();
+        new AsyncFetch().execute();
 
 
 //        buttonNewsHome.setOnClickListener(new View.OnClickListener() {
@@ -144,7 +144,8 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
         Log.e("hello",message);
     }
 
-    public class AsyncFetch3 extends AsyncTask<String,String,String> {
+    @SuppressLint("StaticFieldLeak")
+    public class AsyncFetch extends AsyncTask<String,String,String> {
         ProgressDialog pdLoading = new ProgressDialog(getActivity());
         HttpURLConnection conn;
         URL url = null;
