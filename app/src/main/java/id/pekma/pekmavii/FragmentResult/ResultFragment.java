@@ -1,6 +1,7 @@
 package id.pekma.pekmavii.FragmentResult;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -34,6 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import id.pekma.pekmavii.FragmentHome.AdapterHome;
@@ -51,8 +53,27 @@ import id.pekma.pekmavii.R;
 
 public class ResultFragment extends Fragment{
     private Spinner spinnerCabor,spinnerCaborDetail;
-
+    SendCabol SC;
     int pos = 0;
+    int positionCabol = 0;
+    List<HomeData> data=new ArrayList<>();
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+
+            SC = (SendCabol) getActivity();
+
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Error in retrieving data. Please try again");
+        }
+
+    }
+
+    public interface SendCabol {
+        void sendCabolData (int message);
+    }
 
     @Nullable
     @Override
@@ -130,23 +151,129 @@ public class ResultFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-                if (position == 1 && pos == 1){
+
+                if (pos == 1) {
+                    if (position == 1){
+                        positionCabol = 1;
+                        Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+                    } else if (position == 2){
+                        positionCabol = 2;
+                    } else if (position == 3){
+                        positionCabol = 3;
+                    } else if (position == 4){
+                        positionCabol = 4;
+                    } else if (position == 5){
+                        positionCabol = 5;
+                    } else if (position == 6){
+                        positionCabol = 6;
+                    } else if (position == 7){
+                        positionCabol = 7;
+                    } else if (position == 8){
+                        positionCabol = 8;
+                    } else if (position == 9){
+                        positionCabol = 9;
+                    } else {
+                        positionCabol = 10;
+                    }
+
+                    HomeData homeData = new HomeData();
                     Fragment fragment = new FragmentOlahraga();
                     FragmentManager fragmentManager = getChildFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.flfragment2,fragment);
                     fragmentTransaction.commit();
+
+                    SC.sendCabolData(position);
+                    homeData.cabolData1 = positionCabol;
+                    System.out.println(positionCabol + "KONTOL");
+
+                    data.add(homeData);
+                } else if (pos == 0){
+
+                    if (position == 1){
+                        positionCabol = 1;
+                        Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+                    } else if (position == 2){
+                        positionCabol = 2;
+                    } else if (position == 3){
+                        positionCabol = 3;
+                    } else if (position == 4){
+                        positionCabol = 4;
+                    } else if (position == 5){
+                        positionCabol = 5;
+                    } else if (position == 6){
+                        positionCabol = 6;
+                    } else if (position == 7){
+                        positionCabol = 7;
+                    } else if (position == 8){
+                        positionCabol = 8;
+                    } else if (position == 9){
+                        positionCabol = 9;
+                    } else {
+                        positionCabol = 10;
+                    }
+
+                    HomeData homeData = new HomeData();
+                    Fragment fragment = new FragmentOlahraga();
+                    FragmentManager fragmentManager = getChildFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.flfragment2,fragment);
+                    fragmentTransaction.commit();
+
+                    SC.sendCabolData(position);
+                    homeData.cabolData1 = positionCabol;
+                    System.out.println(positionCabol + "KONTOL");
+
+                } else {
+                    if (position == 1){
+                        positionCabol = 1;
+                        Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+                    } else if (position == 2){
+                        positionCabol = 2;
+                    } else if (position == 3){
+                        positionCabol = 3;
+                    } else if (position == 4){
+                        positionCabol = 4;
+                    } else if (position == 5){
+                        positionCabol = 5;
+                    } else if (position == 6){
+                        positionCabol = 6;
+                    } else if (position == 7){
+                        positionCabol = 7;
+                    } else if (position == 8){
+                        positionCabol = 8;
+                    } else if (position == 9){
+                        positionCabol = 9;
+                    } else {
+                        positionCabol = 10;
+                    }
+
+                    HomeData homeData = new HomeData();
+                    Fragment fragment = new FragmentOlahraga();
+                    FragmentManager fragmentManager = getChildFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.flfragment2,fragment);
+                    fragmentTransaction.commit();
+
+                    SC.sendCabolData(position);
+                    homeData.cabolData1 = positionCabol;
+                    System.out.println(positionCabol + "KONTOL");
+
                 }
+
+
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
         return rootview;
     }
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

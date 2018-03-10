@@ -126,6 +126,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         openDetailActivityHome(playerA,playerB,jurA,jurB);
                     }
                 });
+
             } else {
                 System.out.println("kurang dari");
                 holderhome.itemView.setVisibility(View.GONE);

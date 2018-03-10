@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity implements
         View.OnClickListener,
         NewsFragment.SendMessage,
         NewsFragment.SendMessageiv,
-        NewsFragment.SendMessageTitle
+        NewsFragment.SendMessageTitle,
+        ResultFragment.SendCabol
 {
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements
     private ProgressDialog mProgressDialog;
 
     public SignInButton btnSignIn;
+    int myCabolData;
     String myString,myIvString,myTitleString;
     public ImageView imgProfilePic;
     public TextView txtName, txtEmail,mnews;
@@ -353,12 +355,9 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.settings) {
             return true;
         }
@@ -385,9 +384,19 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void sendCabolData(int cabolData) {
+        Log.d("LOG","hello" + cabolData);
+        myCabolData = cabolData;
+    }
+
+    @Override
     public void sendNewsTitleData(String titleMessage) {
         Log.d("LOG","hello" + titleMessage);
         myTitleString = titleMessage;
+    }
+
+    public int getCabolData() {
+        return myCabolData ;
     }
 
     public String getMyTitleString() {

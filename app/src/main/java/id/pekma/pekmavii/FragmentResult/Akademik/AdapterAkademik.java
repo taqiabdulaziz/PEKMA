@@ -1,8 +1,7 @@
-package id.pekma.pekmavii.FragmentResult.Olahraga;
+package id.pekma.pekmavii.FragmentResult.Akademik;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,17 +11,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.pekma.pekmavii.FragmentHome.DetailActivityHomeMatch;
 import id.pekma.pekmavii.FragmentHome.HomeData;
 import id.pekma.pekmavii.FragmentNews.ItemClickListener;
-import id.pekma.pekmavii.FragmentResult.CabolDataGetSet;
 import id.pekma.pekmavii.FragmentResult.ResultFragment;
 import id.pekma.pekmavii.R;
 
@@ -30,7 +26,7 @@ import id.pekma.pekmavii.R;
  * Created by Muhammad Taqi on 2/13/2018.
  */
 
-public class AdapterOlahraga extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ResultFragment.SendCabol {
+public class AdapterAkademik extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ResultFragment.SendCabol {
 
     private Context context;
     private LayoutInflater inflater;
@@ -39,7 +35,7 @@ public class AdapterOlahraga extends RecyclerView.Adapter<RecyclerView.ViewHolde
     int cabolPos;
     AdapterView.OnItemClickListener itemClickListener;
 
-    public AdapterOlahraga(Context context, List<HomeData> data){
+    public AdapterAkademik(Context context, List<HomeData> data){
         this.context=context;
         inflater= LayoutInflater.from(context);
         this.data=data;

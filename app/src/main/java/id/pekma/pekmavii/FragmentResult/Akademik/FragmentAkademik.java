@@ -1,19 +1,21 @@
-package id.pekma.pekmavii.FragmentResult.Olahraga;
+package id.pekma.pekmavii.FragmentResult.Akademik;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,12 +25,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 import id.pekma.pekmavii.FragmentHome.HomeData;
 import id.pekma.pekmavii.FragmentResult.ResultFragment;
 import id.pekma.pekmavii.MainActivity;
 import id.pekma.pekmavii.R;
 
-public class FragmentOlahraga extends Fragment implements ResultFragment.SendCabol{
+public class FragmentAkademik extends Fragment implements ResultFragment.SendCabol{
     View rootview;
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
@@ -164,7 +167,7 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
                 }
 
                 RecyclerView recyclerView = getView().findViewById(R.id.rvResult);
-                AdapterOlahraga mAdapter = new AdapterOlahraga(getActivity(), data);
+                AdapterAkademik mAdapter = new AdapterAkademik(getActivity(), data);
 
                 recyclerView.setAdapter(mAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));

@@ -334,13 +334,6 @@
         android:layout_height="1dp"
         android:background="#e0e0e0" />
 
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="700dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/no_internet"/>
-
 </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

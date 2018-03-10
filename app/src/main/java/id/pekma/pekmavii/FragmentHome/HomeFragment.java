@@ -73,9 +73,11 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
         final String myTitleDataFromActivity = mainActivity.getMyTitleString();
         final String myIvDataFromActivity = mainActivity.getMyIvData();
 
+
         this.title = myTitleDataFromActivity;
         this.desc = myDataFromActivity;
         this.imageview = myIvDataFromActivity;
+
         buttonNewsHome = rootview.findViewById(R.id.openNews);
         iconpekmasmall = rootview.findViewById(R.id.iconpekmasmall);
         mnewstitle = rootview.findViewById(R.id.homenewstxt);
@@ -120,22 +122,6 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
         }
         super.onCreate(savedInstanceState);
         new AsyncFetch().execute();
-
-
-//        buttonNewsHome.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(getContext(),DetailActivityNews.class);
-//                //PACK DATA TO SEND
-//                i.putExtra("TITLE_KEY",title);
-//                i.putExtra("NAME_KEY",desc);
-//                i.putExtra("IMAGE_KEY",imageview);
-//            }
-//        });
-
-    }
-
-    protected void displayReceivedData(String message) {
 
     }
 
@@ -233,7 +219,6 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
             try {
 
                 JSONArray jsonArray = new JSONArray(result);
-
                 for (int i=0;i<jsonArray.length();i++){
                 JSONObject json_data = jsonArray.getJSONObject(i);
                 HomeData homeData = new HomeData();
@@ -243,7 +228,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                 homeData.mstime = json_data.getString("mstime");
                 homeData.jurA = json_data.getString("jurA");
                 homeData.jurB = json_data.getString("jurB");
-                homeData.idevent = json_data.getString("idevent");
+                homeData.idevent = json_data.getInt("idevent");
 
                 data.add(homeData);
 

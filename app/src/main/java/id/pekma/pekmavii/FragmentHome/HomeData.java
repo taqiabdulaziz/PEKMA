@@ -15,8 +15,17 @@ public class HomeData {
     public String resultpb;
     public String jurA;
     public String jurB;
-    public String idevent;
+    public int idevent;
+    public int cabolData1;
+
     public String done;
+
+
+    public int getCabolData() {
+        return cabolData1;
+    }
+
+
 
     public String getJurA() {
         return jurA;
@@ -98,11 +107,11 @@ public class HomeData {
         this.resultpb = resultpb;
     }
 
-    public String getIdevent() {
+    public int getIdevent() {
         return idevent;
     }
 
-    public void setIdevent(String idevent) {
+    public void setIdevent(int idevent) {
         this.idevent = idevent;
     }
 
