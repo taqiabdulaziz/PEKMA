@@ -17,9 +17,33 @@ public class HomeData {
     public String jurB;
     public int idevent;
     public int cabolData1;
-
+    public String namaPeserta;
+    public String namaTema;
     public String done;
 
+    public int getCabolData1() {
+        return cabolData1;
+    }
+
+    public void setCabolData1(int cabolData1) {
+        this.cabolData1 = cabolData1;
+    }
+
+    public String getNamaPeserta() {
+        return namaPeserta;
+    }
+
+    public void setNamaPeserta(String namaPeserta) {
+        this.namaPeserta = namaPeserta;
+    }
+
+    public String getNamaTema() {
+        return namaTema;
+    }
+
+    public void setNamaTema(String namaTema) {
+        this.namaTema = namaTema;
+    }
 
     public int getCabolData() {
         return cabolData1;

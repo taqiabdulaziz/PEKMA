@@ -43,6 +43,7 @@ import id.pekma.pekmavii.FragmentHome.AdapterHomeLatestMatch;
 import id.pekma.pekmavii.FragmentHome.HomeData;
 import id.pekma.pekmavii.FragmentHome.HomeFragment;
 import id.pekma.pekmavii.FragmentNews.NewsFragment;
+import id.pekma.pekmavii.FragmentResult.Akademik.FragmentAkademik;
 import id.pekma.pekmavii.FragmentResult.Olahraga.FragmentOlahraga;
 import id.pekma.pekmavii.MainActivity;
 import id.pekma.pekmavii.R;
@@ -153,29 +154,25 @@ public class ResultFragment extends Fragment{
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
 
                 if (pos == 1) {
-                    if (position == 1){
-                        positionCabol = 1;
-                        Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
-                    } else if (position == 2){
-                        positionCabol = 2;
-                    } else if (position == 3){
-                        positionCabol = 3;
-                    } else if (position == 4){
-                        positionCabol = 4;
-                    } else if (position == 5){
-                        positionCabol = 5;
-                    } else if (position == 6){
-                        positionCabol = 6;
-                    } else if (position == 7){
-                        positionCabol = 7;
-                    } else if (position == 8){
+                    if (position == 0){
                         positionCabol = 8;
-                    } else if (position == 9){
+                    } else if (position == 1){
                         positionCabol = 9;
-                    } else {
+                    } else if (position == 2){
                         positionCabol = 10;
+                    } else if (position == 3){
+                        positionCabol = 11;
+                    } else if (position == 4){
+                        positionCabol = 12;
+                    } else if (position == 5){
+                        positionCabol = 13;
+                    } else if (position == 6){
+                        positionCabol = 14;
+                    } else if (position == 7){
+                        positionCabol = 15;
+                    } else {
+                        positionCabol = 16;
                     }
-
                     HomeData homeData = new HomeData();
                     Fragment fragment = new FragmentOlahraga();
                     FragmentManager fragmentManager = getChildFragmentManager();
@@ -190,22 +187,22 @@ public class ResultFragment extends Fragment{
                     data.add(homeData);
                 } else if (pos == 0){
 
-                    if (position == 1){
-                        positionCabol = 1;
+                    if (position == 0){
+                        positionCabol = 1 ;
                         Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
-                    } else if (position == 2){
+                    } else if (position == 1){
                         positionCabol = 2;
-                    } else if (position == 3){
+                    } else if (position == 2){
                         positionCabol = 3;
-                    } else if (position == 4){
+                    } else if (position == 3){
                         positionCabol = 4;
-                    } else if (position == 5){
+                    } else if (position == 4){
                         positionCabol = 5;
-                    } else if (position == 6){
+                    } else if (position == 5){
                         positionCabol = 6;
-                    } else if (position == 7){
+                    } else if (position == 6){
                         positionCabol = 7;
-                    } else if (position == 8){
+                    } else if (position == 7){
                         positionCabol = 8;
                     } else if (position == 9){
                         positionCabol = 9;
@@ -214,7 +211,7 @@ public class ResultFragment extends Fragment{
                     }
 
                     HomeData homeData = new HomeData();
-                    Fragment fragment = new FragmentOlahraga();
+                    Fragment fragment = new FragmentAkademik();
                     FragmentManager fragmentManager = getChildFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.flfragment2,fragment);
@@ -225,31 +222,31 @@ public class ResultFragment extends Fragment{
                     System.out.println(positionCabol + "KONTOL");
 
                 } else {
-                    if (position == 1){
-                        positionCabol = 1;
+                    if (position == 0){
+                        positionCabol = 17;
                         Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+                    } else if (position == 1){
+                        positionCabol = 18;
                     } else if (position == 2){
-                        positionCabol = 2;
+                        positionCabol = 19;
                     } else if (position == 3){
-                        positionCabol = 3;
+                        positionCabol = 20;
                     } else if (position == 4){
-                        positionCabol = 4;
+                        positionCabol = 21;
                     } else if (position == 5){
-                        positionCabol = 5;
+                        positionCabol = 22;
                     } else if (position == 6){
-                        positionCabol = 6;
+                        positionCabol = 23;
                     } else if (position == 7){
-                        positionCabol = 7;
+                        positionCabol = 24;
                     } else if (position == 8){
-                        positionCabol = 8;
-                    } else if (position == 9){
-                        positionCabol = 9;
+                        positionCabol = 25;
                     } else {
-                        positionCabol = 10;
+                        positionCabol = 26;
                     }
 
                     HomeData homeData = new HomeData();
-                    Fragment fragment = new FragmentOlahraga();
+                    Fragment fragment = new FragmentAkademik();
                     FragmentManager fragmentManager = getChildFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.flfragment2,fragment);

@@ -2,6 +2,7 @@ package id.pekma.pekmavii.FragmentHome;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,12 +11,16 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.pekma.pekmavii.R;
 
 public class DetailActivityHomeMatch extends AppCompatActivity {
 
-    TextView playerAtext,playerBtext,jurAtext,jurBtext;
+    TextView playerAtext,playerBtext,jurAtext,jurBtext,titledetail,msDateTxt,msTimeTxt;
     CircleImageView jurAciv,jurBciv;
     Context context;
     int akun,bc,kbn,pajak,manset,penilai;
@@ -23,7 +28,6 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_home_match);
-        setTitle("Competition Detail");
         Toolbar toolbar = findViewById(R.id.toolbar);
 
 //        setSupportActionBar(toolbar);
@@ -31,6 +35,8 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setElevation(0);
 
+        msTimeTxt = findViewById(R.id.msTime);
+        msDateTxt = findViewById(R.id.msDate);
         playerAtext = findViewById(R.id.playerAtxt);
         playerBtext = findViewById(R.id.playerBtxt);
         jurAtext = findViewById(R.id.JurAtxt);
@@ -38,15 +44,29 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
         jurAciv = findViewById(R.id.jurAciv);
         jurBciv = findViewById(R.id.jurBciv);
 
-
         //RECEIVE DATA
         Intent i=this.getIntent();
+        String msDate = i.getExtras().getString("MSDATE");
+        String mstime = i.getExtras().getString("MSTIME");
         String playerAname=i.getExtras().getString("NAME_KEY_A");
         String playerBname=i.getExtras().getString("NAME_KEY_B");
         String jurAname = i.getExtras().getString("NAME_KEY_A_JUR");
         String jurBname = i.getExtras().getString("NAME_KEY_B_JUR");
 
         //BIND DATA
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        Date date1 = null;
+        try {
+            date1 = sdf.parse(mstime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long time = date1.getTime();
+        sdf.applyPattern("HH:mm");
+
+        msTimeTxt.setText(sdf.format(time));
+        msDateTxt.setText(msDate);
         playerAtext.setText(playerAname);
         playerBtext.setText(playerBname);
         jurAtext.setText(jurAname);
@@ -96,6 +116,4 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
             Picasso.with(context).load(R.drawable.warna_kbn).into(jurBciv);
         }
     }
-
-
 }

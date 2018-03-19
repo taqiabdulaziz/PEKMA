@@ -52,11 +52,20 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".FragmentNews.DetailActivityNews"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FragmentHome.DetailActivityHomeMatch"
-            android:theme="@style/DetailHomeTheme"></activity>
-        <activity android:name=".FragmentResult.Olahraga.FragmentOlahraga"></activity>
+            android:theme="@style/DetailHomeTheme" />
+        <activity android:name=".FragmentResult.Olahraga.FragmentOlahraga" />
+
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".MyIntentService"
+            android:exported="false"></service>
+
     </application>
 
 </manifest>

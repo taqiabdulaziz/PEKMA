@@ -73,7 +73,20 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         try {
             Date strDate = sdf.parse(msdate);
             if (System.currentTimeMillis() < strDate.getTime()) {
+
+                SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
+                Date date1 = null;
+                try {
+                    date1 = sdfTime.parse(currenthome.mstime);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long time = date1.getTime();
+                sdf.applyPattern("HH:mm");
+
+                sdf.applyPattern("HH:mm");
                 myHolderHome.tvplayerA.setText(currenthome.playerA);
+                myHolderHome.msTime.setText(sdf.format(time));
                 myHolderHome.tvplayerB.setText(currenthome.playerB);
 
                 if ((jurA.equals("D4 Akuntansi"))
@@ -123,7 +136,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(int pos) {
-                        openDetailActivityHome(playerA,playerB,jurA,jurB);
+                        openDetailActivityHome(playerA,playerB,jurA,jurB,msdate,mstime);
                     }
                 });
 
@@ -137,10 +150,12 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB) {
+    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime) {
         Intent i=new Intent(context, DetailActivityHomeMatch.class);
 
         //PACK DATA TO SEND
+        i.putExtra("MSTIME", msTime);
+        i.putExtra("MSDATE", msDate);
         i.putExtra("NAME_KEY_A",playerA);
         i.putExtra("NAME_KEY_B",playerB);
         i.putExtra("NAME_KEY_A_JUR",jurA);
@@ -158,7 +173,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     class MyHolderHome extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         HomeData homeData;
-        TextView tvplayerA,tvplayerB;
+        TextView tvplayerA,tvplayerB,msTime;
         ItemClickListener itemClickListener;
         CircleImageView jurAciv,jurBciv;
 
@@ -167,6 +182,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public MyHolderHome(View itemView) {
             super(itemView);
 
+            msTime = itemView.findViewById(R.id.UF_Time_1);
             tvplayerA= itemView.findViewById(R.id.txtPlayerA);
             tvplayerB= itemView.findViewById(R.id.txtPlayerB);
             jurAciv = itemView.findViewById(R.id.jurAciv);

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#dedbdb"
+    android:background="#e1e6eb"
     android:weightSum="1">
 
     <android.support.v7.widget.CardView
@@ -112,8 +112,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/flfragment2"
-            >
+            android:id="@+id/flfragment2">
 
             <TextView
                 android:id="@+id/tv"

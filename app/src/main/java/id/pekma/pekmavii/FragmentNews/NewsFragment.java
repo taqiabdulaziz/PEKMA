@@ -133,7 +133,7 @@ public class NewsFragment extends Fragment {
                 // Enter URL address where your json file resides
                 // Even you can make call to php file which returns json data
 
-                url = new URL("https://taqiabdulaziz.com/berita.php");
+                url = new URL("https://pekma.id/berita.php");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -207,7 +207,7 @@ public class NewsFragment extends Fragment {
                     NewsData newsData = new NewsData();
 
                     newsData.title = json_data.optString("title");
-                    newsData.title = json_data_home.optString("title");
+                    newsData.titlehome = json_data_home.optString("title");
                     newsData.desc=json_data.optString("ndesc");
                     newsData.deschome=json_data_home.optString("ndesc");
                     newsData.newsImage=json_data.optString("nimg");

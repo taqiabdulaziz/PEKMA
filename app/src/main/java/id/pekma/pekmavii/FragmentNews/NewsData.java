@@ -8,7 +8,16 @@ public class NewsData {
     public String desc;
     public String deschome;
     public String title;
+    public String titlehome;
     public int price;
+
+    public String getTitlehome() {
+        return titlehome;
+    }
+
+    public void setTitlehome(String titlehome) {
+        this.titlehome = titlehome;
+    }
 
     public String getNewsImageHome() {
         return newsImageHome;

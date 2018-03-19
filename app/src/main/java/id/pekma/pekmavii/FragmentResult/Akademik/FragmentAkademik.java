@@ -79,7 +79,7 @@ public class FragmentAkademik extends Fragment implements ResultFragment.SendCab
                 // Enter URL address where your json file resides
                 // Even you can make call to php file which returns json data
 
-                url = new URL("https://taqiabdulaziz.com/news.php");
+                url = new URL("https://pekma.id/akademik.php");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -152,12 +152,8 @@ public class FragmentAkademik extends Fragment implements ResultFragment.SendCab
                 for (int i=0;i<jsonArray.length();i++){
                     JSONObject json_data = jsonArray.getJSONObject(i);
                     HomeData homeData = new HomeData();
-                    homeData.playerA = json_data.getString("playera");
-                    homeData.playerB = json_data.getString("playerb");
-                    homeData.msDate = json_data.getString("msdate");
-                    homeData.mstime = json_data.getString("mstime");
-                    homeData.jurA = json_data.getString("jurA");
-                    homeData.jurB = json_data.getString("jurB");
+                    homeData.namaPeserta = json_data.getString("namaPeserta");
+                    homeData.namaTema = json_data.getString("namaTema");
                     homeData.idevent = json_data.getInt("idevent");
                     homeData.cabolData1 = cabolPosition ;
 

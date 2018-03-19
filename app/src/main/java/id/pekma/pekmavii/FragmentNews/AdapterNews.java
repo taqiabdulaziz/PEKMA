@@ -62,13 +62,15 @@ public class AdapterNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         // Get current position of item in recyclerview to bind data and assign values from list
         MyHolderNews myHolderNews = (MyHolderNews) holder;
         NewsData current=data.get(position);
-        myHolderNews.title.setText(current.title);
+        myHolderNews.title.setText(current.getTitle());
+
         Picasso.with(context)
                 .load(current.getNewsImage())
                 .fit()
                 .centerCrop()
                 .transform(new GradientTransformation())
                 .into(myHolderNews.newsIv);
+
         Picasso.with(context)
                 .load(R.drawable.ic_w)
                 .fit()

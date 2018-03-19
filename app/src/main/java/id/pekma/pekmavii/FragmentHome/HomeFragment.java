@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
 
-    TextView mnewst,mnewst1,mnewstitle,mnewstitle1;
+    TextView mnewst,mnewst1,mnewstitle,mnewstitle1,toolbarTitle;
     String title,desc,imageview;
     ImageView mnewsiv,iconpekmasmall;
     Button buttonNewsHome;
@@ -150,7 +150,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                 // Enter URL address where your json file resides
                 // Even you can make call to php file which returns json data
 
-                url = new URL("https://taqiabdulaziz.com/news.php");
+                url = new URL("https://pekma.id/news.php");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block

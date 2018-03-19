@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "211194476908",
-    "firebase_url": "https://pekma-vii-6eb86.firebaseio.com",
-    "project_id": "pekma-vii-6eb86",
-    "storage_bucket": "pekma-vii-6eb86.appspot.com"
+    "project_number": "625189348620",
+    "firebase_url": "https://pekma-vii.firebaseio.com",
+    "project_id": "pekma-vii",
+    "storage_bucket": "pekma-vii.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:211194476908:android:97b802b51e2ce725",
+        "mobilesdk_app_id": "1:625189348620:android:97b802b51e2ce725",
         "android_client_info": {
           "package_name": "id.pekma.pekmavii"
         }
       },
       "oauth_client": [
         {
-          "client_id": "211194476908-racp8ce2d42n1779q587amrf5j4j1fnh.apps.googleusercontent.com",
+          "client_id": "625189348620-krsia0kmfk8nlqh41m7eli22rghfv7i9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.pekma.pekmavii",
+            "certificate_hash": "e9f27f47e1bbc64e3b7c7abc99997486454f47e6"
+          }
+        },
+        {
+          "client_id": "625189348620-bcuehb8ofnfk7dsbjibhrbj268834ter.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDyDyeFEs1oRvw6fl_rD2mXi7acHzJgT0A"
+          "current_key": "AIzaSyARPCvxM1vChlJNxI_EoFFHchpmHBseUyo"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625189348620-bcuehb8ofnfk7dsbjibhrbj268834ter.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

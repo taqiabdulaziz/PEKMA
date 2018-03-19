@@ -2,6 +2,7 @@ package id.pekma.pekmavii;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,6 +15,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +35,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
+import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
 
 import id.pekma.pekmavii.FragmentHome.HomeFragment;
@@ -51,17 +57,9 @@ public class MainActivity extends AppCompatActivity implements
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int RC_SIGN_IN = 007;
-
-    private GoogleApiClient mGoogleApiClient;
-    private ProgressDialog mProgressDialog;
-
     public SignInButton btnSignIn;
-    int myCabolData;
-    String myString,myIvString,myTitleString;
     public ImageView imgProfilePic;
     public TextView txtName, txtEmail,mnews;
-    NavigationView navigationView;
-
     public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -88,7 +86,12 @@ public class MainActivity extends AppCompatActivity implements
         }
 
     };
-
+    int myCabolData;
+    String myString,myIvString,myTitleString;
+    NavigationView navigationView;
+    public FirebaseAuth mAuth;
+    private GoogleApiClient mGoogleApiClient;
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,13 +102,26 @@ public class MainActivity extends AppCompatActivity implements
 //        txtName = findViewById(R.id.txtName);
         NavigationView navigationView;
 
+        mAuth = FirebaseAuth.getInstance();
+
+
+//        Typeface khandBold = Typeface.createFromAsset(getApplication().getAssets(), "font/adisans_bold.otf");
+//
+//        mTitle.setTypeface(khandBold);
+
         btnSignIn.setOnClickListener(this);
+
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestId()
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)

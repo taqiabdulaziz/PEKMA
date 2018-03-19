@@ -1,5 +1,6 @@
 package id.pekma.pekmavii.FragmentResult.Akademik;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -28,23 +29,24 @@ import id.pekma.pekmavii.R;
 
 public class AdapterAkademik extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ResultFragment.SendCabol {
 
-    private Context context;
-    private LayoutInflater inflater;
-    List<HomeData> data= Collections.emptyList();
-    int currentPos=0;
+    List<HomeData> data = Collections.emptyList();
+    int currentPos = 0;
     int cabolPos;
     AdapterView.OnItemClickListener itemClickListener;
+    private Context context;
+    private LayoutInflater inflater;
 
-    public AdapterAkademik(Context context, List<HomeData> data){
-        this.context=context;
-        inflater= LayoutInflater.from(context);
-        this.data=data;
+    public AdapterAkademik(Context context, List<HomeData> data) {
+        this.context = context;
+        inflater = LayoutInflater.from(context);
+        this.data = data;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.item_home, parent,false);
+        View view = inflater.inflate(R.layout.item_akademik, parent, false);
         MyHolderHome holderhome = new MyHolderHome(view);
+
         final int cabolData = data.get(0).getCabolData();
         cabolPos = cabolData;
 
@@ -55,7 +57,7 @@ public class AdapterAkademik extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holderhome, int position) {
-        
+
 
         //DATA UNTUK KE DETAIL ACTIVITY HOME
         final String playerA = data.get(position).getPlayerA();
@@ -71,78 +73,35 @@ public class AdapterAkademik extends RecyclerView.Adapter<RecyclerView.ViewHolde
         MyHolderHome myHolderHome = (MyHolderHome) holderhome;
         HomeData currenthome = data.get(position);
         HomeData currenthome2 = data.get(0);
-        System.out.println(cabolPos + "BERHASIL");
+        System.out.println(cabolPos + "cabolPos");
+        System.out.println(idevent + "idevent");
 
 
         if (cabolPos == idevent) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        myHolderHome.tvplayerA.setText(currenthome.playerA);
-        myHolderHome.tvplayerB.setText(currenthome.playerB);
-
-        if ((jurA.equals("D4 Akuntansi"))
-                || (jurA.equals("D3 Akuntansi"))
-                || (jurA.equals("D4 Akuntansi Tugas belajar"))
-                || (jurA.equals("D3 Manajemen Aset"))
-                || (jurA.equals("D3 Akuntansi Tugas Belajar"))) {
-            Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurAciv);
-
-        } else if ((jurA.equals("D1 Pajak"))
-                || ((jurA.equals("D3 Pajak")))
-                || (jurA.equals("D3 Pajak Tugas Belajar"))
-                || (jurA.equals("D3 Penilai"))){
-            Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurAciv);
-
-        } else if ((jurA.equals("D1 BC"))
-                || (jurA.equals("D3 BC"))) {
-            Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurAciv);
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            myHolderHome.namaPeserta.setText(currenthome.namaPeserta);
+            myHolderHome.namaTema.setText(currenthome.namaTema);
+            Picasso.with(context)
+                    .load(R.drawable.person_placeholder)
+                    .fit()
+                    .into(((MyHolderHome) holderhome).placeholderIv);
 
         } else {
-            Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurAciv);
-        }
 
-        if ((jurB.equals("D4 Akuntansi"))
-                || (jurB.equals("D3 Akuntansi"))
-                || (jurB.equals("D4 Akuntansi Tugas belajar"))
-                || (jurB.equals("D3 Manajemen Aset"))
-                || (jurB.equals("D3 Akuntansi Tugas Belajar"))) {
-            Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurBciv);
-
-        } else if ((jurB.equals("D1 Pajak"))
-                || ((jurB.equals("D3 Pajak")))
-                || (jurB.equals("D3 Pajak Tugas Belajar"))
-                || (jurB.equals("D3 Penilai"))){
-            Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurBciv);
-
-        } else if ((jurB.equals("D1 BC"))
-                || (jurB.equals("D3 BC"))) {
-            Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurBciv);
-
-        } else {
-            Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurBciv);
-        }
-
-        ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
-            @Override
-            public void onItemClick(int pos) {
-                openDetailActivityHome(playerA,playerB,jurA,jurB);
-            }
-        });
-
-        } else {
             holderhome.itemView.setVisibility(View.GONE);
             holderhome.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
         }
     }
 
     private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB) {
-        Intent i=new Intent(context, DetailActivityHomeMatch.class);
+        Intent i = new Intent(context, DetailActivityHomeMatch.class);
 
         //PACK DATA TO SEND
-        i.putExtra("NAME_KEY_A",playerA);
-        i.putExtra("NAME_KEY_B",playerB);
-        i.putExtra("NAME_KEY_A_JUR",jurA);
-        i.putExtra("NAME_KEY_B_JUR",jurB);
+//        i.putExtra("NAME_KEY_A",playerA);
+//        i.putExtra("NAME_KEY_B",playerB);
+//        i.putExtra("NAME_KEY_A_JUR",jurA);
+//        i.putExtra("NAME_KEY_B_JUR",jurB);
 
         //open activity
         context.startActivity(i);
@@ -158,22 +117,25 @@ public class AdapterAkademik extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     }
 
+    public void parseCabolData() {
+
+    }
+
     class MyHolderHome extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         HomeData homeData;
-        TextView tvplayerA,tvplayerB;
+        TextView namaPeserta, namaTema;
         ItemClickListener itemClickListener;
-        CircleImageView jurAciv,jurBciv;
+        CircleImageView placeholderIv;
 
 
         // create constructor to get widget reference
         public MyHolderHome(View itemView) {
             super(itemView);
 
-            tvplayerA= itemView.findViewById(R.id.txtPlayerA);
-            tvplayerB= itemView.findViewById(R.id.txtPlayerB);
-            jurAciv = itemView.findViewById(R.id.jurAciv);
-            jurBciv = itemView.findViewById(R.id.jurBciv);
+            namaPeserta = itemView.findViewById(R.id.namaPeserta);
+            namaTema = itemView.findViewById(R.id.namaTema);
+            placeholderIv = itemView.findViewById(R.id.placeholderIv);
 
             itemView.setOnClickListener(this);
         }
@@ -182,15 +144,11 @@ public class AdapterAkademik extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public void onClick(View v) {
             this.itemClickListener.onItemClick(this.getLayoutPosition());
         }
-        public void setItemClickListener(ItemClickListener itemClickListener)
-        {
-            this.itemClickListener=itemClickListener;
+
+        public void setItemClickListener(ItemClickListener itemClickListener) {
+            this.itemClickListener = itemClickListener;
         }
 
-
-    }
-
-    public void parseCabolData() {
 
     }
 }

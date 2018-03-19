@@ -4,18 +4,45 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Handler;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 public class SplashScreen extends AppCompatActivity {
-
+    ImageView splash;
+    CoordinatorLayout coordinatorLayout;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        splash = findViewById(R.id.splashImg);
+
+        coordinatorLayout = findViewById(R.id.coordinator);
+        checkConn();
+    }
+
+    private void checkConn() {
+
         if (!DetectConnection.checkInternetConnection(this)) {
-            Intent a = new Intent(getApplicationContext(),NoInternet.class);
-            startActivity(a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+
+            Snackbar snackbar = Snackbar
+                    .make(coordinatorLayout, "Check Your Connection", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Try Again", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            checkConn();
+
+                        }
+                    });
+            snackbar.show();
+//            Intent a = new Intent(getApplicationContext(),NoInternet.class);
+//            startActivity(a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         } else {
             new Handler().postDelayed(new Runnable() {
 

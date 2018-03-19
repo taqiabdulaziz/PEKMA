@@ -129,7 +129,7 @@ public class AdapterOlahraga extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                openDetailActivityHome(playerA,playerB,jurA,jurB);
+                openDetailActivityHome(playerA,playerB,jurA,jurB,msdate,mstime);
             }
         });
 
@@ -139,10 +139,12 @@ public class AdapterOlahraga extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB) {
+    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime) {
         Intent i=new Intent(context, DetailActivityHomeMatch.class);
 
         //PACK DATA TO SEND
+        i.putExtra("MSTIME", msTime);
+        i.putExtra("MSDATE", msDate);
         i.putExtra("NAME_KEY_A",playerA);
         i.putExtra("NAME_KEY_B",playerB);
         i.putExtra("NAME_KEY_A_JUR",jurA);
