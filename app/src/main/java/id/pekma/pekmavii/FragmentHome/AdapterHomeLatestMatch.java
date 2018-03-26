@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -32,10 +33,8 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
     private LayoutInflater inflater;
     List<HomeData> data= Collections.emptyList();
     HomeData current;
-    int currentPos=0;
-    AdapterView.OnItemClickListener itemClickListener;
 
-    public AdapterHomeLatestMatch(Context context, List<HomeData> data){
+    AdapterHomeLatestMatch(Context context, List<HomeData> data){
         this.context=context;
         inflater= LayoutInflater.from(context);
         this.data=data;
@@ -58,6 +57,8 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
         final String jurB = data.get(position).getJurB();
         final String msdate = data.get(position).getMsDate();
         final String mstime = data.get(position).getMstime();
+        final String skorA = data.get(position).getResultpa();
+        final String skorB = data.get(position).getResultpb();
 
         // Get current position of item in recyclerview to bind data and assign values from list
         MyHolderHome myHolderHome = (MyHolderHome) holderhome;
@@ -77,23 +78,23 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
                     case "D3 Manajemen Aset":
                     case "D3 Akuntansi Tugas Belajar":
 
-                        Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurAciv);
+                        Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurAciv);
                         break;
                     case "D1 Pajak":
                     case "D3 Pajak":
                     case "D3 Pajak Tugas Belajar":
                     case "D3 Penilai":
 
-                        Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurAciv);
+                        Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurAciv);
                         break;
-                    case "D1 BC":
-                    case "D3 BC":
+                    case "D1 maskot_bc":
+                    case "D3 maskot_bc":
 
-                        Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurAciv);
+                        Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurAciv);
                         break;
                     default:
 
-                        Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurAciv);
+                        Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurAciv);
                         break;
                 }
 
@@ -104,30 +105,30 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
                     case "D3 Manajemen Aset":
                     case "D3 Akuntansi Tugas Belajar":
 
-                        Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurBciv);
+                        Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurBciv);
                         break;
                     case "D1 Pajak":
                     case "D3 Pajak":
                     case "D3 Pajak Tugas Belajar":
                     case "D3 Penilai":
 
-                        Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurBciv);
+                        Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurBciv);
                         break;
-                    case "D1 BC":
-                    case "D3 BC":
+                    case "D1 maskot_bc":
+                    case "D3 maskot_bc":
 
-                        Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurBciv);
+                        Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurBciv);
                         break;
                     default:
 
-                        Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurBciv);
+                        Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
                         break;
                 }
 
                 ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(int pos) {
-                        openDetailActivityHome(playerA,playerB,jurA,jurB,msdate,mstime);
+                        openDetailActivityHome(playerA,playerB,jurA,jurB,msdate,mstime,skorA,skorB);
                     }
                 });
             } else {
@@ -140,10 +141,12 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime) {
+    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime, String skorA, String skorB) {
         Intent i=new Intent(context, DetailActivityHomeMatch.class);
 
         //PACK DATA TO SEND
+        i.putExtra("RESULTPA", skorA);
+        i.putExtra("RESULTPB",skorB);
         i.putExtra("MSTIME", msTime);
         i.putExtra("MSDATE", msDate);
         i.putExtra("NAME_KEY_A",playerA);
@@ -162,13 +165,16 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
 
     class MyHolderHome extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView tvplayerA,tvplayerB;
+        TextView tvplayerA,tvplayerB,skorA,skorB;
         ItemClickListener itemClickListener;
-        CircleImageView jurAciv,jurBciv;
+        ImageView jurAciv,jurBciv;
 
         // create constructor to get widget reference
         MyHolderHome(View itemView) {
             super(itemView);
+
+            skorA = itemView.findViewById(R.id.skorA);
+            skorB = itemView.findViewById(R.id.skorB);
             tvplayerA= itemView.findViewById(R.id.txtPlayerA);
             tvplayerB= itemView.findViewById(R.id.txtPlayerB);
             jurAciv = itemView.findViewById(R.id.jurAciv);

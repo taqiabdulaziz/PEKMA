@@ -13,4 +13,5 @@
     <dimen name="contact_chip_left_padding">8dp</dimen>
     <dimen name="contact_chip_right_padding">12dp</dimen>
     <dimen name="padding_top">8dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
 </resources>

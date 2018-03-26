@@ -3,6 +3,7 @@ package id.pekma.pekmavii;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -41,6 +42,7 @@ import com.squareup.picasso.Picasso;
 
 import id.pekma.pekmavii.FragmentHome.HomeFragment;
 import id.pekma.pekmavii.FragmentNews.NewsFragment;
+import id.pekma.pekmavii.FragmentNews.TabbedNews;
 import id.pekma.pekmavii.NavDrawContent.FixturesFragment;
 import id.pekma.pekmavii.NavDrawContent.OtherFragment;
 import id.pekma.pekmavii.FragmentResult.ResultFragment;
@@ -118,6 +120,9 @@ public class MainActivity extends AppCompatActivity implements
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setElevation(0);
+        }
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -186,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements
             String personPhotoUrl = acct.getPhotoUrl().toString();
             String email = acct.getEmail();
 
+
             Log.e(TAG, "Name: " + personName + ", email: " + email
                     + ", Image: " + personPhotoUrl);
 
@@ -218,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements
             fragment = new ResultFragment();
             title = "Result";
         } else if (position == 4) {
-            fragment = new NewsFragment();
+            fragment = new TabbedNews();
             title = "Feed";
         } else {
             fragment = new OtherFragment();
@@ -375,7 +381,9 @@ public class MainActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         if (id == R.id.settings) {
-            return true;
+            Intent i = new Intent(getApplicationContext(),SettingsActivity.class);
+            startActivity(i);
+
         }
 
         return super.onOptionsItemSelected(item);

@@ -9,125 +9,127 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="id.pekma.pekmavii.FragmentHome.DetailActivityHomeMatch">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="130sp"
-    android:background="@color/colorPrimary"
-    android:orientation="horizontal"
-    android:weightSum="95">
-
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="35"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/jurAciv"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="40sp"
-            android:layout_height="50sp"
-            />
-
-        <TextView
-            android:id="@+id/playerAtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Tim #"
-            android:textColor="#FFFF"
-            android:textSize="11sp"
-            android:textStyle="bold" />
-
-
-        <TextView
-            android:id="@+id/JurAtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="D3 Akuntansi TB"
-            android:textAlignment="center"
-            android:textColor="#FFFF"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="25"
+        android:layout_width="match_parent"
+        android:layout_height="130sp"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal"
-        android:weightSum="90">
+        android:weightSum="95">
 
-        <TextView
-        android:text="-"
-        android:gravity="center"
-        android:textSize="40sp"
-        android:textColor="#FFFF"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="40"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="35"
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <TextView
-        android:text=":"
-        android:gravity="center"
-        android:textSize="40sp"
-        android:textColor="#FFFF"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="10"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/jurAciv"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="40sp"
+                android:layout_height="50sp"
+                />
 
-        <TextView
-        android:text="-"
-        android:gravity="center"
-        android:textSize="40sp"
-        android:textColor="#FFFF"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="40"/>
+            <TextView
+                android:id="@+id/playerAtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Tim #"
+                android:textColor="#FFFF"
+                android:textSize="11sp"
+                android:textStyle="bold" />
 
+
+            <TextView
+                android:id="@+id/JurAtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="D3 Akuntansi TB"
+                android:textAlignment="center"
+                android:textColor="#FFFF"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:orientation="horizontal"
+            android:weightSum="90">
+
+            <TextView
+                android:text="-"
+                android:id="@+id/skorA"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textColor="#FFFF"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="40"/>
+
+            <TextView
+                android:text=":"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textColor="#FFFF"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"/>
+
+            <TextView
+                android:text="-"
+                android:id="@+id/skorB"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textColor="#FFFF"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="40"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="35"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:src="#FFF"
+                android:id="@+id/jurBciv"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="40sp"
+                android:layout_height="50sp"
+                />
+
+            <TextView
+                android:id="@+id/playerBtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Tim #"
+                android:textColor="#FFFF"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/JurBtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="D3 Akuntansi TB"
+                android:textColor="#FFFF"
+                android:textAlignment="center"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="35"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:src="#FFF"
-            android:id="@+id/jurBciv"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="40sp"
-            android:layout_height="50sp"
-            />
-
-        <TextView
-            android:id="@+id/playerBtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Tim #"
-            android:textColor="#FFFF"
-            android:textSize="11sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/JurBtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="D3 Akuntansi TB"
-            android:textColor="#FFFF"
-            android:textAlignment="center"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-</LinearLayout>
 
 
     <android.support.v4.widget.NestedScrollView
@@ -158,33 +160,63 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="60sp"
+                    android:orientation="vertical"
+                    android:weightSum="1">
 
-                    <TextView
-                        android:id="@+id/msTime"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="9sp"
-                        android:gravity="center"
-                        android:text="Start at 10.00PM"
-                        android:textSize="12sp" />
+                        android:layout_weight="0.5"
+                        android:layout_margin="9dp">
 
-                    <TextView
-                        android:id="@+id/msDate"
-                        android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:text="Time: "
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/msTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Start at 10.00PM"
+                            android:textColor="#323c46"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Thursday, March 10"
-                        android:textColor="#323c46"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:layout_weight="0.5"
+                        android:layout_marginLeft="9dp"
+                        android:layout_marginBottom="9dp"
+                        android:layout_marginRight="9dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
 
-                    <View
-                        android:layout_marginTop="9sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@android:color/darker_gray"/>
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:text="Date: "
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/msDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Thursday, March 10"
+                            android:textColor="#323c46"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+
+
 
 
                 </LinearLayout>
@@ -221,25 +253,26 @@
                         android:text="Politeknik Keuangan Negara STAN"
                         android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/namaVenue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="9sp"
-                    android:gravity="left"
-                    android:text="Student Center"
-                    android:layout_marginBottom="9sp"
-                    android:textColor="#323c46"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/namaVenue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="9sp"
+                        android:gravity="left"
+                        android:text="Student Center"
+                        android:layout_marginBottom="9sp"
+                        android:textColor="#323c46"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
 
 
-                <ImageView
-                    android:src="@color/colorAccent"
-                    android:layout_width="match_parent"
-                    android:scaleType="centerCrop"
-                    android:layout_height="300sp" />
+                    <ImageView
+                        android:id="@+id/venue"
+                        android:src="@color/colorAccent"
+                        android:layout_width="match_parent"
+                        android:scaleType="centerCrop"
+                        android:layout_height="300sp" />
 
                 </LinearLayout>
 

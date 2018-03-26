@@ -95,7 +95,6 @@
                             android:text="Featured News"
                             android:textColor="#323c46"
                             android:textStyle="bold" />
-
                     </LinearLayout>
                     <ImageView
                         android:id="@+id/ivHomeNews"

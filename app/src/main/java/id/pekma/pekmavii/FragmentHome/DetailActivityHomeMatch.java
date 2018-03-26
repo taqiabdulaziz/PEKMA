@@ -1,11 +1,13 @@
 package id.pekma.pekmavii.FragmentHome;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +20,13 @@ import java.util.Date;
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.pekma.pekmavii.R;
 
+import static com.squareup.picasso.Picasso.*;
+
 public class DetailActivityHomeMatch extends AppCompatActivity {
 
-    TextView playerAtext,playerBtext,jurAtext,jurBtext,titledetail,msDateTxt,msTimeTxt;
+    TextView playerAtext,playerBtext,jurAtext,jurBtext,titledetail,msDateTxt,msTimeTxt,resultpaTxt,resultpbTxt;
     CircleImageView jurAciv,jurBciv;
+    ImageView venue;
     Context context;
     int akun,bc,kbn,pajak,manset,penilai;
     @Override
@@ -35,6 +40,9 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setElevation(0);
 
+        venue = findViewById(R.id.venue);
+        resultpaTxt = findViewById(R.id.skorA);
+        resultpbTxt = findViewById(R.id.skorB);
         msTimeTxt = findViewById(R.id.msTime);
         msDateTxt = findViewById(R.id.msDate);
         playerAtext = findViewById(R.id.playerAtxt);
@@ -46,17 +54,21 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
 
         //RECEIVE DATA
         Intent i=this.getIntent();
+        String resultpa = i.getExtras().getString("RESULTPA");
+        String resultpb = i.getExtras().getString("RESULTPB");
         String msDate = i.getExtras().getString("MSDATE");
         String mstime = i.getExtras().getString("MSTIME");
         String playerAname=i.getExtras().getString("NAME_KEY_A");
         String playerBname=i.getExtras().getString("NAME_KEY_B");
+        String idevent = i.getExtras().getString("IDEVENT");
         String jurAname = i.getExtras().getString("NAME_KEY_A_JUR");
         String jurBname = i.getExtras().getString("NAME_KEY_B_JUR");
 
         //BIND DATA
 
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         Date date1 = null;
+
         try {
             date1 = sdf.parse(mstime);
         } catch (ParseException e) {
@@ -65,6 +77,15 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
         long time = date1.getTime();
         sdf.applyPattern("HH:mm");
 
+        //RESULT
+        if (resultpa == null || resultpb == null){
+            resultpaTxt.setText("-");
+            resultpbTxt.setText("-");
+        } else {
+            resultpaTxt.setText(resultpa);
+            resultpbTxt.setText(resultpb);
+        }
+
         msTimeTxt.setText(sdf.format(time));
         msDateTxt.setText(msDate);
         playerAtext.setText(playerAname);
@@ -72,48 +93,105 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
         jurAtext.setText(jurAname);
         jurBtext.setText(jurBname);
 
-        if ((jurAname.equals("D4 Akuntansi"))
-                || (jurAname.equals("D3 Akuntansi"))
-                || (jurAname.equals("D4 Akuntansi Tugas belajar"))
-                || (jurAname.equals("D3 Manajemen Aset"))
-                || (jurAname.equals("D3 Akuntansi Tugas Belajar"))) {
+        switch (jurAname) {
+            case "D4 Akuntansi":
+            case "D3 Akuntansi":
+            case "D4 Akuntansi Tugas belajar":
+            case "D3 Manajemen Aset":
+            case "D3 Akuntansi Tugas Belajar":
 
-            Picasso.with(context).load(R.drawable.warna_akun).into(jurAciv);
-        } else if ((jurAname.equals("D1 Pajak"))
-                || ((jurAname.equals("D3 Pajak")))
-                || (jurAname.equals("D3 Pajak Tugas Belajar"))
-                || (jurAname.equals("D3 Penilai"))){
+                with(context).load(R.drawable.maskot_akun).into(jurAciv);
+                break;
+            case "D1 Pajak":
+            case "D3 Pajak":
+            case "D3 Pajak Tugas Belajar":
+            case "D3 Penilai":
 
-            Picasso.with(context).load(R.drawable.warna_pajak).into(jurAciv);
-        } else if ((jurAname.equals("D1 BC"))
-                || (jurAname.equals("D3 BC"))) {
+                with(context).load(R.drawable.maskot_pajak).into(jurAciv);
+                break;
+            case "D1 maskot_bc":
+            case "D3 maskot_bc":
 
-            Picasso.with(context).load(R.drawable.warna_bc).into(jurAciv);
-        } else {
+                with(context).load(R.drawable.maskot_bc).into(jurAciv);
+                break;
+            default:
 
-            Picasso.with(context).load(R.drawable.warna_kbn).into(jurAciv);
+                with(context).load(R.drawable.maskot_mankeu).into(jurAciv);
+                break;
         }
 
-        if ((jurBname.equals("D4 Akuntansi"))
-                || (jurBname.equals("D3 Akuntansi"))
-                || (jurBname.equals("D4 Akuntansi Tugas belajar"))
-                || (jurBname.equals("D3 Manajemen Aset"))
-                || (jurBname.equals("D3 Akuntansi Tugas Belajar"))) {
+        switch (jurBname) {
+            case "D4 Akuntansi":
+            case "D3 Akuntansi":
+            case "D4 Akuntansi Tugas belajar":
+            case "D3 Manajemen Aset":
+            case "D3 Akuntansi Tugas Belajar":
 
-            Picasso.with(context).load(R.drawable.warna_akun).into(jurBciv);
-        } else if ((jurBname.equals("D1 Pajak"))
-                || ((jurBname.equals("D3 Pajak")))
-                || (jurBname.equals("D3 Pajak Tugas Belajar"))
-                || (jurBname.equals("D3 Penilai"))){
+                with(context).load(R.drawable.maskot_akun).into(jurBciv);
+                break;
+            case "D1 Pajak":
+            case "D3 Pajak":
+            case "D3 Pajak Tugas Belajar":
+            case "D3 Penilai":
 
-            Picasso.with(context).load(R.drawable.warna_pajak).into(jurBciv);
-        } else if ((jurBname.equals("D1 BC"))
-                || (jurBname.equals("D3 BC"))) {
+                with(context).load(R.drawable.maskot_pajak).into(jurBciv);
+                break;
+            case "D1 maskot_bc":
+            case "D3 maskot_bc":
 
-            Picasso.with(context).load(R.drawable.warna_bc).into(jurBciv);
+                with(context).load(R.drawable.maskot_bc).into(jurBciv);
+                break;
+            default:
+
+                with(context).load(R.drawable.maskot_mankeu).into(jurBciv);
+                break;
+        }
+
+        if (idevent == "0"){
+            with(context)
+                    .load(R.drawable.venue_sc)
+                    .fit()
+                    .into(venue);
+        } else if (idevent == "1") {
+            with(context)
+                    .load(R.drawable.venue_sc)
+                    .fit()
+                    .into(venue);
+        } else if (idevent == "2"){
+            with(context)
+                    .load(R.drawable.venue_sc)
+                    .fit()
+                    .into(venue);
+        } else if (idevent == "3"){
+            with(context)
+                    .load(R.drawable.venue_sc)
+                    .fit()
+                    .into(venue);
+        } else if (idevent == "4") {
+            with(context)
+                    .load(R.drawable.venue_gedungj)
+                    .fit()
+                    .into(venue);
+        } else if (idevent == "5") {
+            with(context)
+                    .load(R.drawable.venue_sc)
+                    .fit()
+                    .into(venue);
+        } else if (idevent == "6") {
+            with(context)
+                    .load(R.drawable.venue_mini_soccer)
+                    .fit()
+                    .into(venue);
+        } else if (idevent == "7"){
+            with(context)
+                    .load(R.drawable.venue_sc)
+                    .fit()
+                    .into(venue);
         } else {
-
-            Picasso.with(context).load(R.drawable.warna_kbn).into(jurBciv);
+            with(context)
+                    .load(R.drawable.venue_sc)
+                    .fit()
+                    .into(venue);
         }
     }
 }

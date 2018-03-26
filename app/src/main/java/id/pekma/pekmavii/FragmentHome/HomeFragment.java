@@ -85,6 +85,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
         Picasso.with(getContext())
                 .load(myIvDataFromActivity)
                 .fit()
+                .centerCrop()
                 .into(mnewsiv);
         Picasso.with(getContext())
                 .load(R.drawable.ic_w)
@@ -107,13 +108,10 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
         });
         return rootview;
 
-
-
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-
 
         if (getArguments()!=null) {
             Bundle bundle = getArguments();
@@ -226,6 +224,8 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                 homeData.playerB = json_data.getString("playerb");
                 homeData.msDate = json_data.getString("msdate");
                 homeData.mstime = json_data.getString("mstime");
+                homeData.resultpa = json_data.getString("resultpa");
+                homeData.resultpb = json_data.getString("resultpb");
                 homeData.jurA = json_data.getString("jurA");
                 homeData.jurB = json_data.getString("jurB");
                 homeData.idevent = json_data.getInt("idevent");

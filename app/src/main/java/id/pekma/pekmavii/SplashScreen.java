@@ -16,19 +16,24 @@ import com.squareup.picasso.Picasso;
 public class SplashScreen extends AppCompatActivity {
     ImageView splash;
     CoordinatorLayout coordinatorLayout;
-    Context context;
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         splash = findViewById(R.id.splashImg);
+        context = this;
+
+        Picasso.with(context)
+                .load(R.drawable.splashscreen)
+                .fit()
+                .into(splash);
 
         coordinatorLayout = findViewById(R.id.coordinator);
         checkConn();
     }
 
     private void checkConn() {
-
         if (!DetectConnection.checkInternetConnection(this)) {
 
             Snackbar snackbar = Snackbar

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -77,20 +78,29 @@ public class AdapterAkademik extends RecyclerView.Adapter<RecyclerView.ViewHolde
         System.out.println(idevent + "idevent");
 
 
-        if (cabolPos == idevent) {
 
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            myHolderHome.namaPeserta.setText(currenthome.namaPeserta);
-            myHolderHome.namaTema.setText(currenthome.namaTema);
-            Picasso.with(context)
-                    .load(R.drawable.person_placeholder)
-                    .fit()
-                    .into(((MyHolderHome) holderhome).placeholderIv);
-
+        if (currenthome == null) {
+            myHolderHome.iv1.setVisibility(View.VISIBLE);
+            myHolderHome.iv2.setVisibility(View.VISIBLE);
+            myHolderHome.iv3.setVisibility(View.VISIBLE);
         } else {
+            if (cabolPos == idevent) {
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                myHolderHome.namaPeserta.setText(currenthome.namaPeserta);
+                myHolderHome.namaTema.setText(currenthome.namaTema);
+                Picasso.with(context)
+                        .load(R.drawable.person_placeholder)
+                        .fit()
+                        .into(((MyHolderHome) holderhome).placeholderIv);
 
-            holderhome.itemView.setVisibility(View.GONE);
-            holderhome.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+//                myHolderHome.iv1.setVisibility(View.VISIBLE);
+//                myHolderHome.iv2.setVisibility(View.VISIBLE);
+//                myHolderHome.iv3.setVisibility(View.VISIBLE);
+            } else {
+                holderhome.itemView.setVisibility(View.GONE);
+                holderhome.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+            }
+
         }
     }
 
@@ -121,10 +131,11 @@ public class AdapterAkademik extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     }
 
-    class MyHolderHome extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class MyHolderHome extends RecyclerView.ViewHolder {
 
         HomeData homeData;
-        TextView namaPeserta, namaTema;
+        ImageView iv1;
+        TextView namaPeserta, namaTema,iv2,iv3;
         ItemClickListener itemClickListener;
         CircleImageView placeholderIv;
 
@@ -137,17 +148,22 @@ public class AdapterAkademik extends RecyclerView.Adapter<RecyclerView.ViewHolde
             namaTema = itemView.findViewById(R.id.namaTema);
             placeholderIv = itemView.findViewById(R.id.placeholderIv);
 
-            itemView.setOnClickListener(this);
+            iv1 = itemView.findViewById(R.id.iv1);
+            iv2 = itemView.findViewById(R.id.iv2);
+            iv3 = itemView.findViewById(R.id.iv3);
+
+
+//            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View v) {
-            this.itemClickListener.onItemClick(this.getLayoutPosition());
-        }
-
-        public void setItemClickListener(ItemClickListener itemClickListener) {
-            this.itemClickListener = itemClickListener;
-        }
+//        @Override
+//        public void onClick(View v) {
+//            this.itemClickListener.onItemClick(this.getLayoutPosition());
+//        }
+//
+//        public void setItemClickListener(ItemClickListener itemClickListener) {
+//            this.itemClickListener = itemClickListener;
+//        }
 
 
     }

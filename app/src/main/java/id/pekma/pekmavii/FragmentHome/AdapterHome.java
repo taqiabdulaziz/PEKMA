@@ -1,5 +1,6 @@
 package id.pekma.pekmavii.FragmentHome;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -36,12 +37,11 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private LayoutInflater inflater;
-    List<HomeData> data= Collections.emptyList();
+    private List<HomeData> data= Collections.emptyList();
     HomeData current;
-    int currentPos=0;
     AdapterView.OnItemClickListener itemClickListener;
 
-    public AdapterHome(Context context, List<HomeData> data){
+    AdapterHome(Context context, List<HomeData> data){
         this.context=context;
         inflater= LayoutInflater.from(context);
         this.data=data;
@@ -50,8 +50,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view=inflater.inflate(R.layout.item_home, parent,false);
-        MyHolderHome holderhome = new MyHolderHome(view);
-        return holderhome;
+        return new MyHolderHome(view);
     }
 
     @Override
@@ -64,23 +63,25 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         final String jurB = data.get(position).getJurB();
         final String msdate = data.get(position).getMsDate();
         final String mstime = data.get(position).getMstime();
+        final int idevent = data.get(position).getIdevent();
 
         // Get current position of item in recyclerview to bind data and assign values from list
         MyHolderHome myHolderHome = (MyHolderHome) holderhome;
         HomeData currenthome = data.get(position);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date strDate = sdf.parse(msdate);
             if (System.currentTimeMillis() < strDate.getTime()) {
 
-                SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
                 Date date1 = null;
                 try {
                     date1 = sdfTime.parse(currenthome.mstime);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                assert date1 != null;
                 long time = date1.getTime();
                 sdf.applyPattern("HH:mm");
 
@@ -89,54 +90,64 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 myHolderHome.msTime.setText(sdf.format(time));
                 myHolderHome.tvplayerB.setText(currenthome.playerB);
 
-                if ((jurA.equals("D4 Akuntansi"))
-                        || (jurA.equals("D3 Akuntansi"))
-                        || (jurA.equals("D4 Akuntansi Tugas belajar"))
-                        || (jurA.equals("D3 Manajemen Aset"))
-                        || (jurA.equals("D3 Akuntansi Tugas Belajar"))) {
+                switch (jurA) {
+                    case "D4 Akuntansi":
+                    case "D3 Akuntansi":
+                    case "D4 Akuntansi Tugas belajar":
+                    case "D3 Manajemen Aset":
+                    case "D3 Akuntansi Tugas Belajar":
 
-                    Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurAciv);
-                } else if ((jurA.equals("D1 Pajak"))
-                        || ((jurA.equals("D3 Pajak")))
-                        || (jurA.equals("D3 Pajak Tugas Belajar"))
-                        || (jurA.equals("D3 Penilai"))){
+                        Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurAciv);
+                        break;
+                    case "D1 Pajak":
+                    case "D3 Pajak":
+                    case "D3 Pajak Tugas Belajar":
+                    case "D3 Penilai":
 
-                    Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurAciv);
-                } else if ((jurA.equals("D1 BC"))
-                        || (jurA.equals("D3 BC"))) {
+                        Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurAciv);
+                        break;
+                    case "D1 maskot_bc":
+                    case "D3 maskot_bc":
 
-                    Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurAciv);
-                } else {
+                        Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurAciv);
+                        break;
+                    default:
 
-                    Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurAciv);
+                        Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurAciv);
+                        break;
                 }
 
-                if ((jurB.equals("D4 Akuntansi"))
-                        || (jurB.equals("D3 Akuntansi"))
-                        || (jurB.equals("D4 Akuntansi Tugas belajar"))
-                        || (jurB.equals("D3 Manajemen Aset"))
-                        || (jurB.equals("D3 Akuntansi Tugas Belajar"))) {
+                switch (jurB) {
+                    case "D4 Akuntansi":
+                    case "D3 Akuntansi":
+                    case "D4 Akuntansi Tugas belajar":
+                    case "D3 Manajemen Aset":
+                    case "D3 Akuntansi Tugas Belajar":
 
-                    Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurBciv);
-                } else if ((jurB.equals("D1 Pajak"))
-                        || ((jurB.equals("D3 Pajak")))
-                        || (jurB.equals("D3 Pajak Tugas Belajar"))
-                        || (jurB.equals("D3 Penilai"))){
+                        Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurBciv);
+                        break;
+                    case "D1 Pajak":
+                    case "D3 Pajak":
+                    case "D3 Pajak Tugas Belajar":
+                    case "D3 Penilai":
 
-                    Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurBciv);
-                } else if ((jurB.equals("D1 BC"))
-                        || (jurB.equals("D3 BC"))) {
+                        Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurBciv);
+                        break;
+                    case "D1 maskot_bc":
+                    case "D3 maskot_bc":
 
-                    Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurBciv);
-                } else {
+                        Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurBciv);
+                        break;
+                    default:
 
-                    Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurBciv);
+                        Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+                        break;
                 }
 
                 ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(int pos) {
-                        openDetailActivityHome(playerA,playerB,jurA,jurB,msdate,mstime);
+                        openDetailActivityHome(playerA,playerB,jurA,jurB,msdate,mstime,idevent);
                     }
                 });
 
@@ -150,7 +161,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime) {
+    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime, int idevent) {
         Intent i=new Intent(context, DetailActivityHomeMatch.class);
 
         //PACK DATA TO SEND
@@ -160,6 +171,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         i.putExtra("NAME_KEY_B",playerB);
         i.putExtra("NAME_KEY_A_JUR",jurA);
         i.putExtra("NAME_KEY_B_JUR",jurB);
+        i.putExtra("IDEVENT",idevent);
 
         //open activity
         context.startActivity(i);
@@ -172,14 +184,13 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     class MyHolderHome extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        HomeData homeData;
         TextView tvplayerA,tvplayerB,msTime;
         ItemClickListener itemClickListener;
-        CircleImageView jurAciv,jurBciv;
+        ImageView jurAciv,jurBciv;
 
 
         // create constructor to get widget reference
-        public MyHolderHome(View itemView) {
+        MyHolderHome(View itemView) {
             super(itemView);
 
             msTime = itemView.findViewById(R.id.UF_Time_1);
@@ -195,7 +206,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public void onClick(View v) {
             this.itemClickListener.onItemClick(this.getLayoutPosition());
         }
-        public void setItemClickListener(ItemClickListener itemClickListener)
+        void setItemClickListener(ItemClickListener itemClickListener)
         {
             this.itemClickListener=itemClickListener;
         }

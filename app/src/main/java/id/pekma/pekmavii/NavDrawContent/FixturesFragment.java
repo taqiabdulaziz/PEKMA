@@ -27,11 +27,5 @@ public class FixturesFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.btnImport).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Your Are fixtures", Toast.LENGTH_LONG).show();
-            }
-        });
     }
 }

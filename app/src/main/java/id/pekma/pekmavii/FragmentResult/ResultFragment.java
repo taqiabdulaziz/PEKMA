@@ -182,7 +182,6 @@ public class ResultFragment extends Fragment{
 
                     SC.sendCabolData(position);
                     homeData.cabolData1 = positionCabol;
-                    System.out.println(positionCabol + "KONTOL");
 
                     data.add(homeData);
                 } else if (pos == 0){
@@ -219,7 +218,6 @@ public class ResultFragment extends Fragment{
 
                     SC.sendCabolData(position);
                     homeData.cabolData1 = positionCabol;
-                    System.out.println(positionCabol + "KONTOL");
 
                 } else {
                     if (position == 0){

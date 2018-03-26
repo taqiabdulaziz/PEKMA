@@ -11,7 +11,7 @@
         <item
             android:id="@+id/Fixtures"
             android:icon="@drawable/bnv_fixtures"
-            android:title="Fixtures" />
+            android:title="Venue" />
         <item
             android:id="@+id/Result"
             android:icon="@drawable/bnv_result"

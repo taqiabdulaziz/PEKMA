@@ -64,8 +64,19 @@
             android:exported="true" />
         <service
             android:name=".MyIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
 
+        <activity
+            android:name=".FragmentNews.TabbedNews"
+            android:label="@string/title_activity_tabbed_news"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FragmentNews.InstaFrag.InstaFragment"
+            android:label="@string/title_activity_tabbed_news"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>

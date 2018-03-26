@@ -4,25 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="id.pekma.pekmavii.FragmentNews.DetailActivityNews"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:fitsSystemWindows="true">
-
+    tools:context="id.pekma.pekmavii.FragmentNews.DetailActivityNews">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:layout_width="fill_parent"
         android:layout_height="230dp"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginStart="48dp"
-        app:expandedTitleMarginEnd="64dp"
             android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+        app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -38,9 +37,9 @@
                 android:id="@+id/toolbar1"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:layout_collapseMode="pin" />
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -51,32 +50,33 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:text="Yesterday - 7:42 PM"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Yesterday - 7:42 PM" />
 
             <TextView
                 android:id="@+id/homeTitleNewsDetailTxt"
                 android:layout_width="wrap_content"
-                android:layout_marginTop="13dp"
                 android:layout_height="wrap_content"
-                android:text="Adrian Clarke believes Sam Allardyce must focus on his defence to improve the Toffees' away record"
-                android:textSize="20sp"
-                android:textColor="#323c46"
                 android:layout_marginBottom="15dp"
+                android:layout_marginTop="13dp"
+                android:text="Adrian Clarke believes Sam Allardyce must focus on his defence to improve the Toffees' away record"
+                android:textColor="#323c46"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:textColor="#323c46"
                 android:id="@+id/homeNewsDetailTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Everton?s away form is a cause for concern as they make the short trip to Burnley this weekend.
 
 The Toffees collected one win and two draws from their first three road trips under Sam Allardyce, but since then they have lost four consecutive away days.
@@ -100,8 +100,7 @@ When the structure and pattern of play changes on a match-by-match basis, the re
 This is not an excuse for players switching off or not marking properly, but some of Everton?s off-the-ball work and positioning has suffered from the changes.
 
 They need to be less open between the lines and in wide areas, to reduce the shots that have been raining in on their goal."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textColor="#323c46" />
 
 
         </LinearLayout>

@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="Akuntansi"
+                android:text="TIM 1"
                 android:textAllCaps="true"
                 android:textColor="@color/dark"
                 android:textStyle="bold" />
@@ -47,11 +47,11 @@
             android:layout_marginLeft="-5dp"
             android:layout_marginStart="-5dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/jurAciv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="#FFFF"
+                android:src="@drawable/maskot_akun"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
@@ -81,6 +81,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="21:20"
+                android:textSize="13sp"
                 android:textAlignment="center"
                 android:textColor="#FFFF"
                 android:textStyle="bold" />
@@ -101,12 +102,11 @@
             android:layout_weight="0.3"
             android:layout_marginRight="-5dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/jurBciv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="#FFFF"
-                app:civ_circle_background_color="#FFFF"
+                android:src="@drawable/maskot_bc"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"/>
@@ -127,7 +127,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:text="Akunansi"
+                android:text="TIM 2"
                 android:textAllCaps="true"
                 android:textColor="@color/dark"
                 android:textStyle="bold" />

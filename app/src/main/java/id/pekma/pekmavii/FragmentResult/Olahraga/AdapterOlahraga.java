@@ -1,5 +1,6 @@
 package id.pekma.pekmavii.FragmentResult.Olahraga;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
@@ -36,7 +37,7 @@ public class AdapterOlahraga extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private LayoutInflater inflater;
     List<HomeData> data= Collections.emptyList();
     int currentPos=0;
-    int cabolPos;
+    private int cabolPos;
     AdapterView.OnItemClickListener itemClickListener;
 
     public AdapterOlahraga(Context context, List<HomeData> data){
@@ -74,57 +75,69 @@ public class AdapterOlahraga extends RecyclerView.Adapter<RecyclerView.ViewHolde
         // Get current position of item in recyclerview to bind data and assign values from list
         MyHolderHome myHolderHome = (MyHolderHome) holderhome;
         HomeData currenthome = data.get(position);
+
+        System.out.println(currenthome);
         HomeData currenthome2 = data.get(0);
         System.out.println(cabolPos + "BERHASIL");
 
 
         if (cabolPos == idevent) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         myHolderHome.tvplayerA.setText(currenthome.playerA);
         myHolderHome.tvplayerB.setText(currenthome.playerB);
 
-        if ((jurA.equals("D4 Akuntansi"))
-                || (jurA.equals("D3 Akuntansi"))
-                || (jurA.equals("D4 Akuntansi Tugas belajar"))
-                || (jurA.equals("D3 Manajemen Aset"))
-                || (jurA.equals("D3 Akuntansi Tugas Belajar"))) {
-            Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurAciv);
+            switch (jurA) {
+                case "D4 Akuntansi":
+                case "D3 Akuntansi":
+                case "D4 Akuntansi Tugas belajar":
+                case "D3 Manajemen Aset":
+                case "D3 Akuntansi Tugas Belajar":
+                    Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurAciv);
 
-        } else if ((jurA.equals("D1 Pajak"))
-                || ((jurA.equals("D3 Pajak")))
-                || (jurA.equals("D3 Pajak Tugas Belajar"))
-                || (jurA.equals("D3 Penilai"))){
-            Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurAciv);
+                    break;
+                case "D1 Pajak":
+                case "D3 Pajak":
+                case "D3 Pajak Tugas Belajar":
+                case "D3 Penilai":
+                    Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurAciv);
 
-        } else if ((jurA.equals("D1 BC"))
-                || (jurA.equals("D3 BC"))) {
-            Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurAciv);
+                    break;
+                case "D1 maskot_bc":
+                case "D3 maskot_bc":
+                    Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurAciv);
 
-        } else {
-            Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurAciv);
-        }
+                    break;
+                default:
+                    Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurAciv);
+                    break;
+            }
 
-        if ((jurB.equals("D4 Akuntansi"))
-                || (jurB.equals("D3 Akuntansi"))
-                || (jurB.equals("D4 Akuntansi Tugas belajar"))
-                || (jurB.equals("D3 Manajemen Aset"))
-                || (jurB.equals("D3 Akuntansi Tugas Belajar"))) {
-            Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurBciv);
+            switch (jurB) {
+                case "D4 Akuntansi":
+                case "D3 Akuntansi":
+                case "D4 Akuntansi Tugas belajar":
+                case "D3 Manajemen Aset":
+                case "D3 Akuntansi Tugas Belajar":
+                    Picasso.with(context).load(R.drawable.warna_akun).fit().into(myHolderHome.jurBciv);
 
-        } else if ((jurB.equals("D1 Pajak"))
-                || ((jurB.equals("D3 Pajak")))
-                || (jurB.equals("D3 Pajak Tugas Belajar"))
-                || (jurB.equals("D3 Penilai"))){
-            Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurBciv);
+                    break;
+                case "D1 Pajak":
+                case "D3 Pajak":
+                case "D3 Pajak Tugas Belajar":
+                case "D3 Penilai":
+                    Picasso.with(context).load(R.drawable.warna_pajak).fit().into(myHolderHome.jurBciv);
 
-        } else if ((jurB.equals("D1 BC"))
-                || (jurB.equals("D3 BC"))) {
-            Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurBciv);
+                    break;
+                case "D1 maskot_bc":
+                case "D3 maskot_bc":
+                    Picasso.with(context).load(R.drawable.warna_bc).fit().into(myHolderHome.jurBciv);
 
-        } else {
-            Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurBciv);
-        }
+                    break;
+                default:
+                    Picasso.with(context).load(R.drawable.warna_kbn).fit().into(myHolderHome.jurBciv);
+                    break;
+            }
 
         ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
             @Override
