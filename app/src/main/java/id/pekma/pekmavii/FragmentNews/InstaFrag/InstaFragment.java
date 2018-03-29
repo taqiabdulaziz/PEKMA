@@ -218,6 +218,9 @@ public class InstaFragment extends Fragment implements NewsFragment.SendMessage 
                     JSONObject images = data1.getJSONObject("images");
                     JSONObject low_resolution = images.getJSONObject("low_resolution");
                     JSONObject caption =  data1.optJSONObject("caption");
+                    JSONObject comments = data1.getJSONObject("comments");
+
+                    instaData.link = data1.optString("link");
 
                     instaData.image = low_resolution.optString("url");
 

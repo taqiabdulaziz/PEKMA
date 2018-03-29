@@ -23,6 +23,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
+
 import id.pekma.pekmavii.FragmentHome.HomeData;
 import id.pekma.pekmavii.FragmentResult.ResultFragment;
 import id.pekma.pekmavii.MainActivity;
@@ -58,7 +61,7 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
 
     public class AsyncFetch extends AsyncTask<String,String,String> {
         ProgressDialog pdLoading = new ProgressDialog(getActivity());
-        HttpURLConnection conn;
+        HttpsURLConnection conn;
         URL url = null;
 
         @Override
@@ -76,7 +79,7 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
                 // Enter URL address where your json file resides
                 // Even you can make call to php file which returns json data
 
-                url = new URL("https://taqiabdulaziz.com/news.php");
+                url = new URL("https://pekma.id/news.php");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -86,7 +89,7 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
             try {
 
                 // Setup HttpURLConnection class to send and receive data from php and mysql
-                conn = (HttpURLConnection) url.openConnection();
+                conn = (HttpsURLConnection) url.openConnection();
                 conn.setReadTimeout(READ_TIMEOUT);
                 conn.setConnectTimeout(CONNECTION_TIMEOUT);
                 conn.setRequestMethod("GET");
@@ -135,10 +138,12 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
 
         @Override
         protected void onPostExecute(String result) {
+
+            int ideventRaw,ideventTrue;
             //this method will be running on UI thread
 
             pdLoading.dismiss();
-            List<HomeData> data=new ArrayList<>();
+            List<OlahragaData> data=new ArrayList<>();
 
             pdLoading.dismiss();
 
@@ -148,14 +153,18 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
 
                 for (int i=0;i<jsonArray.length();i++){
                     JSONObject json_data = jsonArray.getJSONObject(i);
-                    HomeData homeData = new HomeData();
+                    OlahragaData homeData = new OlahragaData();
                     homeData.playerA = json_data.getString("playera");
                     homeData.playerB = json_data.getString("playerb");
                     homeData.msDate = json_data.getString("msdate");
                     homeData.mstime = json_data.getString("mstime");
                     homeData.jurA = json_data.getString("jurA");
                     homeData.jurB = json_data.getString("jurB");
-                    homeData.idevent = json_data.getInt("idevent");
+                    ideventRaw = json_data.getInt("idevent");
+                    ideventTrue = ideventRaw - 8;
+
+                    homeData.idevent = ideventTrue;
+
                     homeData.cabolData1 = cabolPosition ;
 
                     System.out.println(cabolPosition +"HEHE");

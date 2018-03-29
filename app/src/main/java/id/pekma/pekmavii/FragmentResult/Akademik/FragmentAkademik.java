@@ -32,9 +32,9 @@ import id.pekma.pekmavii.MainActivity;
 import id.pekma.pekmavii.R;
 
 public class FragmentAkademik extends Fragment implements ResultFragment.SendCabol{
-    View rootview;
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
+    View rootview;
     int cabolPosition;
 
     @Nullable
@@ -138,8 +138,9 @@ public class FragmentAkademik extends Fragment implements ResultFragment.SendCab
 
         @Override
         protected void onPostExecute(String result) {
-            //this method will be running on UI thread
+            int ideventRaw,ideventTrue;
 
+            //this method will be running on UI thread
             pdLoading.dismiss();
             List<HomeData> data=new ArrayList<>();
 
@@ -154,7 +155,9 @@ public class FragmentAkademik extends Fragment implements ResultFragment.SendCab
                     HomeData homeData = new HomeData();
                     homeData.namaPeserta = json_data.getString("namaPeserta");
                     homeData.namaTema = json_data.getString("namaTema");
-                    homeData.idevent = json_data.getInt("idevent");
+                    ideventRaw = json_data.getInt("idevent");
+                    ideventTrue = ideventRaw - 1;
+                    homeData.idevent = ideventTrue;
                     homeData.cabolData1 = cabolPosition ;
 
                     System.out.println(cabolPosition +"HEHE");

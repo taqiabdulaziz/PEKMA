@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<android.support.v4.widget.SwipeRefreshLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/swipeHome"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -51,7 +52,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:background="#e1e6eb"
+        android:background="#f4f4f4"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -59,48 +60,451 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
-                android:layout_marginLeft="9dp"
-                android:layout_marginTop="9dp"
-                android:layout_marginRight="9dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#ffffff">
 
-                <LinearLayout
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="129sp"
+                    android:background="@color/colorPrimary">
+
+                </RelativeLayout>
+
+                <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@drawable/cardview_corner">
+                    android:background="#00f1f1f1">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/iconpekmasmall"
-                            android:scaleType="fitStart"
-                            android:layout_width="20sp"
-                            android:layout_height="20sp"
-                            android:layout_gravity="center"
-                            android:layout_margin="9dp"
-                            android:src="@mipmap/ic_launcher"/>
-
-                        <TextView
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/gedungJ"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:foreground="@drawable/ripple"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="16dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginBottom="16dp"
-                            android:text="Featured News"
-                            android:textColor="#323c46"
-                            android:textStyle="bold" />
+                            android:layout_margin="9sp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="120sp"
+                                    android:layout_height="120sp"
+                                    android:src="@drawable/venue_gedungj"
+                                    android:scaleType="centerCrop"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Gedung J"
+                                        android:textSize="14sp"
+                                        android:textColor="#303030"
+                                        android:layout_margin="9dp"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="6 Competition"
+                                        android:textSize="10sp"
+                                        android:layout_marginLeft="9dp"
+                                        android:layout_marginRight="9dp"
+                                        android:layout_marginBottom="9dp"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/miniSoccer"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:foreground="@drawable/ripple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="9sp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="120sp"
+                                    android:layout_height="120sp"
+                                    android:src="@drawable/venue_mini_soccer"
+                                    android:scaleType="centerCrop"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Mini Soccer"
+                                        android:textSize="14sp"
+                                        android:textColor="#303030"
+                                        android:layout_margin="9dp"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="6 Competition"
+                                        android:textSize="10sp"
+                                        android:layout_marginLeft="9dp"
+                                        android:layout_marginRight="9dp"
+                                        android:layout_marginBottom="9dp"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/plasma"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:foreground="@drawable/ripple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="9sp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="120sp"
+                                    android:layout_height="120sp"
+                                    android:src="@drawable/venue_plasma"
+                                    android:scaleType="centerCrop"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Plasma"
+                                        android:textSize="14sp"
+                                        android:textColor="#303030"
+                                        android:layout_margin="9dp"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="6 Competition"
+                                        android:textSize="10sp"
+                                        android:layout_marginLeft="9dp"
+                                        android:layout_marginRight="9dp"
+                                        android:layout_marginBottom="9dp"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/studentCenter"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:foreground="@drawable/ripple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="9sp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="120sp"
+                                    android:layout_height="120sp"
+                                    android:src="@drawable/venue_sc"
+                                    android:scaleType="centerCrop"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Student Center"
+                                        android:textSize="14sp"
+                                        android:textColor="#303030"
+                                        android:layout_margin="9dp"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="6 Competition"
+                                        android:textSize="10sp"
+                                        android:layout_marginLeft="9dp"
+                                        android:layout_marginRight="9dp"
+                                        android:layout_marginBottom="9dp"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/voliParma"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:foreground="@drawable/ripple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="9sp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="120sp"
+                                    android:layout_height="120sp"
+                                    android:src="@drawable/venue_voli_parma"
+                                    android:scaleType="centerCrop"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Voli Parma"
+                                        android:textSize="14sp"
+                                        android:textColor="#303030"
+                                        android:layout_margin="9dp"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="6 Competition"
+                                        android:textSize="10sp"
+                                        android:layout_marginLeft="9dp"
+                                        android:layout_marginRight="9dp"
+                                        android:layout_marginBottom="9dp"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/gedungG"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:foreground="@drawable/ripple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="9sp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="120sp"
+                                    android:layout_height="120sp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/venue_mini_soccer" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="9dp"
+                                        android:text="Mini Soccer"
+                                        android:textColor="#303030"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="9dp"
+                                        android:layout_marginLeft="9dp"
+                                        android:layout_marginRight="9dp"
+                                        android:text="6 Competition"
+                                        android:textSize="10sp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/joggingTrack"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:foreground="@drawable/ripple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="9sp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="120sp"
+                                    android:layout_height="120sp"
+                                    android:src="@drawable/venue_plasma"
+                                    android:scaleType="centerCrop"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Plasma"
+                                        android:textSize="14sp"
+                                        android:textColor="#303030"
+                                        android:layout_margin="9dp"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="6 Competition"
+                                        android:textSize="10sp"
+                                        android:layout_marginLeft="9dp"
+                                        android:layout_marginRight="9dp"
+                                        android:layout_marginBottom="9dp"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:id="@+id/lapanganFutsalParma"
+                            android:focusable="true"
+                            android:clickable="true"
+                            android:foreground="@drawable/ripple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="9sp"
+                            app:cardElevation="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="120sp"
+                                    android:layout_height="120sp"
+                                    android:src="@drawable/venue_plasma"
+                                    android:scaleType="centerCrop"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Plasma"
+                                        android:textSize="14sp"
+                                        android:textColor="#303030"
+                                        android:layout_margin="9dp"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="6 Competition"
+                                        android:textSize="10sp"
+                                        android:layout_marginLeft="9dp"
+                                        android:layout_marginRight="9dp"
+                                        android:layout_marginBottom="9dp"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </android.support.v7.widget.CardView>
+
                     </LinearLayout>
+
+
+                </HorizontalScrollView>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvNewsHome"
+                android:layout_marginLeft="9dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginRight="9dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:id="@+id/newsHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/cardview_corner"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:foreground="@drawable/ripple">
+
                     <ImageView
                         android:id="@+id/ivHomeNews"
-                        android:src="#5e35b0"
+                        android:src="@drawable/venue_voli_parma"
                         android:layout_width="match_parent"
-                        android:layout_height="250sp"
+                        android:layout_height="170sp"
                         android:scaleType="centerCrop"/>
 
                     <!--<RelativeLayout-->
@@ -134,29 +538,27 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
-                            android:text="My favourite match: robert pires"
-                            android:textColor="#323c46"
-                            android:textSize="17sp"
-                            android:textStyle="bold" />
+                            android:text="My favourite match: robert pires My favourite match: robert pires My favourite match: robert pires"
+                            android:textColor="#191a19" />
 
-                        <Button
-                            android:id="@+id/openNews"
-                            android:layout_width="match_parent"
-                            android:layout_height="45sp"
-                            android:layout_marginBottom="9dp"
-                            android:layout_marginLeft="9dp"
-                            android:layout_marginRight="9dp"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:foreground="@drawable/ripple"
-                            android:onClick="openNews"
-                            android:textSize="15sp"
-                            android:text="READ STORY"
-                            android:textColor="#FFFF"
-                            android:textStyle="bold"
-                            android:typeface="normal">
+                        <!--<Button-->
+                        <!--android:id="@+id/openNews"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="45sp"-->
+                        <!--android:layout_marginBottom="9dp"-->
+                        <!--android:layout_marginLeft="9dp"-->
+                        <!--android:layout_marginRight="9dp"-->
+                        <!--android:clickable="true"-->
+                        <!--android:focusable="true"-->
+                        <!--android:foreground="@drawable/ripple"-->
+                        <!--android:onClick="openNews"-->
+                        <!--android:textSize="15sp"-->
+                        <!--android:text="READ STORY"-->
+                        <!--android:textColor="#FFFF"-->
+                        <!--android:textStyle="bold"-->
+                        <!--android:typeface="normal">-->
 
-                        </Button>
+                        <!--</Button>-->
 
                         <!--<android.support.v7.widget.CardView-->
                         <!--android:layout_width="match_parent"-->
@@ -336,4 +738,4 @@
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-</LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

@@ -24,8 +24,8 @@ import static com.squareup.picasso.Picasso.*;
 
 public class DetailActivityHomeMatch extends AppCompatActivity {
 
-    TextView playerAtext,playerBtext,jurAtext,jurBtext,titledetail,msDateTxt,msTimeTxt,resultpaTxt,resultpbTxt;
-    CircleImageView jurAciv,jurBciv;
+    TextView playerAtext,playerBtext,jurAtext,jurBtext,titledetail,msDateTxt,msTimeTxt,resultpaTxt,resultpbTxt,ideventTxt,keterangan;
+    ImageView jurAciv,jurBciv;
     ImageView venue;
     Context context;
     int akun,bc,kbn,pajak,manset,penilai;
@@ -51,6 +51,7 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
         jurBtext = findViewById(R.id.JurBtxt);
         jurAciv = findViewById(R.id.jurAciv);
         jurBciv = findViewById(R.id.jurBciv);
+        ideventTxt = findViewById(R.id.typeSport);
 
         //RECEIVE DATA
         Intent i=this.getIntent();
@@ -92,6 +93,8 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
         playerBtext.setText(playerBname);
         jurAtext.setText(jurAname);
         jurBtext.setText(jurBname);
+
+        System.out.println(idevent + "ID EVENTNWOI");
 
         switch (jurAname) {
             case "D4 Akuntansi":
@@ -147,51 +150,60 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
                 break;
         }
 
-        if (idevent == "0"){
+        if (idevent.equals("0")){
             with(context)
                     .load(R.drawable.venue_sc)
                     .fit()
                     .into(venue);
-        } else if (idevent == "1") {
+            ideventTxt.setText("Atletik");
+        } else if (idevent.equals("1")) {
             with(context)
                     .load(R.drawable.venue_sc)
                     .fit()
                     .into(venue);
-        } else if (idevent == "2"){
+            ideventTxt.setText("Basket");
+        } else if (idevent.equals("2")){
+            with(context)
+                    .load(R.drawable.venue_voli_parma)
+                    .fit()
+                    .into(venue);
+            ideventTxt.setText("Voli");
+        } else if (idevent.equals("3")){
             with(context)
                     .load(R.drawable.venue_sc)
                     .fit()
                     .into(venue);
-        } else if (idevent == "3"){
-            with(context)
-                    .load(R.drawable.venue_sc)
-                    .fit()
-                    .into(venue);
-        } else if (idevent == "4") {
+            ideventTxt.setText("Tenis Meja");
+        } else if (idevent.equals("4")) {
             with(context)
                     .load(R.drawable.venue_gedungj)
                     .fit()
                     .into(venue);
-        } else if (idevent == "5") {
+            ideventTxt.setText("Catur");
+        } else if (idevent.equals("13")) {
             with(context)
                     .load(R.drawable.venue_sc)
                     .fit()
                     .into(venue);
-        } else if (idevent == "6") {
+            ideventTxt.setText("Futsal");
+        } else if (idevent.equals("14")) {
             with(context)
                     .load(R.drawable.venue_mini_soccer)
                     .fit()
                     .into(venue);
-        } else if (idevent == "7"){
+            ideventTxt.setText("Mini Soccer");
+        } else if (idevent.equals("15")){
             with(context)
                     .load(R.drawable.venue_sc)
                     .fit()
                     .into(venue);
+            ideventTxt.setText("Badminton");
         } else {
             with(context)
                     .load(R.drawable.venue_sc)
                     .fit()
                     .into(venue);
+            ideventTxt.setText("Mini Games");
         }
     }
 }

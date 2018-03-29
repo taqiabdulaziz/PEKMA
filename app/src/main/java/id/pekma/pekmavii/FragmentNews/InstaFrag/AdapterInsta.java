@@ -24,6 +24,7 @@ import id.pekma.pekmavii.FragmentNews.GradientTransformation;
 import id.pekma.pekmavii.FragmentNews.ItemClickListener;
 import id.pekma.pekmavii.FragmentNews.NewsData;
 import id.pekma.pekmavii.R;
+import id.pekma.pekmavii.SocialWebViewActivity;
 
 public class AdapterInsta extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -44,7 +45,7 @@ public class AdapterInsta extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view=inflater.inflate(R.layout.item_insta, parent,false);
-        return new MyHolderNews(view);
+        return new MyHolderInsta(view);
     }
 
 
@@ -54,10 +55,11 @@ public class AdapterInsta extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         runEnterAnimation(holder.itemView);
         final String image = data.get(position).getImage();
         final String title = data.get(position).getDescription();
+        final String link = data.get(position).getLink();
 
 
         // Get current position of item in recyclerview to bind data and assign values from list
-        MyHolderNews myHolderNews = (MyHolderNews) holder;
+        MyHolderInsta myHolderNews = (MyHolderInsta) holder;
         InstaData current = data.get(position);
         myHolderNews.title.setText(current.getDescription());
 
@@ -72,6 +74,22 @@ public class AdapterInsta extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 .load(R.drawable.instagram_icon)
                 .fit()
                 .into(myHolderNews.instaIcon);
+
+        ((MyHolderInsta) holder).setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemClick(int pos) {
+                SocialWebViewActivity(link);
+            }
+        });
+    }
+
+    private void SocialWebViewActivity(String link) {
+        Intent i = new Intent(context,SocialWebViewActivity.class);
+        //PACK DATA TO SEND
+        i.putExtra("LINK_KEY",link);
+
+        //open activity
+        context.startActivity(i);
     }
 
 
@@ -92,13 +110,13 @@ public class AdapterInsta extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
 
-    class MyHolderNews extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class MyHolderInsta extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView instaIv,instaIcon;
         TextView title;
         ItemClickListener itemClickListener;
         // create constructor to get widget reference
-        MyHolderNews(View itemView) {
+        MyHolderInsta(View itemView) {
             super(itemView);
             instaIcon = itemView.findViewById(R.id.iconInsta);
             title= itemView.findViewById(R.id.descInsta);

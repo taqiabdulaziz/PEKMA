@@ -38,7 +38,7 @@
             android:layout_marginRight="14dp"
             android:layout_marginBottom="14dp"
             android:layout_width="match_parent"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_height="48dp"
             android:gravity="center"
             android:fitsSystemWindows="true" />

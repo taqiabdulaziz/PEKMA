@@ -17,8 +17,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200sp"
-                android:layout_marginBottom="20sp">
+                android:layout_height="200sp">
 
                 <com.gjiazhe.scrollparallaximageview.ScrollParallaxImageView
                     android:id="@+id/ivSc"
@@ -57,8 +56,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200sp"
-                android:layout_marginBottom="20sp">
+                android:layout_height="200sp">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -94,8 +92,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200sp"
-                android:layout_marginBottom="20sp">
+                android:layout_height="200sp">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -131,8 +128,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200sp"
-                android:layout_marginBottom="20sp">
+                android:layout_height="200sp">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -168,8 +164,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200sp"
-                android:layout_marginBottom="20sp">
+                android:layout_height="200sp">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -203,8 +198,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200sp"
-                android:layout_marginBottom="20sp">
+                android:layout_height="200sp">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -238,8 +232,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200sp"
-                android:layout_marginBottom="20sp">
+                android:layout_height="200sp">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -273,8 +266,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200sp"
-                android:layout_marginBottom="20sp">
+                android:layout_height="200sp">
 
                 <ImageView
                     android:layout_width="match_parent"

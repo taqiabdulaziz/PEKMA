@@ -47,6 +47,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import id.pekma.pekmavii.FragmentHome.HomeFragment;
 import id.pekma.pekmavii.MainActivity;
 import id.pekma.pekmavii.R;
@@ -119,7 +121,7 @@ public class NewsFragment extends Fragment {
     }
 
     public class AsyncFetch extends AsyncTask<String,String,String>{
-        HttpURLConnection conn;
+        HttpsURLConnection conn;
         URL url = null;
         @Override
         protected void onPreExecute() {
@@ -143,7 +145,7 @@ public class NewsFragment extends Fragment {
             try {
 
                 // Setup HttpURLConnection class to send and receive data from php and mysql
-                conn = (HttpURLConnection) url.openConnection();
+                conn = (HttpsURLConnection) url.openConnection();
                 conn.setReadTimeout(READ_TIMEOUT);
                 conn.setConnectTimeout(CONNECTION_TIMEOUT);
                 conn.setRequestMethod("GET");

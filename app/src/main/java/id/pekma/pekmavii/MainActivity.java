@@ -15,6 +15,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements
     private static final int RC_SIGN_IN = 007;
     public SignInButton btnSignIn;
     public ImageView imgProfilePic;
+    public CardView cardViewHomeNews;
     public TextView txtName, txtEmail,mnews;
     public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -111,12 +113,14 @@ public class MainActivity extends AppCompatActivity implements
 //
 //        mTitle.setTypeface(khandBold);
 
+
         btnSignIn.setOnClickListener(this);
 
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
+        OneSignal.setSubscription(false);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -137,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements
         // Customizing G+ button
         btnSignIn.setSize(SignInButton.COLOR_DARK);
         btnSignIn.setColorScheme(0);
+        btnSignIn.setVisibility(View.GONE);
 
         btnSignIn.setScopes(gso.getScopeArray());
 
@@ -381,7 +386,7 @@ public class MainActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         if (id == R.id.settings) {
-            Intent i = new Intent(getApplicationContext(),SettingsActivity.class);
+            Intent i = new Intent(getApplicationContext(),SettingActivity.class);
             startActivity(i);
 
         }

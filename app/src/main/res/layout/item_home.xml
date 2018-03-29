@@ -35,7 +35,7 @@
                 android:layout_centerVertical="true"
                 android:text="TIM 1"
                 android:textAllCaps="true"
-                android:textColor="@color/dark"
+                android:textColor="#323c46"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -129,14 +129,14 @@
                 android:layout_gravity="center"
                 android:text="TIM 2"
                 android:textAllCaps="true"
-                android:textColor="@color/dark"
+                android:textColor="#323c46"
                 android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="9dp"
-                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp"
                 android:layout_gravity="center_vertical"/>
         </LinearLayout>
 

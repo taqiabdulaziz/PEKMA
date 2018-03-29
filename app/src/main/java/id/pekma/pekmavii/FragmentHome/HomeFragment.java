@@ -1,6 +1,7 @@
 package id.pekma.pekmavii.FragmentHome;
 
 import android.annotation.SuppressLint;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,6 +10,9 @@ import android.sax.RootElement;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -46,6 +50,7 @@ import id.pekma.pekmavii.FragmentNews.NewsDataHome;
 import id.pekma.pekmavii.FragmentNews.NewsFragment;
 import id.pekma.pekmavii.MainActivity;
 import id.pekma.pekmavii.R;
+import id.pekma.pekmavii.VenueActivity.V_GedungG;
 
 /**
  * Created by Muhammad Taqi on 2/13/2018.
@@ -59,41 +64,60 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
     String title,desc,imageview;
     ImageView mnewsiv,iconpekmasmall;
     Button buttonNewsHome;
+    CardView cardViewHome;
+    LinearLayout newsHome;
+    SwipeRefreshLayout swipeRefreshLayout;
+    CardView gedungJ,miniSoccer,plasma,studentCenter,voliParma,gedungG,joggingTrack,lapfutparma;
+    List<HomeData> data=new ArrayList<>();
 
     private BottomSheetBehavior mBottomSheetBehavior1;
+    private boolean refreshState = false;
 
     @Nullable
     @Override
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_home, container, false);
-        MainActivity mainActivity = (MainActivity) getActivity();
 
+        final MainActivity mainActivity = (MainActivity) getActivity();
         final String myDataFromActivity = mainActivity.getMyData();
         final String myTitleDataFromActivity = mainActivity.getMyTitleString();
         final String myIvDataFromActivity = mainActivity.getMyIvData();
 
+        //BIAR CARDVIEW ADA CORNER NYA
+        cardViewHome = rootview.findViewById(R.id.cvNewsHome);
+        cardViewHome.setPreventCornerOverlap(false);
 
         this.title = myTitleDataFromActivity;
         this.desc = myDataFromActivity;
         this.imageview = myIvDataFromActivity;
 
-        buttonNewsHome = rootview.findViewById(R.id.openNews);
-        iconpekmasmall = rootview.findViewById(R.id.iconpekmasmall);
         mnewstitle = rootview.findViewById(R.id.homenewstxt);
         mnewsiv = rootview.findViewById(R.id.ivHomeNews);
-        Picasso.with(getContext())
-                .load(myIvDataFromActivity)
-                .fit()
-                .centerCrop()
-                .into(mnewsiv);
-        Picasso.with(getContext())
-                .load(R.drawable.ic_w)
-                .fit()
-                .into(iconpekmasmall);
-        mnewstitle.setText(myTitleDataFromActivity);
+        newsHome = rootview.findViewById(R.id.newsHome);
+        swipeRefreshLayout = rootview.findViewById(R.id.swipeHome);
 
-        buttonNewsHome.setOnClickListener(new View.OnClickListener() {
+        //CARDVIEW HOME
+        gedungJ = rootview.findViewById(R.id.gedungJ);
+        miniSoccer = rootview.findViewById(R.id.miniSoccer);
+        plasma = rootview.findViewById(R.id.plasma);
+        studentCenter = rootview.findViewById(R.id.studentCenter);
+        voliParma = rootview.findViewById(R.id.voliParma);
+        gedungG = rootview.findViewById(R.id.gedungG);
+        joggingTrack = rootview.findViewById(R.id.joggingTrack);
+        lapfutparma = rootview.findViewById(R.id.lapanganFutsalParma);
+
+        gedungJ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), V_GedungG.class);
+                startActivity(i);
+            }
+        });
+
+
+        //HOME NEWS ONCLICKLISTENER
+        newsHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(),DetailActivityNews.class);
@@ -106,6 +130,29 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                 startActivity(i);
             }
         });
+        Picasso.with(getContext())
+                .load(myIvDataFromActivity)
+                .fit()
+                .centerCrop()
+                .into(mnewsiv);
+
+        mnewstitle.setText(myTitleDataFromActivity);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                Fragment frg = null;
+                frg = getFragmentManager().findFragmentByTag("FLFRAGMENT");
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(frg);
+                ft.attach(frg);
+                ft.commit();
+            }
+        });
+
+        swipeRefreshLayout.setRefreshing(false);
+
         return rootview;
 
     }
@@ -210,7 +257,6 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
             //this method will be running on UI thread
 
             pdLoading.dismiss();
-            List<HomeData> data=new ArrayList<>();
 
             pdLoading.dismiss();
 
@@ -236,8 +282,8 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
 
                 RecyclerView recyclerView = getView().findViewById(R.id.rvHome);
                 RecyclerView recyclerViewL = getView().findViewById(R.id.rvHomeLatest);
-                AdapterHome mAdapter = new AdapterHome(getActivity(), data);
-                AdapterHomeLatestMatch mAdapterL = new AdapterHomeLatestMatch(getActivity(), data);
+                final AdapterHome mAdapter = new AdapterHome(getActivity(), data);
+                final AdapterHomeLatestMatch mAdapterL = new AdapterHomeLatestMatch(getActivity(), data);
 
                 recyclerView.setAdapter(mAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
@@ -247,6 +293,8 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
             } catch (JSONException e) {
                 Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
             }
+
         }
     }
+
 }
