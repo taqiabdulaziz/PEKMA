@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/swipeHome"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -638,6 +637,7 @@
                     </android.support.v7.widget.RecyclerView>
 
                     <Button
+                        android:id="@+id/viewAllUpcom"
                         android:layout_width="match_parent"
                         android:layout_height="45sp"
                         android:layout_margin="9dp"
@@ -716,7 +716,7 @@
                         android:layout_margin="9dp"
                         android:layout_width="match_parent"
                         android:layout_height="45sp"
-
+                        android:id="@+id/viewAllLatest"
                         android:typeface="serif"
                         android:elevation="0dp"
                         android:textSize="15sp"
@@ -738,4 +738,4 @@
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-</android.support.v4.widget.SwipeRefreshLayout>
+</RelativeLayout>

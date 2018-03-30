@@ -48,6 +48,8 @@ import id.pekma.pekmavii.FragmentNews.DetailActivityNews;
 import id.pekma.pekmavii.FragmentNews.NewsData;
 import id.pekma.pekmavii.FragmentNews.NewsDataHome;
 import id.pekma.pekmavii.FragmentNews.NewsFragment;
+import id.pekma.pekmavii.FragmentResult.ResultFragment;
+import id.pekma.pekmavii.FragmentSchedule.ScheduleFragment;
 import id.pekma.pekmavii.MainActivity;
 import id.pekma.pekmavii.R;
 import id.pekma.pekmavii.VenueActivity.V_GedungG;
@@ -63,11 +65,11 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
     TextView mnewst,mnewst1,mnewstitle,mnewstitle1,toolbarTitle;
     String title,desc,imageview;
     ImageView mnewsiv,iconpekmasmall;
-    Button buttonNewsHome;
+    Button viewAllUpcom,viewAllLatest;
     CardView cardViewHome;
     LinearLayout newsHome;
-    SwipeRefreshLayout swipeRefreshLayout;
     CardView gedungJ,miniSoccer,plasma,studentCenter,voliParma,gedungG,joggingTrack,lapfutparma;
+    Fragment fragment;
     List<HomeData> data=new ArrayList<>();
 
     private BottomSheetBehavior mBottomSheetBehavior1;
@@ -95,7 +97,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
         mnewstitle = rootview.findViewById(R.id.homenewstxt);
         mnewsiv = rootview.findViewById(R.id.ivHomeNews);
         newsHome = rootview.findViewById(R.id.newsHome);
-        swipeRefreshLayout = rootview.findViewById(R.id.swipeHome);
+//        swipeRefreshLayout = rootview.findViewById(R.id.swipeHome);
 
         //CARDVIEW HOME
         gedungJ = rootview.findViewById(R.id.gedungJ);
@@ -106,6 +108,34 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
         gedungG = rootview.findViewById(R.id.gedungG);
         joggingTrack = rootview.findViewById(R.id.joggingTrack);
         lapfutparma = rootview.findViewById(R.id.lapanganFutsalParma);
+
+        //Button
+        viewAllUpcom = rootview.findViewById(R.id.viewAllUpcom);
+        viewAllLatest = rootview.findViewById(R.id.viewAllLatest);
+
+        viewAllUpcom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new ScheduleFragment();
+                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flfragment, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        viewAllLatest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new ResultFragment();
+                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flfragment, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
 
         gedungJ.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,20 +168,23 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
 
         mnewstitle.setText(myTitleDataFromActivity);
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                Fragment frg = null;
-                frg = getFragmentManager().findFragmentByTag("FLFRAGMENT");
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.detach(frg);
-                ft.attach(frg);
-                ft.commit();
-            }
-        });
-
-        swipeRefreshLayout.setRefreshing(false);
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                swipeRefreshLayout.setRefreshing(true);
+//                fragment = new HomeFragment();
+//                FragmentTransaction ft = getFragmentManager().beginTransaction();
+//                ft.detach(this).attach(this).commit();
+////                Fragment frg = null;
+////                frg = getFragmentManager().findFragmentByTag("FLFRAGMENT");
+////                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+////                ft.detach(frg);
+////                ft.attach(frg);
+////                ft.commit();
+//            }
+//        });
+//
+//        swipeRefreshLayout.setRefreshing(false);
 
         return rootview;
 
@@ -254,6 +287,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
 
         @Override
         protected void onPostExecute(String result) {
+            int ideventRaw,ideventTrue;
             //this method will be running on UI thread
 
             pdLoading.dismiss();
@@ -264,19 +298,23 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
 
                 JSONArray jsonArray = new JSONArray(result);
                 for (int i=0;i<jsonArray.length();i++){
-                JSONObject json_data = jsonArray.getJSONObject(i);
-                HomeData homeData = new HomeData();
-                homeData.playerA = json_data.getString("playera");
-                homeData.playerB = json_data.getString("playerb");
-                homeData.msDate = json_data.getString("msdate");
-                homeData.mstime = json_data.getString("mstime");
-                homeData.resultpa = json_data.getString("resultpa");
-                homeData.resultpb = json_data.getString("resultpb");
-                homeData.jurA = json_data.getString("jurA");
-                homeData.jurB = json_data.getString("jurB");
-                homeData.idevent = json_data.getInt("idevent");
+                    JSONObject json_data = jsonArray.getJSONObject(i);
+                    HomeData homeData = new HomeData();
+                    homeData.playerA = json_data.getString("playera");
+                    homeData.playerB = json_data.getString("playerb");
+                    homeData.msDate = json_data.getString("msdate");
+                    homeData.mstime = json_data.getString("mstime");
+                    homeData.resultpa = json_data.getString("resultpa");
+                    homeData.resultpb = json_data.getString("resultpb");
+                    homeData.jurA = json_data.getString("jurA");
+                    homeData.jurB = json_data.getString("jurB");
+                    homeData.done = json_data.getString("done");
+                    ideventRaw = json_data.getInt("idcat");
+                    ideventTrue = ideventRaw - 8;
 
-                data.add(homeData);
+                    homeData.idevent = ideventTrue;
+
+                    data.add(homeData);
 
                 }
 
@@ -296,5 +334,6 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
 
         }
     }
+
 
 }

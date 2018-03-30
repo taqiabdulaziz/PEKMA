@@ -42,7 +42,7 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.item_home, parent,false);
+        View view=inflater.inflate(R.layout.item_home_latest, parent,false);
         MyHolderHome holderhome = new MyHolderHome(view);
         return holderhome;
     }
@@ -59,6 +59,8 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
         final String mstime = data.get(position).getMstime();
         final String skorA = data.get(position).getResultpa();
         final String skorB = data.get(position).getResultpb();
+        final int done = Integer.parseInt(data.get(position).getDone());
+        final int idevent = data.get(position).getIdevent();
 
         // Get current position of item in recyclerview to bind data and assign values from list
         MyHolderHome myHolderHome = (MyHolderHome) holderhome;
@@ -67,7 +69,9 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date strDate = sdf.parse(msdate);
-            if (System.currentTimeMillis() > strDate.getTime()) {
+            if (done > 0) {
+                myHolderHome.skorA.setText(skorA);
+                myHolderHome.skorB.setText(skorB);
                 myHolderHome.tvplayerA.setText(currenthome.playerA);
                 myHolderHome.tvplayerB.setText(currenthome.playerB);
 
@@ -128,7 +132,7 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
                 ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(int pos) {
-                        openDetailActivityHome(playerA,playerB,jurA,jurB,msdate,mstime,skorA,skorB);
+                        openDetailActivityHome(playerA,playerB,jurA,jurB,msdate,mstime,skorA,skorB, String.valueOf(idevent));
                     }
                 });
             } else {
@@ -141,7 +145,7 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime, String skorA, String skorB) {
+    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime, String skorA, String skorB,String idevent) {
         Intent i=new Intent(context, DetailActivityHomeMatch.class);
 
         //PACK DATA TO SEND
@@ -153,6 +157,7 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
         i.putExtra("NAME_KEY_B",playerB);
         i.putExtra("NAME_KEY_A_JUR",jurA);
         i.putExtra("NAME_KEY_B_JUR",jurB);
+        i.putExtra("IDEVENT",idevent);
 
         //open activity
         context.startActivity(i);
@@ -173,8 +178,8 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
         MyHolderHome(View itemView) {
             super(itemView);
 
-            skorA = itemView.findViewById(R.id.skorA);
-            skorB = itemView.findViewById(R.id.skorB);
+            skorA = itemView.findViewById(R.id.skorTimA);
+            skorB = itemView.findViewById(R.id.skorTimB);
             tvplayerA= itemView.findViewById(R.id.txtPlayerA);
             tvplayerB= itemView.findViewById(R.id.txtPlayerB);
             jurAciv = itemView.findViewById(R.id.jurAciv);

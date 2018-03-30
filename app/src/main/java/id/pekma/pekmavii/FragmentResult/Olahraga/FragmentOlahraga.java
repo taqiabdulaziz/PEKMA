@@ -160,7 +160,7 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
                     homeData.mstime = json_data.getString("mstime");
                     homeData.jurA = json_data.getString("jurA");
                     homeData.jurB = json_data.getString("jurB");
-                    ideventRaw = json_data.getInt("idevent");
+                    ideventRaw = json_data.getInt("idcat");
                     ideventTrue = ideventRaw - 8;
 
                     homeData.idevent = ideventTrue;

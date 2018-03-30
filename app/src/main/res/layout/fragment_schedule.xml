@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#e1e6eb"
+    android:weightSum="1">
+
+    <android.support.v7.widget.CardView
+        android:layout_margin="9dp"
+        android:layout_width="match_parent"
+        android:layout_height="80sp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80sp"
+            android:padding="9dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:weightSum="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Kompetisi"
+                        android:layout_marginLeft="8dp"
+                        android:textColor="@color/dark"
+                        android:gravity="center_vertical"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5">
+
+                    <Spinner
+                        android:spinnerMode="dropdown"
+                        android:gravity="right"
+                        android:id="@+id/spinnerCabor"
+                        android:backgroundTint="@color/dark"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </Spinner>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:weightSum="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Cabang Olahraga"
+                            android:layout_marginLeft="8dp"
+                            android:textColor="@color/dark"
+                            android:gravity="center_vertical"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.5">
+                        <Spinner
+                            android:spinnerMode="dropdown"
+                            android:backgroundTint="@color/dark"
+                            android:id="@+id/spinnerDetailCabor"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        </Spinner>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/flfragment2">
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

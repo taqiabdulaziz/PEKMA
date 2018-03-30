@@ -10,17 +10,27 @@
             android:title="Home" />
         <item
             android:id="@+id/Fixtures"
-            android:icon="@drawable/bnv_fixtures"
+            android:icon="@drawable/bnv_venue"
             android:title="Venue" />
         <item
             android:id="@+id/Result"
             android:icon="@drawable/bnv_result"
             android:title="Result" />
+
+        <item
+            android:id="@+id/Schedule"
+            android:icon="@drawable/bnv_schedule"
+            android:title="Schedule" />
+
+        <item
+            android:id="@+id/Gallery"
+            android:icon="@drawable/bnv_gallery"
+            android:title="Gallery" />
+
         <item
             android:id="@+id/News"
             android:icon="@drawable/bnv_news"
             android:title="News" />
-
         <item
             android:id="@+id/Other"
             android:icon="@drawable/bnv_other"

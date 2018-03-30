@@ -63,6 +63,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         final String jurB = data.get(position).getJurB();
         final String msdate = data.get(position).getMsDate();
         final String mstime = data.get(position).getMstime();
+        final int done = Integer.parseInt(data.get(position).getDone());
         final int idevent = data.get(position).getIdevent();
 
         // Get current position of item in recyclerview to bind data and assign values from list
@@ -72,7 +73,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date strDate = sdf.parse(msdate);
-            if (System.currentTimeMillis() < strDate.getTime()) {
+            if (done == 0) {
 
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
                 Date date1 = null;
@@ -147,7 +148,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(int pos) {
-                        openDetailActivityHome(playerA,playerB,jurA,jurB,msdate,mstime,idevent);
+                        openDetailActivityHome(playerA,playerB,jurA,jurB,msdate,mstime, String.valueOf(idevent));
                     }
                 });
 
@@ -161,7 +162,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime, int idevent) {
+    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime, String idevent) {
         Intent i=new Intent(context, DetailActivityHomeMatch.class);
 
         //PACK DATA TO SEND

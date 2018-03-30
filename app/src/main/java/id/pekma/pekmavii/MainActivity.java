@@ -1,10 +1,12 @@
 package id.pekma.pekmavii;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -13,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -20,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,6 +48,7 @@ import com.squareup.picasso.Picasso;
 import id.pekma.pekmavii.FragmentHome.HomeFragment;
 import id.pekma.pekmavii.FragmentNews.NewsFragment;
 import id.pekma.pekmavii.FragmentNews.TabbedNews;
+import id.pekma.pekmavii.FragmentSchedule.ScheduleFragment;
 import id.pekma.pekmavii.NavDrawContent.FixturesFragment;
 import id.pekma.pekmavii.NavDrawContent.OtherFragment;
 import id.pekma.pekmavii.FragmentResult.ResultFragment;
@@ -62,8 +67,12 @@ public class MainActivity extends AppCompatActivity implements
     private static final int RC_SIGN_IN = 007;
     public SignInButton btnSignIn;
     public ImageView imgProfilePic;
+    SwipeRefreshLayout swipeRefreshLayout;
+    Fragment fragment;
+    public int pos;
     public CardView cardViewHomeNews;
     public TextView txtName, txtEmail,mnews;
+    String title = null;
     public BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -103,6 +112,9 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         btnSignIn = findViewById(R.id.footer_item_2);
+        swipeRefreshLayout = findViewById(R.id.swipeHome);
+        swipeRefreshLayout.setRefreshing(false);
+
 //        txtName = findViewById(R.id.txtName);
         NavigationView navigationView;
 
@@ -120,7 +132,6 @@ public class MainActivity extends AppCompatActivity implements
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
-        OneSignal.setSubscription(false);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -154,7 +165,53 @@ public class MainActivity extends AppCompatActivity implements
 
         setTitle("PEKMA");
         changeFragment(4);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+//                refreshHandler();
+                swipeRefreshLayout.setEnabled(true);
+                swipeRefreshLayout.setRefreshing(true);
+//                commitFragment();
+
+                changeFragment(pos);
+
+                swipeRefreshLayout.setRefreshing(false);
+
+
+//                if (swipeRefreshLayout.isRefreshing()){
+//                    if (swipeRefreshLayout.isEnabled()){
+//                        swipeRefreshLayout.setEnabled(false);
+//                        swipeRefreshLayout.setRefreshing(false);
+//                    }
+//                } else {
+//                    swipeRefreshLayout.setEnabled(true);
+//                }
+            }
+        });
+
+
     }
+
+//    private void refreshHandler() {
+//        Handler refreshHandler = new Handler();
+//        refreshHandler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                swipeRefreshLayout.setRefreshing(true);
+//                fragment = new HomeFragment();
+////                FragmentManager fragmentManager = getSupportFragmentManager();
+////                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+////                fragmentTransaction.replace(R.id.flfragment,fragment);
+////                fragmentTransaction.commit();
+////                fragmentTransaction.addToBackStack(null);
+//                swipeRefreshLayout.setEnabled(true);
+//                swipeRefreshLayout.setRefreshing(true);
+//            }
+//        }, 2000);
+//    }
+
+
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
@@ -216,31 +273,38 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
+
+
     private void changeFragment(int position) {
-        Fragment fragment;
-        String title = null;
+
         if (position == 1) {
             fragment = new HomeFragment();
+            pos = 1;
             title = "Home";
         } else if (position == 2) {
             fragment = new FixturesFragment();
+            pos = 2;
             title = "Fixtures";
         } else if (position == 3) {
             fragment = new ResultFragment();
+            pos = 3;
             title = "Result";
         } else if (position == 4) {
             fragment = new TabbedNews();
+            pos = 4;
             title = "Feed";
-        } else {
+        } else if (position == 5){
             fragment = new OtherFragment();
+            pos = 5;
+        } else if (position == 6){
+            pos = 6;
+        } else if (position == 7){
+            fragment = new ResultFragment();
+            pos = 7;
+            title = "Schedule";
         }
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.flfragment,fragment);
-        fragmentTransaction.commit();
-        setTitle(title);
-        fragmentTransaction.addToBackStack(null);
+        commitFragment();
     }
 
     @Override
@@ -263,6 +327,13 @@ public class MainActivity extends AppCompatActivity implements
                 changeFragment(5);
                 break;
             case R.id.footer_item_2:
+                break;
+
+            case R.id.Gallery:
+                changeFragment(6);
+                break;
+            case R.id.Schedule:
+                changeFragment(7);
                 break;
             case R.id.Logout:
                 signOut();
@@ -356,6 +427,11 @@ public class MainActivity extends AppCompatActivity implements
         mProgressDialog.show();
     }
 
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        return super.onCreateView(name, context, attrs);
+    }
+
     private void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.hide();
@@ -368,7 +444,7 @@ public class MainActivity extends AppCompatActivity implements
             btnSignIn.setVisibility(View.GONE);
             showItem();
         } else {
-            btnSignIn.setVisibility(View.VISIBLE);
+            btnSignIn.setVisibility(View.GONE);
             hideItem();
         }
     }
@@ -402,8 +478,8 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void sendNewsData(String message) {
-       Log.d("LOG","hello" + message);
-       myString = message;
+        Log.d("LOG","hello" + message);
+        myString = message;
     }
 
     @Override
@@ -438,5 +514,15 @@ public class MainActivity extends AppCompatActivity implements
 
     public String getMyIvData(){
         return myIvString;
+    }
+
+    public void commitFragment(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flfragment,fragment);
+        fragmentTransaction.commit();
+        fragmentTransaction.addToBackStack(null);
+        setTitle(title);
+
     }
 }

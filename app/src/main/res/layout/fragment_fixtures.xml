@@ -22,6 +22,8 @@
                 <com.gjiazhe.scrollparallaximageview.ScrollParallaxImageView
                     android:id="@+id/ivSc"
                     android:scaleType="centerCrop"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
