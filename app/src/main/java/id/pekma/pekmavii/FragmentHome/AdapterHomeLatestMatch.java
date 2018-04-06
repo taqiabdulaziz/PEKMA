@@ -51,16 +51,30 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(RecyclerView.ViewHolder holderhome, int position) {
 
         //DATA UNTUK KE DETAIL ACTIVITY HOME
+//        final String playerA = data.get(position).getPlayerA();
+//        final String playerB = data.get(position).getPlayerB();
+//        final String jurA = data.get(position).getJurA();
+//        final String jurB = data.get(position).getJurB();
+//        final String msdate = data.get(position).getMsDate();
+//        final String mstime = data.get(position).getMstime();
+//        final String skorA = data.get(position).getResultpa();
+//        final String skorB = data.get(position).getResultpb();
+//        final int done = Integer.parseInt(data.get(position).getDone());
+//        final int idevent = data.get(position).getIdevent();
+
         final String playerA = data.get(position).getPlayerA();
         final String playerB = data.get(position).getPlayerB();
+        final String loc = data.get(position).getLoc();
         final String jurA = data.get(position).getJurA();
         final String jurB = data.get(position).getJurB();
+        final int idevent = data.get(position).getIdevent();
+        final int done = Integer.parseInt(data.get(position).getDone());
         final String msdate = data.get(position).getMsDate();
+        final int idcat = data.get(position).getIdcat();
         final String mstime = data.get(position).getMstime();
+        final String cat = data.get(position).getCategory();
         final String skorA = data.get(position).getResultpa();
         final String skorB = data.get(position).getResultpb();
-        final int done = Integer.parseInt(data.get(position).getDone());
-        final int idevent = data.get(position).getIdevent();
 
         // Get current position of item in recyclerview to bind data and assign values from list
         MyHolderHome myHolderHome = (MyHolderHome) holderhome;
@@ -76,63 +90,63 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
                 myHolderHome.tvplayerB.setText(currenthome.playerB);
 
                 switch (jurA) {
-                    case "D4 Akuntansi":
-                    case "D3 Akuntansi":
-                    case "D4 Akuntansi Tugas belajar":
-                    case "D3 Manajemen Aset":
-                    case "D3 Akuntansi Tugas Belajar":
-
+                    case "Akuntansi":
                         Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurAciv);
-                        break;
-                    case "D1 Pajak":
-                    case "D3 Pajak":
-                    case "D3 Pajak Tugas Belajar":
-                    case "D3 Penilai":
 
+
+                        break;
+                    case "Pajak":
                         Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurAciv);
-                        break;
-                    case "D1 maskot_bc":
-                    case "D3 maskot_bc":
 
+
+                        break;
+                    case "Bea Cukai":
                         Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurAciv);
+
+
+                        break;
+                    case "Manajemen Keuangan":
+                        Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurAciv);
+
+
                         break;
                     default:
+                        Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
 
-                        Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurAciv);
                         break;
                 }
 
                 switch (jurB) {
-                    case "D4 Akuntansi":
-                    case "D3 Akuntansi":
-                    case "D4 Akuntansi Tugas belajar":
-                    case "D3 Manajemen Aset":
-                    case "D3 Akuntansi Tugas Belajar":
-
+                    case "Akuntansi":
                         Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurBciv);
-                        break;
-                    case "D1 Pajak":
-                    case "D3 Pajak":
-                    case "D3 Pajak Tugas Belajar":
-                    case "D3 Penilai":
 
+
+                        break;
+                    case "Pajak":
                         Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurBciv);
-                        break;
-                    case "D1 maskot_bc":
-                    case "D3 maskot_bc":
 
+
+                        break;
+                    case "Bea Cukai":
                         Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurBciv);
+
+
+                        break;
+                    case "Manajemen Keuangan":
+                        Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+
+
                         break;
                     default:
-
                         Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+
                         break;
                 }
 
                 ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(int pos) {
-                        openDetailActivityHome(playerA,playerB,jurA,jurB,msdate,mstime,skorA,skorB, String.valueOf(idevent));
+                        openDetailActivityHome(playerA,playerB,jurA,jurB,msdate,mstime,skorA,skorB, String.valueOf(idcat),loc,cat);
                     }
                 });
             } else {
@@ -145,19 +159,33 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime, String skorA, String skorB,String idevent) {
+    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime, String skorA, String skorB,String idcat,String loc, String cat) {
         Intent i=new Intent(context, DetailActivityHomeMatch.class);
 
-        //PACK DATA TO SEND
+//        //PACK DATA TO SEND
+//        i.putExtra("RESULTPA", skorA);
+//        i.putExtra("RESULTPB",skorB);
+//        i.putExtra("MSTIME", msTime);
+//        i.putExtra("MSDATE", msDate);
+//        i.putExtra("NAME_KEY_A",playerA);
+//        i.putExtra("NAME_KEY_B",playerB);
+//        i.putExtra("NAME_KEY_A_JUR",jurA);
+//        i.putExtra("NAME_KEY_B_JUR",jurB);
+//        i.putExtra("IDEVENT",idevent);
+
         i.putExtra("RESULTPA", skorA);
         i.putExtra("RESULTPB",skorB);
         i.putExtra("MSTIME", msTime);
         i.putExtra("MSDATE", msDate);
-        i.putExtra("NAME_KEY_A",playerA);
-        i.putExtra("NAME_KEY_B",playerB);
-        i.putExtra("NAME_KEY_A_JUR",jurA);
-        i.putExtra("NAME_KEY_B_JUR",jurB);
-        i.putExtra("IDEVENT",idevent);
+        i.putExtra("IDEVENT",idcat);
+        i.putExtra("NAME_KEY_A", playerA);
+        i.putExtra("NAME_KEY_B", playerB);
+        i.putExtra("NAME_KEY_A_JUR", jurA);
+        i.putExtra("NAME_KEY_B_JUR", jurB);
+        i.putExtra("LOC", loc);
+        i.putExtra("CAT", cat);
+
+
 
         //open activity
         context.startActivity(i);
@@ -166,6 +194,7 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public int getItemCount() {
         return data.size();
+//        return 5;
     }
 
     class MyHolderHome extends RecyclerView.ViewHolder implements View.OnClickListener {

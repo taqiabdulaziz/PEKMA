@@ -29,9 +29,13 @@
     <string name="btn_revoke_access">Revoke Access</string>
 
     <string-array name="cabang_olahraga">
-        <item>Akademik</item>
+        <item>Olahraga</item>
+    </string-array>
+
+    <string-array name="cabang_olahraga_result">
         <item>Olahraga</item>
         <item>Seni</item>
+        <item>Akademik</item>
     </string-array>
 
     <string-array name="akademik">
@@ -45,15 +49,16 @@
     </string-array>
 
     <string-array name="olahraga">
-        <item>Atletik</item>
         <item>Basket</item>
         <item>Voli</item>
         <item>Tenis Meja</item>
-        <item>Catur</item>
         <item>Futsal</item>
         <item>Mini Soccer</item>
         <item>Badminton</item>
-        <item>Mini Games</item>
+        <item>Mini Games (Tarik Tambang)</item>
+        <item>Mini Games (Estafet)</item>
+        <item>Mini Games (Dart)</item>
+        <item>Mini Games (FINAL)</item>
     </string-array>
 
     <string-array name="seni">
@@ -67,7 +72,49 @@
         <item>Tari Tradisional</item>
         <item>Tari Modern</item>
         <item>PKN STAN Got Talent</item>
+        <item>Batik</item>
     </string-array>
+
+    <string-array name="akademik_result">
+        <item>Essay &amp; KTI</item>
+        <item>Akuntansi</item>
+        <item>Pajak</item>
+        <item>APBN</item>
+        <item>Pidato </item>
+        <item>Speech</item>
+        <item>Cerdas Cermat</item>
+        <item>Debat</item>
+    </string-array>
+
+    <string-array name="olahraga_result">
+        <item>Basket</item>
+        <item>Voli</item>
+        <item>Tenis Meja</item>
+        <item>Futsal</item>
+        <item>Mini Soccer</item>
+        <item>Badminton</item>
+        <item>Atletik</item>
+        <item>Catur</item>
+        <item>Mini Games (Tarik Tambang)</item>
+        <item>Mini Games (Estafet)</item>
+        <item>Mini Games (Dart)</item>
+        <item>Mini Games (FINAL)</item>
+
+    </string-array>
+
+    <string-array name="seni_result">
+        <item>Band</item>
+        <item>Stand Up Comedy</item>
+        <item>Vocal (Solo &amp; Group)</item>
+        <item>Sinematografi</item>
+        <item>Fotografi</item>
+        <item>Musikalisasi Puisi</item>
+        <item>Kabaret</item>
+        <item>Tari Tradisional</item>
+        <item>Tari Modern</item>
+        <item>PKN STAN Got Talent</item>
+    </string-array>
+
     <string name="title_activity_tabbed_news">TabbedNews</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_settings">Settings</string>
@@ -143,4 +190,5 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="url_handbook"><![CDATA[https://doc-00-6k-docs.googleusercontent.com/docs/securesc/j9go383sslduuloul9c0opimsjmh05bu/lg8gh9buco3j43sbkfm161k1l79jrhkh/1523044800000/11412409295841225400/18112893322663930726/1-TPek9ZXZpEVlYqNFhDSnR0uqoYkdAwF?e=download&nonce=gr47agdjajml8&user=18112893322663930726&hash=s62i25t0c96vlle07tlbe99olbp9c2up]]></string>
 </resources>

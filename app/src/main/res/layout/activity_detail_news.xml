@@ -52,18 +52,20 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yesterday - 7:42 PM" />
+                android:text="Yesterday - 7:42 PM"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"/>
 
             <TextView
                 android:id="@+id/homeTitleNewsDetailTxt"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -75,6 +77,8 @@
 
             <TextView
                 android:id="@+id/homeNewsDetailTxt"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Everton?s away form is a cause for concern as they make the short trip to Burnley this weekend.
@@ -103,7 +107,15 @@ They need to be less open between the lines and in wide areas, to reduce the sho
                 android:textColor="#323c46" />
 
 
+            <ImageView
+                android:id="@+id/ivDetail"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_height="500sp" />
+
         </LinearLayout>
+
+
     </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

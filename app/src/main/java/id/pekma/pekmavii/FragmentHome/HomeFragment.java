@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
 
     TextView mnewst,mnewst1,mnewstitle,mnewstitle1,toolbarTitle;
     String title,desc,imageview;
-    ImageView mnewsiv,iconpekmasmall;
+    ImageView mnewsiv,IvGedJ,IvMinsoc,IvPlasma,ivSc,ivVoliParma,IvLapfutParma,IvGedG,IvJoggingTrack;
     Button viewAllUpcom,viewAllLatest;
     CardView cardViewHome;
     LinearLayout newsHome;
@@ -94,6 +94,8 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
         this.desc = myDataFromActivity;
         this.imageview = myIvDataFromActivity;
 
+        System.out.println(myIvDataFromActivity +"DESC NEWS");
+
         mnewstitle = rootview.findViewById(R.id.homenewstxt);
         mnewsiv = rootview.findViewById(R.id.ivHomeNews);
         newsHome = rootview.findViewById(R.id.newsHome);
@@ -109,9 +111,29 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
         joggingTrack = rootview.findViewById(R.id.joggingTrack);
         lapfutparma = rootview.findViewById(R.id.lapanganFutsalParma);
 
+        //IMAGEVIEW VENUE
+        IvGedG = rootview.findViewById(R.id.IvGedG);
+        IvGedJ = rootview.findViewById(R.id.IvGedJ);
+        IvJoggingTrack = rootview.findViewById(R.id.IvJoggingTrack);
+        IvLapfutParma = rootview.findViewById(R.id.IvLapfutParma);
+        IvMinsoc = rootview.findViewById(R.id.IvMinsoc);
+        IvPlasma = rootview.findViewById(R.id.IvPlasma);
+        ivSc = rootview.findViewById(R.id.ivSc);
+        ivVoliParma = rootview.findViewById(R.id.ivVoliParma);
+
         //Button
         viewAllUpcom = rootview.findViewById(R.id.viewAllUpcom);
         viewAllLatest = rootview.findViewById(R.id.viewAllLatest);
+
+        //LOAD KE IMAGEVIEW VENUE!
+//        Picasso.with(getContext()).load(R.drawable.venue_gedungg).fit().into(IvGedG);
+//        Picasso.with(getContext()).load(R.drawable.venue_gedungj).fit().into(IvGedJ);
+//        Picasso.with(getContext()).load(R.drawable.venue_joggingtrack).fit().into(IvJoggingTrack);
+//        Picasso.with(getContext()).load(R.drawable.venue_lapanganfutsalparma).fit().into(IvLapfutParma);
+//        Picasso.with(getContext()).load(R.drawable.venue_mini_soccer).fit().into(IvMinsoc);
+//        Picasso.with(getContext()).load(R.drawable.venue_plasma).fit().into(IvPlasma);
+//        Picasso.with(getContext()).load(R.drawable.venue_sc).fit().into(ivSc);
+//        Picasso.with(getContext()).load(R.drawable.venue_voli_parma).fit().into(ivVoliParma);
 
         viewAllUpcom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,13 +159,13 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
             }
         });
 
-        gedungJ.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), V_GedungG.class);
-                startActivity(i);
-            }
-        });
+//        gedungJ.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(getActivity(), V_GedungG.class);
+//                startActivity(i);
+//            }
+//        });
 
 
         //HOME NEWS ONCLICKLISTENER
@@ -290,9 +312,6 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
             int ideventRaw,ideventTrue;
             //this method will be running on UI thread
 
-            pdLoading.dismiss();
-
-            pdLoading.dismiss();
 
             try {
 
@@ -309,6 +328,9 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                     homeData.jurA = json_data.getString("jurA");
                     homeData.jurB = json_data.getString("jurB");
                     homeData.done = json_data.getString("done");
+                    homeData.category = json_data.optString("cat");
+                    homeData.loc = json_data.optString("loc");
+                    homeData.category = json_data.optString("category");
                     ideventRaw = json_data.getInt("idcat");
                     ideventTrue = ideventRaw - 8;
 
@@ -320,6 +342,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
 
                 RecyclerView recyclerView = getView().findViewById(R.id.rvHome);
                 RecyclerView recyclerViewL = getView().findViewById(R.id.rvHomeLatest);
+
                 final AdapterHome mAdapter = new AdapterHome(getActivity(), data);
                 final AdapterHomeLatestMatch mAdapterL = new AdapterHomeLatestMatch(getActivity(), data);
 
@@ -328,12 +351,23 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                 recyclerViewL.setAdapter(mAdapterL);
                 recyclerViewL.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
 
+                recyclerView.setNestedScrollingEnabled(false);
+                recyclerViewL.setNestedScrollingEnabled(false);
+
             } catch (JSONException e) {
                 Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
             }
 
+            Picasso.with(getContext()).load(R.drawable.venue_gedungg).fit().into(IvGedG);
+            Picasso.with(getContext()).load(R.drawable.venue_gedungj).fit().into(IvGedJ);
+            Picasso.with(getContext()).load(R.drawable.venue_joggingtrack).fit().into(IvJoggingTrack);
+            Picasso.with(getContext()).load(R.drawable.venue_lapanganfutsalparma).fit().into(IvLapfutParma);
+            Picasso.with(getContext()).load(R.drawable.venue_mini_soccer).fit().into(IvMinsoc);
+            Picasso.with(getContext()).load(R.drawable.venue_plasma).fit().into(IvPlasma);
+            Picasso.with(getContext()).load(R.drawable.venue_sc).fit().into(ivSc);
+            Picasso.with(getContext()).load(R.drawable.venue_voli_parma).fit().into(ivVoliParma);
+
+            pdLoading.dismiss();
         }
     }
-
-
 }

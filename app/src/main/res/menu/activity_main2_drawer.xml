@@ -8,10 +8,7 @@
             android:id="@+id/Home"
             android:icon="@drawable/bnv_home"
             android:title="Home" />
-        <item
-            android:id="@+id/Fixtures"
-            android:icon="@drawable/bnv_venue"
-            android:title="Venue" />
+
         <item
             android:id="@+id/Result"
             android:icon="@drawable/bnv_result"
@@ -31,10 +28,6 @@
             android:id="@+id/News"
             android:icon="@drawable/bnv_news"
             android:title="News" />
-        <item
-            android:id="@+id/Other"
-            android:icon="@drawable/bnv_other"
-            android:title="Other" />
 
         <item
             android:id="@+id/Logout"

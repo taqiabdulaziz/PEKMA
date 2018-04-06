@@ -60,16 +60,19 @@ public class MainActivity extends AppCompatActivity implements
         NewsFragment.SendMessage,
         NewsFragment.SendMessageiv,
         NewsFragment.SendMessageTitle,
-        ResultFragment.SendCabol
+        ResultFragment.SendCabol,
+        ResultFragment.SendResultOrSched,
+        ScheduleFragment.SendCabol1,
+        ScheduleFragment.SendResultOrSched1
 {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int RC_SIGN_IN = 007;
     public SignInButton btnSignIn;
-    public ImageView imgProfilePic;
+    public ImageView imgProfilePic,ivNavBar;
     SwipeRefreshLayout swipeRefreshLayout;
     Fragment fragment;
-    public int pos;
+    public int pos,scheduleOrResult;
     public CardView cardViewHomeNews;
     public TextView txtName, txtEmail,mnews;
     String title = null;
@@ -99,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements
         }
 
     };
-    int myCabolData;
+    int myCabolData,myResOrSched;
     String myString,myIvString,myTitleString;
     NavigationView navigationView;
     public FirebaseAuth mAuth;
@@ -111,12 +114,16 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
+        View hView = navigationView.getHeaderView(0);
         btnSignIn = findViewById(R.id.footer_item_2);
         swipeRefreshLayout = findViewById(R.id.swipeHome);
+        ivNavBar = hView.findViewById(R.id.headernavbar);
         swipeRefreshLayout.setRefreshing(false);
 
 //        txtName = findViewById(R.id.txtName);
-        NavigationView navigationView;
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -125,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements
 //
 //        mTitle.setTypeface(khandBold);
 
+        Picasso.with(getApplicationContext()).load(R.drawable.headernavbar).fit().into(ivNavBar);
 
         btnSignIn.setOnClickListener(this);
 
@@ -258,13 +266,12 @@ public class MainActivity extends AppCompatActivity implements
                     + ", Image: " + personPhotoUrl);
 
             NavigationView navigationView = findViewById(R.id.nav_view);
-            txtName = navigationView.getHeaderView(0).findViewById(R.id.username);
-            txtName.setText(personName);
-            txtEmail = navigationView.getHeaderView(0).findViewById(R.id.email);
-            txtEmail.setText(email);
-            imgProfilePic = navigationView.getHeaderView(0).findViewById(R.id.img_profile_pic);
-            Picasso.with(getApplicationContext()).load(personPhotoUrl).fit()
-                    .into(imgProfilePic);
+
+
+
+
+
+
 
             updateUI(true);
         } else {
@@ -299,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements
         } else if (position == 6){
             pos = 6;
         } else if (position == 7){
-            fragment = new ResultFragment();
+            fragment = new ScheduleFragment();
             pos = 7;
             title = "Schedule";
         }
@@ -495,6 +502,11 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void sendResultOrSchedData(int resOrSched) {
+        myResOrSched = resOrSched;
+    }
+
+    @Override
     public void sendNewsTitleData(String titleMessage) {
         Log.d("LOG","hello" + titleMessage);
         myTitleString = titleMessage;
@@ -503,6 +515,11 @@ public class MainActivity extends AppCompatActivity implements
     public int getCabolData() {
         return myCabolData ;
     }
+
+    public int getMyResOrSched() {
+        return myResOrSched ;
+    }
+
 
     public String getMyTitleString() {
         return myTitleString;
@@ -525,4 +542,5 @@ public class MainActivity extends AppCompatActivity implements
         setTitle(title);
 
     }
+
 }

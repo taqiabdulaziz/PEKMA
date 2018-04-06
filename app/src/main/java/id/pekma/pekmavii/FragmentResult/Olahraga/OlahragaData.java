@@ -17,9 +17,45 @@ public class OlahragaData {
     public String jurB;
     public int idevent;
     public int cabolData1;
+    public int idcat;
+    public String loc;
+    public int resOrSched;
     public String namaPeserta;
     public String namaTema;
+    public String category;
     public String done;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getLoc() {
+        return loc;
+    }
+
+    public void setLoc(String loc) {
+        this.loc = loc;
+    }
+
+    public int getIdcat() {
+        return idcat;
+    }
+
+    public void setIdcat(int idcat) {
+        this.idcat = idcat;
+    }
+
+    public int getResOrSched() {
+        return resOrSched;
+    }
+
+    public void setResOrSched(int resOrSched) {
+        this.resOrSched = resOrSched;
+    }
 
     public int getCabolData1() {
         return cabolData1;

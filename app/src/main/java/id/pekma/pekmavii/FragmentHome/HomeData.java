@@ -17,9 +17,94 @@ public class HomeData {
     public String jurB;
     public int idevent;
     public int cabolData1;
+    public int schedOrResult;
     public String namaPeserta;
     public String namaTema;
     public String done;
+    public String loc;
+    public String nama;
+    public int nilai;
+
+
+    //RESULT1
+    public String teama;
+    public String jurta;
+    public int idcat;
+    public String resultta;
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public int getNilai() {
+        return nilai;
+    }
+
+    public void setNilai(int nilai) {
+        this.nilai = nilai;
+    }
+
+    public String getLoc() {
+        return loc;
+    }
+
+    public void setLoc(String loc) {
+        this.loc = loc;
+    }
+
+    public String getTeama() {
+        return teama;
+    }
+
+    public void setTeama(String teama) {
+        this.teama = teama;
+    }
+
+    public String getJurta() {
+        return jurta;
+    }
+
+    public void setJurta(String jurta) {
+        this.jurta = jurta;
+    }
+
+    public int getIdcat() {
+        return idcat;
+    }
+
+    public void setIdcat(int idcat) {
+        this.idcat = idcat;
+    }
+
+    public String getResultta() {
+        return resultta;
+    }
+
+    public void setResultta(String resultta) {
+        this.resultta = resultta;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String category;
+
+    public int getSchedOrResult() {
+        return schedOrResult;
+    }
+
+    public void setSchedOrResult(int schedOrResult) {
+        this.schedOrResult = schedOrResult;
+    }
 
     public int getCabolData1() {
         return cabolData1;

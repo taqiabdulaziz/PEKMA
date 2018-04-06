@@ -65,7 +65,7 @@
                 android:layout_marginRight="9dp"
                 android:layout_marginTop="9dp"
                 android:layout_toLeftOf="@+id/ivNews"
-                android:text="Pekma VI I"
+                android:text="Pekma VII"
                 android:textColor="#b0b5b9"
                 android:textSize="13sp" />
 

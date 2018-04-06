@@ -15,12 +15,14 @@ import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 import id.pekma.pekmavii.R;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class DetailActivityNews extends AppCompatActivity {
 
     TextView newsTxt;
-    ImageView homeNewsDetailIv;
+    ImageView homeNewsDetailIv,ivDetail;
     Context context;
+    PhotoViewAttacher photoViewAttacher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class DetailActivityNews extends AppCompatActivity {
         TextView titleTxt = (TextView)findViewById(R.id.homeTitleNewsDetailTxt);
         newsTxt = (TextView) findViewById(R.id.homeNewsDetailTxt);
         homeNewsDetailIv = findViewById(R.id.homeNewsDetailIv);
+        ivDetail = findViewById(R.id.ivDetail);
 
 
         Intent i=this.getIntent();
@@ -47,7 +50,17 @@ public class DetailActivityNews extends AppCompatActivity {
         newsTxt.setText(name);
         Picasso.with(context)
                 .load(image)
+                .fit()
                 .into(homeNewsDetailIv);
+
+        Picasso.with(context)
+                .load(image)
+                .fit()
+                .into(ivDetail);
+
+        photoViewAttacher  = new PhotoViewAttacher(ivDetail);
+        photoViewAttacher.update();
+
 
 
     }

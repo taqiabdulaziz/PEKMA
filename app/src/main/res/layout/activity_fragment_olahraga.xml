@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="id.pekma.pekmavii.FragmentResult.Olahraga.FragmentOlahraga">
+    android:background="#00ffffff"
+    tools:context="id.pekma.pekmavii.FragmentResult.Olahraga.Schedule.FragmentOlahraga">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvResult"
-        android:background="#ffffff"
+        android:background="#00ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"

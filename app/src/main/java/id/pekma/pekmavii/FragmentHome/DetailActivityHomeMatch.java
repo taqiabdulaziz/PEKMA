@@ -24,7 +24,7 @@ import static com.squareup.picasso.Picasso.*;
 
 public class DetailActivityHomeMatch extends AppCompatActivity {
 
-    TextView playerAtext,playerBtext,jurAtext,jurBtext,titledetail,msDateTxt,msTimeTxt,resultpaTxt,resultpbTxt,ideventTxt,keterangan;
+    TextView playerAtext,playerBtext,jurAtext,jurBtext,titledetail,msDateTxt,msTimeTxt,resultpaTxt,resultpbTxt,ideventTxt,keterangan,namavenueTxt;
     ImageView jurAciv,jurBciv;
     ImageView venue;
     Context context;
@@ -52,6 +52,7 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
         jurAciv = findViewById(R.id.jurAciv);
         jurBciv = findViewById(R.id.jurBciv);
         ideventTxt = findViewById(R.id.typeSport);
+        namavenueTxt = findViewById(R.id.namaVenue);
 
         //RECEIVE DATA
         Intent i=this.getIntent();
@@ -64,6 +65,8 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
         String idevent = i.getExtras().getString("IDEVENT");
         String jurAname = i.getExtras().getString("NAME_KEY_A_JUR");
         String jurBname = i.getExtras().getString("NAME_KEY_B_JUR");
+        String namaLomba = i.getExtras().getString("CAT");
+        String namavenue = i.getExtras().getString("LOC");
 
         //BIND DATA
 
@@ -97,113 +100,115 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
         System.out.println(idevent + "ID EVENTNWOI");
 
         switch (jurAname) {
-            case "D4 Akuntansi":
-            case "D3 Akuntansi":
-            case "D4 Akuntansi Tugas belajar":
-            case "D3 Manajemen Aset":
-            case "D3 Akuntansi Tugas Belajar":
+            case "Akuntansi":
 
                 with(context).load(R.drawable.maskot_akun).into(jurAciv);
                 break;
-            case "D1 Pajak":
-            case "D3 Pajak":
-            case "D3 Pajak Tugas Belajar":
-            case "D3 Penilai":
+            case "Pajak":
 
                 with(context).load(R.drawable.maskot_pajak).into(jurAciv);
                 break;
-            case "D1 maskot_bc":
-            case "D3 maskot_bc":
+            case "Bea Cukai":
 
                 with(context).load(R.drawable.maskot_bc).into(jurAciv);
                 break;
-            default:
+            case "Manajemen Keuangan":
 
                 with(context).load(R.drawable.maskot_mankeu).into(jurAciv);
+                break;
+            default:
+
+                with(context).load(R.drawable.maskot_sekre).into(jurAciv);
                 break;
         }
 
         switch (jurBname) {
-            case "D4 Akuntansi":
-            case "D3 Akuntansi":
-            case "D4 Akuntansi Tugas belajar":
-            case "D3 Manajemen Aset":
-            case "D3 Akuntansi Tugas Belajar":
+            case "Akuntansi":
 
                 with(context).load(R.drawable.maskot_akun).into(jurBciv);
                 break;
-            case "D1 Pajak":
-            case "D3 Pajak":
-            case "D3 Pajak Tugas Belajar":
-            case "D3 Penilai":
+            case "Pajak":
 
                 with(context).load(R.drawable.maskot_pajak).into(jurBciv);
                 break;
-            case "D1 maskot_bc":
-            case "D3 maskot_bc":
+            case "Bea Cukai":
 
                 with(context).load(R.drawable.maskot_bc).into(jurBciv);
                 break;
-            default:
+            case "Manajemen Keuangan":
 
                 with(context).load(R.drawable.maskot_mankeu).into(jurBciv);
                 break;
+            default:
+
+                with(context).load(R.drawable.maskot_sekre).into(jurBciv);
+                break;
         }
 
-        if (idevent.equals("0")){
-            with(context)
-                    .load(R.drawable.venue_sc)
-                    .fit()
-                    .into(venue);
-            ideventTxt.setText("Atletik");
-        } else if (idevent.equals("1")) {
-            with(context)
-                    .load(R.drawable.venue_sc)
-                    .fit()
-                    .into(venue);
-            ideventTxt.setText("Basket");
-        } else if (idevent.equals("2")){
-            with(context)
-                    .load(R.drawable.venue_voli_parma)
-                    .fit()
-                    .into(venue);
-            ideventTxt.setText("Voli");
-        } else if (idevent.equals("3")){
-            with(context)
-                    .load(R.drawable.venue_sc)
-                    .fit()
-                    .into(venue);
-            ideventTxt.setText("Tenis Meja");
-        } else if (idevent.equals("4")) {
-            with(context)
-                    .load(R.drawable.venue_gedungj)
-                    .fit()
-                    .into(venue);
-            ideventTxt.setText("Catur");
-        } else if (idevent.equals("13")) {
-            with(context)
-                    .load(R.drawable.venue_sc)
-                    .fit()
-                    .into(venue);
-            ideventTxt.setText("Futsal");
-        } else if (idevent.equals("14")) {
-            with(context)
-                    .load(R.drawable.venue_mini_soccer)
-                    .fit()
-                    .into(venue);
-            ideventTxt.setText("Mini Soccer");
-        } else if (idevent.equals("15")){
-            with(context)
-                    .load(R.drawable.venue_sc)
-                    .fit()
-                    .into(venue);
-            ideventTxt.setText("Badminton");
-        } else {
-            with(context)
-                    .load(R.drawable.venue_sc)
-                    .fit()
-                    .into(venue);
-            ideventTxt.setText("Mini Games");
+        ideventTxt.setText(namaLomba);
+        namavenueTxt.setText(namavenue);
+
+        switch (idevent) {
+            case "24":
+                with(context)
+                        .load(R.drawable.venue_sc)
+                        .fit()
+                        .into(venue);
+
+                break;
+            case "25":
+                with(context)
+                        .load(R.drawable.venue_sc)
+                        .fit()
+                        .into(venue);
+                break;
+            case "26":
+                with(context)
+                        .load(R.drawable.venue_sc)
+                        .fit()
+                        .into(venue);
+                break;
+            case "27":
+                with(context)
+                        .load(R.drawable.venue_lapanganfutsalparma)
+                        .fit()
+                        .into(venue);
+                break;
+            case "28":
+                with(context)
+                        .load(R.drawable.venue_mini_soccer)
+                        .fit()
+                        .into(venue);
+                break;
+            case "29":
+                with(context)
+                        .load(R.drawable.venue_gedungg)
+                        .fit()
+                        .into(venue);
+                break;
+            case "30":
+                with(context)
+                        .load(R.drawable.venue_sc)
+                        .fit()
+                        .into(venue);
+                break;
+            case "15":
+                with(context)
+                        .load(R.drawable.venue_sc)
+                        .fit()
+                        .into(venue);
+                break;
+            default:
+                with(context)
+                        .load(R.drawable.venue_sc)
+                        .fit()
+                        .into(venue);
+                break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

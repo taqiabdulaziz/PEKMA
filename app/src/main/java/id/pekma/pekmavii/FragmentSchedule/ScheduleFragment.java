@@ -1,51 +1,28 @@
 package id.pekma.pekmavii.FragmentSchedule;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import id.pekma.pekmavii.FragmentHome.AdapterHome;
-import id.pekma.pekmavii.FragmentHome.AdapterHomeLatestMatch;
 import id.pekma.pekmavii.FragmentHome.HomeData;
-import id.pekma.pekmavii.FragmentHome.HomeFragment;
-import id.pekma.pekmavii.FragmentNews.NewsFragment;
-import id.pekma.pekmavii.FragmentResult.Akademik.FragmentAkademik;
-import id.pekma.pekmavii.FragmentResult.Olahraga.FragmentOlahraga;
-import id.pekma.pekmavii.MainActivity;
+import id.pekma.pekmavii.FragmentResult.Akademik.FragmentResultOlahraga;
+import id.pekma.pekmavii.FragmentResult.Olahraga.Schedule.FragmentOlahraga;
 import id.pekma.pekmavii.R;
 
 /**
@@ -54,26 +31,34 @@ import id.pekma.pekmavii.R;
 
 public class ScheduleFragment extends Fragment{
     private Spinner spinnerCabor,spinnerCaborDetail;
-    SendCabol SC;
+    SendCabol1 SC;
+    Context context;
+    SendResultOrSched1 SRS;
     int pos = 0;
     int positionCabol = 0;
     List<HomeData> data=new ArrayList<>();
+    ImageView backgroundIv;
 
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        try {
-//
-//            SC = (SendCabol) getActivity();
-//
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException("Error in retrieving data. Please try again");
-//        }
-//
-//    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
 
-    public interface SendCabol {
+            SC = (SendCabol1) getActivity();
+            SRS = (SendResultOrSched1) getActivity();
+
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Error in retrieving data. Please try again");
+        }
+    }
+
+
+    public interface SendCabol1 {
         void sendCabolData (int message);
+    }
+
+    public interface SendResultOrSched1 {
+        void sendResultOrSchedData (int message);
     }
 
     @Nullable
@@ -83,6 +68,7 @@ public class ScheduleFragment extends Fragment{
         View rootview =  inflater.inflate(R.layout.fragment_result, null);
         spinnerCaborDetail = rootview.findViewById(R.id.spinnerDetailCabor);
         spinnerCabor = rootview.findViewById(R.id.spinnerCabor);
+
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.cabang_olahraga, android.R.layout.simple_spinner_item);
@@ -97,15 +83,15 @@ public class ScheduleFragment extends Fragment{
         spinnerCabor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+//                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
                 if (position == 0) {
                     pos = 0;
-                    Toast.makeText(getContext(), "Akademik" + pos, Toast.LENGTH_SHORT).show();
+
                     spinnerCabor.setPrompt("Akademik");
                     ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
 
                     ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
-                            R.array.akademik, android.R.layout.simple_spinner_item);
+                            R.array.olahraga, android.R.layout.simple_spinner_item);
 
                     adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     adapter2.notifyDataSetChanged();
@@ -116,7 +102,7 @@ public class ScheduleFragment extends Fragment{
                 } else if (position == 1) {
                     pos = 1;
                     spinnerCabor.setPrompt("Olahraga");
-                    Toast.makeText(getContext(), "Olahraga"+ pos, Toast.LENGTH_SHORT).show();
+
                     ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
 
                     ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
@@ -129,7 +115,7 @@ public class ScheduleFragment extends Fragment{
                 } else {
                     pos = 2;
                     spinnerCabor.setPrompt("Seni");
-                    Toast.makeText(getContext(), "Seni"+ pos, Toast.LENGTH_SHORT).show();
+
                     ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
 
                     ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
@@ -174,55 +160,57 @@ public class ScheduleFragment extends Fragment{
                         positionCabol = 16;
                     }
                     HomeData homeData = new HomeData();
-                    Fragment fragment = new FragmentOlahraga();
+                    Fragment fragment = new FragmentResultOlahraga();
                     FragmentManager fragmentManager = getChildFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.flfragment2,fragment);
                     fragmentTransaction.commit();
 
                     SC.sendCabolData(position);
+                    SRS.sendResultOrSchedData(0);
                     homeData.cabolData1 = positionCabol;
 
                     data.add(homeData);
                 } else if (pos == 0){
 
                     if (position == 0){
-                        positionCabol = 1 ;
-                        Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+                        positionCabol = 24 ;
+
                     } else if (position == 1){
-                        positionCabol = 2;
+                        positionCabol = 25;
                     } else if (position == 2){
-                        positionCabol = 3;
+                        positionCabol = 26;
                     } else if (position == 3){
-                        positionCabol = 4;
+                        positionCabol = 27;
                     } else if (position == 4){
-                        positionCabol = 5;
+                        positionCabol = 28;
                     } else if (position == 5){
-                        positionCabol = 6;
-                    } else if (position == 6){
-                        positionCabol = 7;
+                        positionCabol = 29;
+                    } else if (position == 6) {
+                        positionCabol = 23;
                     } else if (position == 7){
-                        positionCabol = 8;
-                    } else if (position == 9){
-                        positionCabol = 9;
+                        positionCabol = 30;
+                    } else if (position == 8){
+                        positionCabol = 31;
                     } else {
-                        positionCabol = 10;
+                        positionCabol = 32;
                     }
 
                     HomeData homeData = new HomeData();
-                    Fragment fragment = new FragmentAkademik();
+                    Fragment fragment = new FragmentOlahraga();
                     FragmentManager fragmentManager = getChildFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.flfragment2,fragment);
                     fragmentTransaction.commit();
 
-//                    SC.sendCabolData(position);
+                    SC.sendCabolData(positionCabol);
+                    SRS.sendResultOrSchedData(0);
                     homeData.cabolData1 = positionCabol;
 
                 } else {
                     if (position == 0){
                         positionCabol = 17;
-                        Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+
                     } else if (position == 1){
                         positionCabol = 18;
                     } else if (position == 2){
@@ -244,13 +232,14 @@ public class ScheduleFragment extends Fragment{
                     }
 
                     HomeData homeData = new HomeData();
-                    Fragment fragment = new FragmentAkademik();
+                    Fragment fragment = new FragmentResultOlahraga();
                     FragmentManager fragmentManager = getChildFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.flfragment2,fragment);
                     fragmentTransaction.commit();
 
                     SC.sendCabolData(position);
+                    SRS.sendResultOrSchedData(0);
                     homeData.cabolData1 = positionCabol;
                     System.out.println(positionCabol + "KONTOL");
 

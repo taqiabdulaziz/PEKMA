@@ -217,11 +217,14 @@ public class NewsFragment extends Fragment {
 
                     String mnews = newsData.getDeschome();
                     String mnewsiv = newsData.getNewsImageHome();
-                    String mnewstitle = newsData.getTitle();
+                    String mnewstitle = newsData.getTitlehome();
+                    System.out.println(mnewstitle + "news title desc");
 
                     homenewstitleTxt = mnewstitle;
                     homenewstxt = mnews;
                     homenewsiv = mnewsiv;
+
+                    System.out.println(homenewstitleTxt + "WOIII");
 
                     data.add(newsData);
 

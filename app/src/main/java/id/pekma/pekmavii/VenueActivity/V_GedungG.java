@@ -11,5 +11,7 @@ public class V_GedungG extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_v__gedung_g);
+
+
     }
 }
