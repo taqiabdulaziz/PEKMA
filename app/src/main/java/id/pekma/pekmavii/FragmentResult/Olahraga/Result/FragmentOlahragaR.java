@@ -160,6 +160,10 @@ public class FragmentOlahragaR extends Fragment implements ResultFragment.SendCa
 
                 JSONArray jsonArray = new JSONArray(result);
 
+                if (result == null){
+                    Toast.makeText(getActivity(), "Cabang lomba belum dimulai", Toast.LENGTH_LONG).show();
+                }
+
                 for (int i=0;i<jsonArray.length();i++){
                     JSONObject json_data = jsonArray.getJSONObject(i);
                     OlahragaData homeData = new OlahragaData();
@@ -186,15 +190,16 @@ public class FragmentOlahragaR extends Fragment implements ResultFragment.SendCa
 
                 }
 
-                RecyclerView recyclerView = getView().findViewById(R.id.rvResult);
+                RecyclerView recyclerView = rootview.findViewById(R.id.rvResult);
+                recyclerView.setNestedScrollingEnabled(true);
                 AdapterOlahragaR mAdapter = new AdapterOlahragaR(getActivity(), data);
 
                 recyclerView.setAdapter(mAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
 
 
-            } catch (JSONException e) {
-                Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+            } catch (JSONException ignored) {
+
             }
         }
     }

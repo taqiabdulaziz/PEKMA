@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
 //        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setElevation(0);
 
         venue = findViewById(R.id.venue);
@@ -170,13 +172,13 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
                 break;
             case "27":
                 with(context)
-                        .load(R.drawable.venue_lapanganfutsalparma)
+                        .load(R.drawable.venue_sc)
                         .fit()
                         .into(venue);
                 break;
             case "28":
                 with(context)
-                        .load(R.drawable.venue_mini_soccer)
+                        .load(R.drawable.venue_minsoc)
                         .fit()
                         .into(venue);
                 break;
@@ -207,6 +209,15 @@ public class DetailActivityHomeMatch extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

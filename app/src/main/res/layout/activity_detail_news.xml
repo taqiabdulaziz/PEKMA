@@ -29,7 +29,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/no_internet"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7" />
 
@@ -54,13 +53,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yesterday - 7:42 PM"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"/>
 
             <TextView
                 android:id="@+id/homeTitleNewsDetailTxt"
@@ -111,6 +103,7 @@ They need to be less open between the lines and in wide areas, to reduce the sho
                 android:id="@+id/ivDetail"
                 android:layout_width="match_parent"
                 android:scaleType="centerCrop"
+                android:visibility="gone"
                 android:layout_height="500sp" />
 
         </LinearLayout>

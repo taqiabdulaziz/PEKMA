@@ -232,10 +232,10 @@ public class NewsFragment extends Fragment {
 
                 recyclerView = getView().findViewById(R.id.rvNews);
                 mAdapter = new AdapterNews(getActivity(), data);
-                recyclerView.setItemAnimator(new FadeInLeftAnimator());
+
                 recyclerView.setAdapter(mAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+                recyclerView.setItemAnimator(new FadeInLeftAnimator());
                 recyclerView.setHasFixedSize(true);
                 AnimationSet set = new AnimationSet(true);
 

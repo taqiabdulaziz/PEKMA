@@ -83,10 +83,10 @@ public class AdapterResultOlahraga extends RecyclerView.Adapter<RecyclerView.Vie
         } else {
             if (cabolPos == idevent) {
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                myHolderHome.teama.setText(currenthome.teama);
-                myHolderHome.jura.setText(currenthome.jurta);
-                myHolderHome.resultta.setText(currenthome.resultta);
-                myHolderHome.category.setText(currenthome.category);
+                myHolderHome.teama.setText("Tim: " +currenthome.teama);
+                myHolderHome.jura.setText("Jurusan: " +currenthome.jurta);
+                myHolderHome.resultta.setText("Hasil: " +currenthome.resultta);
+                myHolderHome.category.setText("Kategori: " +currenthome.category);
 
 
 //                myHolderHome.iv1.setVisibility(View.VISIBLE);

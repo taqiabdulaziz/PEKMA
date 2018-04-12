@@ -171,7 +171,8 @@ public class FragmentResultOlahraga extends Fragment implements ResultFragment.S
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
 
             } catch (JSONException e) {
-                Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(getActivity(), "Menunggu hasil final lomba", Toast.LENGTH_LONG).show();
             }
         }
     }

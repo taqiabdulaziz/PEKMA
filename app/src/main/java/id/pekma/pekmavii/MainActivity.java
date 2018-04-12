@@ -45,6 +45,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
 
+import id.pekma.pekmavii.FragmentHome.Gallery;
 import id.pekma.pekmavii.FragmentHome.HomeFragment;
 import id.pekma.pekmavii.FragmentNews.NewsFragment;
 import id.pekma.pekmavii.FragmentNews.TabbedNews;
@@ -304,6 +305,7 @@ public class MainActivity extends AppCompatActivity implements
             fragment = new OtherFragment();
             pos = 5;
         } else if (position == 6){
+            fragment = new Gallery();
             pos = 6;
         } else if (position == 7){
             fragment = new ScheduleFragment();
@@ -406,6 +408,7 @@ public class MainActivity extends AppCompatActivity implements
             // If the user has not previously signed in on this device or the sign-in has expired,
             // this asynchronous branch will attempt to sign in the user silently.  Cross-device
             // single sign-on will occur in this branch.
+
             showProgressDialog();
             opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                 @Override
@@ -430,8 +433,9 @@ public class MainActivity extends AppCompatActivity implements
             mProgressDialog.setMessage("Loding");
             mProgressDialog.setIndeterminate(true);
         }
-
-        mProgressDialog.show();
+        if (mProgressDialog != null) {
+            mProgressDialog.show();
+        }
     }
 
     @Override

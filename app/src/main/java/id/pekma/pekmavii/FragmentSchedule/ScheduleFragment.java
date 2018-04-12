@@ -88,8 +88,9 @@ public class ScheduleFragment extends Fragment{
                     pos = 0;
 
                     spinnerCabor.setPrompt("Akademik");
-                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-
+                    if (parent.getChildAt(0) != null) {
+                        ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                    }
                     ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
                             R.array.olahraga, android.R.layout.simple_spinner_item);
 
@@ -103,7 +104,9 @@ public class ScheduleFragment extends Fragment{
                     pos = 1;
                     spinnerCabor.setPrompt("Olahraga");
 
-                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                    if (parent.getChildAt(0) != null) {
+                        ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                    }
 
                     ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
                             R.array.olahraga, android.R.layout.simple_spinner_item);
@@ -116,7 +119,9 @@ public class ScheduleFragment extends Fragment{
                     pos = 2;
                     spinnerCabor.setPrompt("Seni");
 
-                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                    if (parent.getChildAt(0) != null) {
+                        ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                    }
 
                     ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
                             R.array.seni, android.R.layout.simple_spinner_item);
@@ -137,8 +142,9 @@ public class ScheduleFragment extends Fragment{
         spinnerCaborDetail.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-
+                if (parent.getChildAt(0) != null) {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
                 if (pos == 1) {
                     if (position == 0){
                         positionCabol = 8;
@@ -172,10 +178,8 @@ public class ScheduleFragment extends Fragment{
 
                     data.add(homeData);
                 } else if (pos == 0){
-
                     if (position == 0){
                         positionCabol = 24 ;
-
                     } else if (position == 1){
                         positionCabol = 25;
                     } else if (position == 2){

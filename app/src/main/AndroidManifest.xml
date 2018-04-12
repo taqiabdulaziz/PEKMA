@@ -74,12 +74,15 @@
             android:name=".FragmentNews.InstaFrag.InstaFragment"
             android:label="@string/title_activity_tabbed_news"
             android:theme="@style/AppTheme" />
-        <activity android:name=".SettingActivity"
+        <activity
+            android:name=".SettingActivity"
             android:theme="@style/DetailHomeTheme" />
         <activity android:name=".SocialWebViewActivity" />
-        <activity android:name=".VenueActivity.V_GedungG"
-            android:theme="@style/AppTheme"/>
-        <activity android:name=".FragmentSchedule.ScheduleFragment"></activity>
+        <activity
+            android:name=".VenueActivity.V_GedungG"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".FragmentSchedule.ScheduleFragment" />
+        <activity android:name=".FragmentHome.Gallery"></activity>
     </application>
 
 </manifest>

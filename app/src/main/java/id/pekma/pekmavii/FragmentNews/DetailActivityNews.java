@@ -7,6 +7,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class DetailActivityNews extends AppCompatActivity {
         setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         TextView titleTxt = (TextView)findViewById(R.id.homeTitleNewsDetailTxt);
         newsTxt = (TextView) findViewById(R.id.homeNewsDetailTxt);
@@ -51,6 +53,7 @@ public class DetailActivityNews extends AppCompatActivity {
         Picasso.with(context)
                 .load(image)
                 .fit()
+                .centerCrop()
                 .into(homeNewsDetailIv);
 
         Picasso.with(context)
@@ -60,9 +63,16 @@ public class DetailActivityNews extends AppCompatActivity {
 
         photoViewAttacher  = new PhotoViewAttacher(ivDetail);
         photoViewAttacher.update();
+    }
 
-
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

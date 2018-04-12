@@ -10,14 +10,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.pekma.pekmavii.FragmentHome.DetailActivityHomeMatch;
@@ -41,15 +44,18 @@ public class AdapterOlahraga extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private LayoutInflater inflater;
     private int cabolPos,resOrSchedpos;
     int resOrSched,position,done;
+    int sudah1 = 1;
+    int sudah2 = 1;
+
+
+
 
     public AdapterOlahraga(Context context, List<OlahragaData> data) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.data = data;
+
     }
-
-
-
 
 
     @Override
@@ -78,9 +84,7 @@ public class AdapterOlahraga extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holderhome, int position) {
 
-
         //DATA UNTUK KE DETAIL ACTIVITY HOME
-
         final String playerA = data.get(position).getPlayerA();
         final String playerB = data.get(position).getPlayerB();
         final String loc = data.get(position).getLoc();
@@ -94,6 +98,7 @@ public class AdapterOlahraga extends RecyclerView.Adapter<RecyclerView.ViewHolde
         final String cat = data.get(position).getCategory();
 
 
+
         MyHolderHome myHolderHome = (MyHolderHome) holderhome;
         OlahragaData currenthome = data.get(position);
         OlahragaData currenthome2 = data.get(0);
@@ -101,188 +106,218 @@ public class AdapterOlahraga extends RecyclerView.Adapter<RecyclerView.ViewHolde
         System.out.println(cabolPos + " CABOL POS");
         System.out.println(resOrSchedpos + " res or sched");
         System.out.println(done + " DONE!");
+
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTimeZone(TimeZone.getTimeZone("GMT"));
+        cal2.add(Calendar.DAY_OF_WEEK, -1);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeZone(TimeZone.getTimeZone("GMT"));
+
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        //RESULT = 1 SCHEDULE = 0
-        if (idcat == cabolPos) {
-            if (done == 0) {
-                if (resOrSchedpos == 0){
+        try {
+            Date strDate = sdf.parse(msdate);
+            Date strDateSystem = cal.getTime();
+            Date strDateSystem2 = cal2.getTime();
 
-                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
-                    Date date1 = null;
-                    try {
-                        date1 = sdfTime.parse(currenthome.mstime);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    assert date1 != null;
-                    long time = date1.getTime();
-                    sdf.applyPattern("HH:mm");
+            System.out.println(strDate +"WKT");
+            System.out.println(strDateSystem +"WKTS");
 
-                    sdf.applyPattern("HH:mm");
+            if (strDateSystem.before(strDate) || strDateSystem.equals(strDate) || strDateSystem2.before(strDate)) {
+//                RESULT = 1 SCHEDULE = 0
+                if (idcat == cabolPos) {
+                    if (done == 0) {
+                        if (resOrSchedpos == 0) {
+                            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
+                            Date date1 = null;
+                            try {
+                                date1 = sdfTime.parse(currenthome.mstime);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            assert date1 != null;
+                            long time = date1.getTime();
+                            sdf.applyPattern("HH:mm");
 
-                    myHolderHome.tvplayerA.setText(currenthome.playerA);
-                    myHolderHome.tvplayerB.setText(currenthome.playerB);
+                            sdf.applyPattern("HH:mm");
+                            myHolderHome.msTime.setText(sdf.format(time));
+                            myHolderHome.tvplayerA.setText(currenthome.playerA);
+                            myHolderHome.tvplayerB.setText(currenthome.playerB);
 
-                    switch (jurA) {
-                        case "Akuntansi":
-                            Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurAciv);
-
-
-                            break;
-                        case "Pajak":
-                            Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurAciv);
-
-
-                            break;
-                        case "Bea Cukai":
-                            Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurAciv);
+                            switch (jurA) {
+                                case "Akuntansi":
+                                    Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurAciv);
 
 
-                            break;
-                        case "Manajemen Keuangan":
-                            Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurAciv);
+                                    break;
+                                case "Pajak":
+                                    Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurAciv);
 
 
-                            break;
-                        default:
-                            Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
-
-                            break;
-                    }
-
-                    switch (jurB) {
-                        case "Akuntansi":
-                            Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurBciv);
+                                    break;
+                                case "Bea Cukai":
+                                    Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurAciv);
 
 
-                            break;
-                        case "Pajak":
-                            Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurBciv);
+                                    break;
+                                case "Manajemen Keuangan":
+                                    Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurAciv);
 
 
-                            break;
-                        case "Bea Cukai":
-                            Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurBciv);
+                                    break;
+                                default:
+                                    Picasso.with(context).load(R.drawable.maskot_sekre).fit().into(myHolderHome.jurAciv);
+
+                                    break;
+                            }
+
+                            switch (jurB) {
+                                case "Akuntansi":
+                                    Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurBciv);
 
 
-                            break;
-                        case "Manajemen Keuangan":
-                            Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+                                    break;
+                                case "Pajak":
+                                    Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurBciv);
 
 
-                            break;
-                        default:
-                            Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+                                    break;
+                                case "Bea Cukai":
+                                    Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurBciv);
 
-                            break;
-                    }
 
-                    ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
-                        @Override
-                        public void onItemClick(int pos) {
-                            openDetailActivityHome(playerA, playerB, jurA, jurB, msdate, mstime, String.valueOf(idcat),loc, cat);
+                                    break;
+                                case "Manajemen Keuangan":
+                                    Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+
+
+                                    break;
+                                default:
+                                    Picasso.with(context).load(R.drawable.maskot_sekre).fit().into(myHolderHome.jurBciv);
+
+                                    break;
+                            }
+
+                            ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
+                                @Override
+                                public void onItemClick(int pos) {
+                                    openDetailActivityHome(playerA, playerB, jurA, jurB, msdate, mstime, String.valueOf(idcat), loc, cat);
+                                }
+                            });
+
+                        } else {
+                            holderhome.itemView.setVisibility(View.GONE);
+                            holderhome.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+
                         }
-                    });
+                    } else if (done == 1) {
+                        if (resOrSchedpos == 1) {
+
+
+                            @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
+                            Date date1 = null;
+                            try {
+                                date1 = sdfTime.parse(currenthome.mstime);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            assert date1 != null;
+                            long time = date1.getTime();
+                            sdf.applyPattern("HH:mm");
+
+                            sdf.applyPattern("HH:mm");
+                            System.out.println(time + "TIME WOI");
+
+                            //SKOR
+                            if (this.done == 1 && resOrSchedpos == 1) {
+                                myHolderHome.msTime.setText(sdf.format(time));
+                            }
+                            myHolderHome.msTime.setText(sdf.format(time));
+                            myHolderHome.tvplayerA.setText(currenthome.playerA);
+                            myHolderHome.tvplayerB.setText(currenthome.playerB);
+
+                            switch (jurA) {
+                                case "Akuntansi":
+                                    Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurAciv);
+
+
+                                    break;
+                                case "Pajak":
+                                    Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurAciv);
+
+
+                                    break;
+                                case "Bea Cukai":
+                                    Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurAciv);
+
+
+                                    break;
+                                case "Manajemen Keuangan":
+                                    Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurAciv);
+
+
+                                    break;
+                                default:
+                                    Picasso.with(context).load(R.drawable.maskot_sekre).fit().into(myHolderHome.jurAciv);
+
+                                    break;
+                            }
+
+                            switch (jurB) {
+                                case "Akuntansi":
+                                    Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurBciv);
+
+
+                                    break;
+                                case "Pajak":
+                                    Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurBciv);
+
+
+                                    break;
+                                case "Bea Cukai":
+                                    Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurBciv);
+
+
+                                    break;
+                                case "Manajemen Keuangan":
+                                    Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+
+
+                                    break;
+                                default:
+                                    Picasso.with(context).load(R.drawable.maskot_sekre).fit().into(myHolderHome.jurBciv);
+
+                                    break;
+                            }
+
+                            ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
+                                @Override
+                                public void onItemClick(int pos) {
+                                    openDetailActivityHome(playerA, playerB, jurA, jurB, msdate, mstime, String.valueOf(idcat), loc, cat);
+                                }
+                            });
+                        } else {
+                            holderhome.itemView.setVisibility(View.GONE);
+                            holderhome.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+
+                        }
+                    } else if (data.get(position).getDone() == null) {
+                        holderhome.itemView.setVisibility(View.GONE);
+                        holderhome.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+                    }
                 } else {
                     holderhome.itemView.setVisibility(View.GONE);
                     holderhome.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
-                }
-            } else if (done == 1){
-                if (resOrSchedpos == 1){
-                    @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
-                    Date date1 = null;
-                    try {
-                        date1 = sdfTime.parse(currenthome.mstime);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    assert date1 != null;
-                    long time = date1.getTime();
-                    sdf.applyPattern("HH:mm");
-
-                    sdf.applyPattern("HH:mm");
-
-                    //SKOR
-                    if (this.done == 1 && resOrSchedpos == 1){
-                        myHolderHome.msTime.setText(sdf.format(time));
-                    }
-
-                    myHolderHome.tvplayerA.setText(currenthome.playerA);
-                    myHolderHome.tvplayerB.setText(currenthome.playerB);
-
-                    switch (jurA) {
-                        case "Akuntansi":
-                            Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurAciv);
-
-
-                            break;
-                        case "Pajak":
-                            Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurAciv);
-
-
-                            break;
-                        case "Bea Cukai":
-                            Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurAciv);
-
-
-                            break;
-                        case "Manajemen Keuangan":
-                            Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurAciv);
-
-
-                            break;
-                        default:
-                            Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
-
-                            break;
-                    }
-
-                    switch (jurB) {
-                        case "Akuntansi":
-                            Picasso.with(context).load(R.drawable.maskot_akun).fit().into(myHolderHome.jurBciv);
-
-
-                            break;
-                        case "Pajak":
-                            Picasso.with(context).load(R.drawable.maskot_pajak).fit().into(myHolderHome.jurBciv);
-
-
-                            break;
-                        case "Bea Cukai":
-                            Picasso.with(context).load(R.drawable.maskot_bc).fit().into(myHolderHome.jurBciv);
-
-
-                            break;
-                        case "Manajemen Keuangan":
-                            Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
-
-
-                            break;
-                        default:
-                            Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
-
-                            break;
-                    }
-
-                    ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
-                        @Override
-                        public void onItemClick(int pos) {
-                            openDetailActivityHome(playerA, playerB, jurA, jurB, msdate, mstime, String.valueOf(idcat), loc, cat);
-                        }
-                    });
-                } else {
-                    holderhome.itemView.setVisibility(View.GONE);
-                    holderhome.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+                    sudah2 = 2;
                 }
             } else {
                 holderhome.itemView.setVisibility(View.GONE);
                 holderhome.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
             }
-        } else  {
-            holderhome.itemView.setVisibility(View.GONE);
-            holderhome.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
-        }
 
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -347,6 +382,8 @@ public class AdapterOlahraga extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public void setItemClickListener(ItemClickListener itemClickListener) {
             this.itemClickListener = itemClickListener;
         }
+
+
 
 
     }

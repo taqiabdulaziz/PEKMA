@@ -84,10 +84,10 @@ public class AdapterSeni extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         } else {
             if (cabolPos == idevent) {
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                myHolderHome.nama.setText(currenthome.namaPeserta);
-                myHolderHome.tema.setText(currenthome.namaTema);
-                myHolderHome.nilai.setText(String.valueOf(currenthome.nilai));
-                myHolderHome.jurusan.setText(currenthome.jurta);
+                myHolderHome.nama.setText("Nama: " +currenthome.namaPeserta);
+                myHolderHome.tema.setText("Tema: " +currenthome.namaTema);
+                myHolderHome.nilai.setText(String.valueOf("Nilai: " +currenthome.nilai));
+                myHolderHome.jurusan.setText("Jurusan: " +currenthome.jurta);
 
 
 //                myHolderHome.iv1.setVisibility(View.VISIBLE);

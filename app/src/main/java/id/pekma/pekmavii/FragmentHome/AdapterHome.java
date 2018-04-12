@@ -10,14 +10,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import id.pekma.pekmavii.FragmentNews.ItemClickListener;
 import id.pekma.pekmavii.R;
@@ -38,6 +42,8 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.context=context;
         inflater= LayoutInflater.from(context);
         this.data=data;
+
+        System.out.println(data.size() + "SIZEEE");
     }
 
     @Override
@@ -75,11 +81,23 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         MyHolderHome myHolderHome = (MyHolderHome) holderhome;
         HomeData currenthome = data.get(position);
 
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date strDate = sdf.parse(msdate);
-            if (done == 0) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeZone(TimeZone.getTimeZone("GMT"));
 
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTimeZone(TimeZone.getTimeZone("GMT"));
+        cal2.add(Calendar.DAY_OF_WEEK, -1);
+
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        try {
+            Date strDate = sdf.parse(currenthome.msDate);
+            Date strDateSystem = cal.getTime();
+            Date strDateSystem2 = cal2.getTime();
+
+            System.out.println(strDate + "date 1");
+            System.out.println(strDateSystem + "date 2");
+            if (done == 0 && strDateSystem.before(strDate) || strDateSystem.equals(strDate) || strDateSystem2.before(strDate)){
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
                 Date date1 = null;
                 try {
@@ -118,7 +136,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                         break;
                     default:
-                        Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+                        Picasso.with(context).load(R.drawable.maskot_sekre).fit().into(myHolderHome.jurAciv);
 
                         break;
                 }
@@ -145,7 +163,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                         break;
                     default:
-                        Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+                        Picasso.with(context).load(R.drawable.maskot_sekre).fit().into(myHolderHome.jurBciv);
 
                         break;
                 }
@@ -188,8 +206,8 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        if (data.size() > 5){
-            return 5;
+        if (data.size() >= 9){
+            return 11;
         } else {
             return data.size();
         }

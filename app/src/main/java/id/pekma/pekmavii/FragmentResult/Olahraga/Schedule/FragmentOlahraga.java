@@ -114,7 +114,7 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
                 int response_code = conn.getResponseCode();
 
                 // Check if successful connection made
-                if (response_code == HttpURLConnection.HTTP_OK) {
+                if (response_code == HttpsURLConnection.HTTP_OK) {
 
                     // Read data sent from server
                     InputStream input = conn.getInputStream();
@@ -151,6 +151,7 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
             pdLoading.dismiss();
             List<OlahragaData> data=new ArrayList<>();
 
+
             pdLoading.dismiss();
 
             try {
@@ -158,6 +159,7 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
                 JSONArray jsonArray = new JSONArray(result);
 
                 for (int i=0;i<jsonArray.length();i++){
+
                     JSONObject json_data = jsonArray.getJSONObject(i);
                     OlahragaData homeData = new OlahragaData();
                     homeData.playerA = json_data.getString("playera");
@@ -175,7 +177,7 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
                     homeData.category = json_data.optString("category");
 
 
-                    homeData.cabolData1 = cabolPosition ;
+                    homeData.cabolData1 = cabolPosition;
                     homeData.resOrSched = resOrSchedPos;
 
                     System.out.println(cabolPosition +"HEHE");
@@ -183,7 +185,8 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
 
                 }
 
-                RecyclerView recyclerView = getView().findViewById(R.id.rvResult);
+                RecyclerView recyclerView = rootview.findViewById(R.id.rvResult);
+                recyclerView.setNestedScrollingEnabled(true);
                 AdapterOlahraga mAdapter = new AdapterOlahraga(getActivity(), data);
 
                 recyclerView.setAdapter(mAdapter);
@@ -191,8 +194,9 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
 
 
             } catch (JSONException e) {
-                Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), e+"", Toast.LENGTH_SHORT).show();
             }
+
         }
     }
 }

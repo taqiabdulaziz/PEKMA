@@ -76,7 +76,7 @@
     </string-array>
 
     <string-array name="akademik_result">
-        <item>Essay &amp; KTI</item>
+        <item>Essay </item>
         <item>Akuntansi</item>
         <item>Pajak</item>
         <item>APBN</item>
@@ -84,6 +84,7 @@
         <item>Speech</item>
         <item>Cerdas Cermat</item>
         <item>Debat</item>
+        <item>KTI</item>
     </string-array>
 
     <string-array name="olahraga_result">
@@ -190,5 +191,5 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-    <string name="url_handbook"><![CDATA[https://doc-00-6k-docs.googleusercontent.com/docs/securesc/j9go383sslduuloul9c0opimsjmh05bu/lg8gh9buco3j43sbkfm161k1l79jrhkh/1523044800000/11412409295841225400/18112893322663930726/1-TPek9ZXZpEVlYqNFhDSnR0uqoYkdAwF?e=download&nonce=gr47agdjajml8&user=18112893322663930726&hash=s62i25t0c96vlle07tlbe99olbp9c2up]]></string>
+    <string name="url_handbook"><![CDATA[https://firebasestorage.googleapis.com/v0/b/pekma-vii.appspot.com/o/HANDBOOK%20PEKMA%20VII.pdf?alt=media&token=812dcc88-29f7-4692-86b7-0998629cebe7]]></string>
 </resources>

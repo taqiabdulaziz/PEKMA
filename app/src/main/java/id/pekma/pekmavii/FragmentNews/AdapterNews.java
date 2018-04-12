@@ -71,10 +71,7 @@ public class AdapterNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 .transform(new GradientTransformation())
                 .into(myHolderNews.newsIv);
 
-        Picasso.with(context)
-                .load(R.drawable.ic_w)
-                .fit()
-                .into(myHolderNews.iconpekmasmallnews);
+
 
         ((MyHolderNews) holder).setItemClickListener(new ItemClickListener() {
             @Override
@@ -124,7 +121,7 @@ public class AdapterNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         // create constructor to get widget reference
         MyHolderNews(View itemView) {
             super(itemView);
-            iconpekmasmallnews = itemView.findViewById(R.id.iconpekmasmallnews);
+
             title= itemView.findViewById(R.id.newsTitleTxt);
             newsIv= itemView.findViewById(R.id.ivNews);
             homeNewsIv = itemView.findViewById(R.id.ivHomeNews);

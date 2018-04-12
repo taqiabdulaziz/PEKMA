@@ -15,9 +15,11 @@ import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.pekma.pekmavii.FragmentNews.ItemClickListener;
@@ -80,10 +82,20 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
         MyHolderHome myHolderHome = (MyHolderHome) holderhome;
         HomeData currenthome = data.get(position);
 
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeZone(TimeZone.getTimeZone("GMT"));
+        cal.add(Calendar.DAY_OF_WEEK, -2);
+
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date strDate = sdf.parse(msdate);
-            if (done > 0) {
+            Date strDateSystem = cal.getTime();
+
+            System.out.println(strDate.getDate() + "msdate");
+            System.out.println(strDateSystem.getDate() + "msdateSys");
+
+            if (done > 0 && strDate.compareTo(strDateSystem) >=0) {
                 myHolderHome.skorA.setText(skorA);
                 myHolderHome.skorB.setText(skorB);
                 myHolderHome.tvplayerA.setText(currenthome.playerA);
@@ -111,7 +123,7 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
 
                         break;
                     default:
-                        Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+                        Picasso.with(context).load(R.drawable.maskot_sekre).fit().into(myHolderHome.jurAciv);
 
                         break;
                 }
@@ -138,7 +150,7 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
 
                         break;
                     default:
-                        Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+                        Picasso.with(context).load(R.drawable.maskot_sekre).fit().into(myHolderHome.jurBciv);
 
                         break;
                 }
@@ -150,7 +162,7 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
                     }
                 });
             } else {
-                System.out.println("kurang dari");
+
                 holderhome.itemView.setVisibility(View.GONE);
                 holderhome.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
             }
@@ -194,7 +206,6 @@ public class AdapterHomeLatestMatch extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public int getItemCount() {
         return data.size();
-//        return 5;
     }
 
     class MyHolderHome extends RecyclerView.ViewHolder implements View.OnClickListener {

@@ -12,7 +12,7 @@
         android:id="@+id/rvResult"
         android:background="#00ffffff"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginBottom="5dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" >
     </android.support.v7.widget.RecyclerView>
@@ -20,7 +20,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300sp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center">
 

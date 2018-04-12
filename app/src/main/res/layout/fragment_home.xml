@@ -99,7 +99,7 @@
                                     android:id="@+id/IvGedJ"
                                     android:layout_width="120sp"
                                     android:layout_height="120sp"
-
+                                    android:focusableInTouchMode="true"
                                     android:scaleType="centerCrop"/>
 
                                 <LinearLayout
@@ -545,7 +545,8 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="16dp"
                             android:text="My favourite match: robert pires My favourite match: robert pires My favourite match: robert pires"
-                            android:textColor="#191a19" />
+                            android:textColor="#191a19"
+                            android:textStyle="bold" />
 
                         <!--<Button-->
                         <!--android:id="@+id/openNews"-->

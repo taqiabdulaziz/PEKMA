@@ -94,8 +94,10 @@ public class ResultFragment extends Fragment{
                     pos = 0;
 
                     spinnerCabor.setPrompt("Olahraga");
-                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
 
+                    if (parent.getChildAt(0) != null) {
+                        ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                    }
                     ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
                             R.array.olahraga_result, android.R.layout.simple_spinner_item);
 
@@ -107,8 +109,9 @@ public class ResultFragment extends Fragment{
                     pos = 1;
                     spinnerCabor.setPrompt("Seni");
 
-                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-
+                    if (parent.getChildAt(0) != null) {
+                        ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                    }
                     ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
                             R.array.seni_result, android.R.layout.simple_spinner_item);
 
@@ -120,7 +123,9 @@ public class ResultFragment extends Fragment{
                     pos = 2;
                     spinnerCabor.setPrompt("Akademik");
 
-                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                    if (parent.getChildAt(0) != null) {
+                        ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                    }
 
                     ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(),
                             R.array.akademik_result, android.R.layout.simple_spinner_item);
@@ -140,8 +145,9 @@ public class ResultFragment extends Fragment{
         spinnerCaborDetail.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
-
+                if (parent.getChildAt(0) != null) {
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                }
                 if (pos == 0) {
                     if (position == 0){
                         positionCabol = 24;
@@ -271,8 +277,12 @@ public class ResultFragment extends Fragment{
                         positionCabol = 5;
                     } else if (position == 5){
                         positionCabol = 6;
-                    } else {
+                    } else if(position == 6){
                         positionCabol = 7;
+                    } else if(position == 7){
+                        positionCabol = 8;
+                    } else {
+                        positionCabol = 33;
                     }
 
                     HomeData homeData = new HomeData();

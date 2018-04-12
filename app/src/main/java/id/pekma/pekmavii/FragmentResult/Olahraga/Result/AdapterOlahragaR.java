@@ -69,7 +69,8 @@ public class AdapterOlahragaR extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
         //DATA UNTUK KE DETAIL ACTIVITY HOME
-
+        final String resulta = data.get(position).getResultpa();
+        final String resultb = data.get(position).getResultpb();
         final String playerA = data.get(position).getPlayerA();
         final String playerB = data.get(position).getPlayerB();
         final String loc = data.get(position).getLoc();
@@ -136,7 +137,7 @@ public class AdapterOlahragaR extends RecyclerView.Adapter<RecyclerView.ViewHold
 
                             break;
                         default:
-                            Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+                            Picasso.with(context).load(R.drawable.maskot_sekre).fit().into(myHolderHome.jurAciv);
 
                             break;
                     }
@@ -163,7 +164,7 @@ public class AdapterOlahragaR extends RecyclerView.Adapter<RecyclerView.ViewHold
 
                             break;
                         default:
-                            Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+                            Picasso.with(context).load(R.drawable.maskot_sekre).fit().into(myHolderHome.jurBciv);
 
                             break;
                     }
@@ -171,7 +172,7 @@ public class AdapterOlahragaR extends RecyclerView.Adapter<RecyclerView.ViewHold
                     ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
                         @Override
                         public void onItemClick(int pos) {
-                            openDetailActivityHome(playerA, playerB, jurA, jurB, msdate, mstime, String.valueOf(idcat),loc, cat);
+                            openDetailActivityHome(playerA, playerB, jurA, jurB, msdate, mstime, String.valueOf(idcat),loc, cat,resulta,resultb);
                         }
                     });
                 } else {
@@ -226,7 +227,7 @@ public class AdapterOlahragaR extends RecyclerView.Adapter<RecyclerView.ViewHold
 
                             break;
                         default:
-                            Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+                            Picasso.with(context).load(R.drawable.maskot_sekre).fit().into(myHolderHome.jurAciv);
 
                             break;
                     }
@@ -253,7 +254,7 @@ public class AdapterOlahragaR extends RecyclerView.Adapter<RecyclerView.ViewHold
 
                             break;
                         default:
-                            Picasso.with(context).load(R.drawable.maskot_mankeu).fit().into(myHolderHome.jurBciv);
+                            Picasso.with(context).load(R.drawable.maskot_sekre).fit().into(myHolderHome.jurBciv);
 
                             break;
                     }
@@ -261,7 +262,7 @@ public class AdapterOlahragaR extends RecyclerView.Adapter<RecyclerView.ViewHold
                     ((MyHolderHome) holderhome).setItemClickListener(new ItemClickListener() {
                         @Override
                         public void onItemClick(int pos) {
-                            openDetailActivityHome(playerA, playerB, jurA, jurB, msdate, mstime, String.valueOf(idcat), loc, cat);
+                            openDetailActivityHome(playerA, playerB, jurA, jurB, msdate, mstime, String.valueOf(idcat), loc, cat, resulta, resultb);
                         }
                     });
                 } else {
@@ -286,10 +287,12 @@ public class AdapterOlahragaR extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
 
-    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime, String idcat, String loc, String cat) {
+    private void openDetailActivityHome(String playerA, String playerB, String jurA, String jurB, String msDate, String msTime, String idcat, String loc, String cat, String resulta, String resultb) {
         Intent i = new Intent(context, DetailActivityHomeMatch.class);
 
         //PACK DATA TO SEND
+        i.putExtra("RESULTPA", resulta);
+        i.putExtra("RESULTPB",resultb);
         i.putExtra("MSTIME", msTime);
         i.putExtra("MSDATE", msDate);
         i.putExtra("IDEVENT",idcat);

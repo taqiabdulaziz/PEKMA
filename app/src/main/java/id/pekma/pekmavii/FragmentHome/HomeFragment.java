@@ -19,6 +19,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.LayoutAnimationController;
+import android.view.animation.TranslateAnimation;
 import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -43,6 +48,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import id.pekma.pekmavii.FragmentNews.AdapterNews;
 import id.pekma.pekmavii.FragmentNews.DetailActivityNews;
 import id.pekma.pekmavii.FragmentNews.NewsData;
@@ -53,6 +60,7 @@ import id.pekma.pekmavii.FragmentSchedule.ScheduleFragment;
 import id.pekma.pekmavii.MainActivity;
 import id.pekma.pekmavii.R;
 import id.pekma.pekmavii.VenueActivity.V_GedungG;
+import jp.wasabeef.recyclerview.animators.FadeInLeftAnimator;
 
 /**
  * Created by Muhammad Taqi on 2/13/2018.
@@ -71,6 +79,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
     CardView gedungJ,miniSoccer,plasma,studentCenter,voliParma,gedungG,joggingTrack,lapfutparma;
     Fragment fragment;
     List<HomeData> data=new ArrayList<>();
+    LayoutAnimationController controller,controllerL;
 
     private BottomSheetBehavior mBottomSheetBehavior1;
     private boolean refreshState = false;
@@ -144,6 +153,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                 fragmentTransaction.replace(R.id.flfragment, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
             }
         });
 
@@ -233,7 +243,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
     @SuppressLint("StaticFieldLeak")
     public class AsyncFetch extends AsyncTask<String,String,String> {
         ProgressDialog pdLoading = new ProgressDialog(getActivity());
-        HttpURLConnection conn;
+        HttpsURLConnection conn;
         URL url = null;
         @Override
         protected void onPreExecute() {
@@ -250,7 +260,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                 // Enter URL address where your json file resides
                 // Even you can make call to php file which returns json data
 
-                url = new URL("https://pekma.id/news.php");
+                url = new URL("https://pekma.id/newshome.php");
 
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
@@ -260,7 +270,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
             try {
 
                 // Setup HttpURLConnection class to send and receive data from php and mysql
-                conn = (HttpURLConnection) url.openConnection();
+                conn = (HttpsURLConnection) url.openConnection();
                 conn.setReadTimeout(READ_TIMEOUT);
                 conn.setConnectTimeout(CONNECTION_TIMEOUT);
                 conn.setRequestMethod("GET");
@@ -279,7 +289,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                 int response_code = conn.getResponseCode();
 
                 // Check if successful connection made
-                if (response_code == HttpURLConnection.HTTP_OK) {
+                if (response_code == HttpsURLConnection.HTTP_OK) {
 
                     // Read data sent from server
                     InputStream input = conn.getInputStream();
@@ -354,6 +364,21 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
                 recyclerView.setNestedScrollingEnabled(false);
                 recyclerViewL.setNestedScrollingEnabled(false);
 
+                //ANIM
+                recyclerView.setItemAnimator(new FadeInLeftAnimator());
+                recyclerView.setHasFixedSize(true);
+                recyclerViewL.setItemAnimator(new FadeInLeftAnimator());
+                recyclerViewL.setHasFixedSize(true);
+
+
+
+
+
+
+                recyclerView.setLayoutAnimation(controller);
+                recyclerViewL.setLayoutAnimation(controllerL);
+
+
             } catch (JSONException e) {
                 Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
             }
@@ -362,7 +387,7 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
             Picasso.with(getContext()).load(R.drawable.venue_gedungj).fit().into(IvGedJ);
             Picasso.with(getContext()).load(R.drawable.venue_joggingtrack).fit().into(IvJoggingTrack);
             Picasso.with(getContext()).load(R.drawable.venue_lapanganfutsalparma).fit().into(IvLapfutParma);
-            Picasso.with(getContext()).load(R.drawable.venue_mini_soccer).fit().into(IvMinsoc);
+            Picasso.with(getContext()).load(R.drawable.venue_minsoc).fit().into(IvMinsoc);
             Picasso.with(getContext()).load(R.drawable.venue_plasma).fit().into(IvPlasma);
             Picasso.with(getContext()).load(R.drawable.venue_sc).fit().into(ivSc);
             Picasso.with(getContext()).load(R.drawable.venue_voli_parma).fit().into(ivVoliParma);
@@ -370,4 +395,36 @@ public class HomeFragment extends Fragment implements NewsFragment.SendMessage{
             pdLoading.dismiss();
         }
     }
+
+    public void animR(){
+        //R
+        AnimationSet set = new AnimationSet(true);
+        Animation animation = new AlphaAnimation(0.0f, 1.0f);
+        animation.setDuration(500);
+        set.addAnimation(animation);
+        animation = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, -1.0f, Animation.RELATIVE_TO_SELF, 0.0f
+        );
+        animation.setDuration(100);
+        set.addAnimation(animation);
+        controller = new LayoutAnimationController(set, 0.5f);
+    }
+
+
+    public void animL(){
+        //R
+        AnimationSet setL = new AnimationSet(true);
+        Animation animationL = new AlphaAnimation(0.0f, 1.0f);
+        animationL.setDuration(500);
+        setL.addAnimation(animationL);
+        animationL = new TranslateAnimation(
+                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, -1.0f, Animation.RELATIVE_TO_SELF, 0.0f
+        );
+        animationL.setDuration(100);
+        setL.addAnimation(animationL);
+        controllerL = new LayoutAnimationController(setL, 0.5f);
+    }
+
 }
