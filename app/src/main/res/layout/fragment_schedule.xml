@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,6 +10,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_margin="9dp"
+        android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="80sp">
 
@@ -108,24 +109,21 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:layout_below="@+id/cv"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
             android:id="@+id/flfragment2">
 
             <include layout="@layout/activity_fragment_olahraga" />
 
         </FrameLayout>
 
-    </android.support.v4.widget.NestedScrollView>
 
 
 
 
-</LinearLayout>
+
+</RelativeLayout>

@@ -113,30 +113,20 @@
     </LinearLayout>
     </android.support.v7.widget.CardView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/cv">
 
-
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            >
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/flfragment2">
+                android:id="@+id/flfragment2"
+                android:layout_below="@+id/cv">
 
                 <include layout="@layout/activity_fragment_olahraga" />
 
             </FrameLayout>
 
-        </android.support.v4.widget.NestedScrollView>
 
-    </LinearLayout>
+
     
     
 

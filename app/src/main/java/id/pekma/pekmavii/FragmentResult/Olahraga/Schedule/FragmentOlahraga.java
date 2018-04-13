@@ -186,7 +186,7 @@ public class FragmentOlahraga extends Fragment implements ResultFragment.SendCab
                 }
 
                 RecyclerView recyclerView = rootview.findViewById(R.id.rvResult);
-                recyclerView.setNestedScrollingEnabled(true);
+                recyclerView.setNestedScrollingEnabled(false);
                 AdapterOlahraga mAdapter = new AdapterOlahraga(getActivity(), data);
 
                 recyclerView.setAdapter(mAdapter);
