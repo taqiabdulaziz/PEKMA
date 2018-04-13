@@ -86,7 +86,7 @@ public class AdapterHome extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         Calendar cal2 = Calendar.getInstance();
         cal2.setTimeZone(TimeZone.getTimeZone("GMT"));
-        cal2.add(Calendar.DAY_OF_WEEK, -1);
+        cal2.add(Calendar.DAY_OF_WEEK, -2);
 
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());

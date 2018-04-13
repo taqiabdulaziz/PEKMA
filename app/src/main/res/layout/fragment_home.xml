@@ -722,19 +722,20 @@
                     </android.support.v7.widget.RecyclerView>
 
                     <Button
-                        android:layout_margin="9dp"
+                        android:id="@+id/viewAllLatest"
                         android:layout_width="match_parent"
                         android:layout_height="45sp"
-                        android:id="@+id/viewAllLatest"
-                        android:typeface="serif"
-                        android:elevation="0dp"
-                        android:textSize="15sp"
-                        android:focusable="true"
+                        android:layout_margin="9dp"
                         android:clickable="true"
+                        android:elevation="0dp"
+                        android:focusable="true"
+                        android:foreground="@drawable/ripple"
                         android:text="VIEW ALL "
                         android:textColor="#FFFF"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                        android:foreground="@drawable/ripple">
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:typeface="serif"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                     </Button>
 
